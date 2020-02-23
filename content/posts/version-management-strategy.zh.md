@@ -1,11 +1,27 @@
 ---
 title: "Version Management Strategy"
 date: 2020-02-23T11:11:22+08:00
-draft: true
+draft: false
+author: "谷中仁"
+authorLink: "https://guzhongren.github.io"
+description: "版本控制策略"
+license: ""
+
+tags: ["git", "git-flow", "trunk-based development", "TBD"]
+categories: ["git"]
+hiddenFromHomePage: false
+
+featuredImage: ""
+featuredImagePreview: ""
+
+toc: true
+autoCollapseToc: true
+math: true
+comment: true
 ---
 
-![white_clouds_and_blue_sky_3689875](https://yqfile.alicdn.com/3b84530723a76268f2a99d3b65b3a354e87fe309.jpeg)
-<p style="text-align:center">Photo by Matheus Natan from Pexels</p>
+![Photo by Matheus Natan from Pexels](https://yqfile.alicdn.com/3b84530723a76268f2a99d3b65b3a354e87fe309.jpeg)
+
 为了开发高质量的软件，我们需要能够跟踪所有更改并在必要时将其撤消。 版本控制系统通过跟踪项目历史记录并帮助合并多人所做的更改来填补这一角色，极大地加快了工作速度，并使我们能够更轻松地发现错误。
 
 此外，得益于这些工具，分布式团队可以畅通合作,使多个人可以同时处理项目的不同部分，然后将其结果合并为一个产品。 让我们仔细看看版本控制系统，git-flow 和 Trunk-based development(基于主干的开发)是如何形成的。
@@ -33,10 +49,7 @@ draft: true
 随后，开发者可以创建一个PR(Pull request)，以将其更改合并到原始项目中。 如果最初的开发人员对合并其他存储库中的更改不感兴趣，那么他们可以自己将其转换(Fork)为单独的项目。 由于没有中央存储的概念，因此一切皆有可能。
 
 ## Git-flow
-
-<p style="text-align:center">![Git-flow](https://yqfile.alicdn.com/329ba9c46b2ea23efdbd095802943e7e9221ee82.png)</p>
-<p style="text-align:center">git-flow</p>
-
+<p style="text-align:center">![Git-flow](https://s2.ax1x.com/2020/02/23/31EDTx.png)</p>
 
 在 Git-flow 开发模型中，你有一个主分支(master branch)，从主分支创建开发分支(develop branch)，所有开发工作提交都基于开发分支。`主分支和开发分支在git-flow 的整个生命周期中都是一直存在的。`
 
@@ -85,14 +98,13 @@ Git流的优点之一是严格控制。仔细查看更改后，只有授权的�
 
 ## Github-flow
 
-<p style="text-align:center">![Github-flow](https://yqfile.alicdn.com/8a3fd93b3c9882d3dd9ca23f64b9640bde34fb64.png)</p>
-<p style="text-align:center">Github-flow</p>
+<p style="text-align:center">![Github-flow](https://s2.ax1x.com/2020/02/23/31VkjJ.png)</p>
+
 Github-flow 是在 git-flow的基础上衍生而来的。他简化了 git-flow 的复杂模型，并且与 Github 可以很好的结合,在此就不赘述了。
 
 ## Trunk-based Development(TBD)
 
 <p style="text-align:center">![Trunk-based Development](https://cn.trunkbaseddevelopment.com/short-lived-feature-branches/slfb_working-copy.png)</p>
-<p style="text-align:center">Trunk-based Development</p>
 
 在基于主干的开发模型中，所有开发人员都在一个具有开放访问权限的分支上工作。通常它只是master分支。他们将代码提交给它并运行它,非常简单。
 
