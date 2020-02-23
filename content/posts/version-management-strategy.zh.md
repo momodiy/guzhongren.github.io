@@ -5,7 +5,7 @@ draft: false
 author: "谷中仁"
 authorLink: "https://guzhongren.github.io"
 description: "版本控制策略"
-license: ""
+license: "Creative Commons Attribution 4.0 International license"
 
 tags: ["git", "git-flow", "trunk-based development", "TBD"]
 categories: ["git"]
@@ -141,3 +141,5 @@ TBD 的适用情况与git-flow 的适用情况恰好相反，可自行脑补。
 * [3.https://trunkbaseddevelopment.com](https://trunkbaseddevelopment.com)
 * [4.https://guides.github.com/introduction/flow/](https://guides.github.com/introduction/flow/)
 
+----
+![谷哥说-微信公众号](https://ftp.bmp.ovh/imgs/2020/02/b7282c60d4d581ad.png)

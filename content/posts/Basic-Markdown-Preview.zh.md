@@ -935,3 +935,6 @@ This is the content of the admonition.
 {{% admonition title="Admonition" details="true" %}}
 This is the content of the admonition.
 {{% /admonition %}}
+
+----
+![谷哥说-微信公众号](https://ftp.bmp.ovh/imgs/2020/02/b7282c60d4d581ad.png)
