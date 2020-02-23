@@ -1,14 +1,14 @@
 ---
 title: "1test"
-date: 2020-02-23T23:22:00+08:00
-draft: true
+date: 2020-02-23T18:17:51+08:00
+draft: false
 author: "谷中仁"
 authorLink: "https://guzhongren.github.io"
-description: ""
+description: "使用 Hugo 构建个人博客"
 license: "Creative Commons Attribution 4.0 International license"
 
-tags: [""]
-categories: [""]
+tags: ["test"]
+categories: ["test"]
 hiddenFromHomePage: false
 
 featuredImage: ""
