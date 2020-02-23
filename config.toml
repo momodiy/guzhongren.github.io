@@ -1,4 +1,4 @@
-baseURL = "/"
+baseURL = "https://guzhongren.github.io"
 # [en, zh, ...] determines default content language
 # [en, zh, ...] 设置默认的语言
 defaultContentLanguage = "zh"
