@@ -12,7 +12,7 @@ pre:
 
 commit:
 	git add -A
-	git commit -m message
+	git commit -m "$(message)"
 pub:
 	git pull
 	git push
