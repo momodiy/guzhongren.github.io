@@ -649,8 +649,8 @@ enableEmoji = true
 # Permalinks Info (https://gohugo.io/content-management/urls/#permalinks)
 # Permalinks 信息 (https://gohugo.io/content-management/urls/#permalinks)
 [Permalinks]
-  # posts = ":year/:month/:filename"
-  posts = ":filename"
+  posts = ":year/:month/:filename"
+  # posts = ":filename"
 
 # Privacy Info (https://gohugo.io/about/hugo-and-gdpr/)
 # 隐私信息设置 (https://gohugo.io/about/hugo-and-gdpr/)
