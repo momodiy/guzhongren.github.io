@@ -1,6 +1,6 @@
 ---
-title: "{{ replace .Name "-" " " | title }}"
-date: {{ .Date }}
+title: "Test"
+date: 2020-02-23T23:31:55+08:00
 draft: false
 author: "谷中仁"
 authorLink: "https://guzhongren.github.io"
