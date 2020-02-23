@@ -23,7 +23,7 @@ $ make pre
 
 ```zsh
 $ # make commit message=提交信息
-$ make commit message=提交信息
+$ make commit message=feat(post): 发布新文章
 ```
 
 ## 发布
