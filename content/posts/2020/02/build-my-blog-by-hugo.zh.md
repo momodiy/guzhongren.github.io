@@ -7,8 +7,8 @@ authorLink: "https://guzhongren.github.io"
 description: ""
 license: "Creative Commons Attribution 4.0 International license"
 
-tags: [""]
-categories: [""]
+tags: ["hugo","blog", "git", "Makefile"]
+categories: ["tool"]
 hiddenFromHomePage: false
 
 featuredImage: ""
