@@ -49,7 +49,8 @@ comment: true
 随后，开发者可以创建一个PR(Pull request)，以将其更改合并到原始项目中。 如果最初的开发人员对合并其他存储库中的更改不感兴趣，那么他们可以自己将其转换(Fork)为单独的项目。 由于没有中央存储的概念，因此一切皆有可能。
 
 ## Git-flow
-<p style="text-align:center">![Git-flow](https://s2.ax1x.com/2020/02/23/31EDTx.png)</p>
+
+![Git-flow](https://i.loli.net/2020/02/23/evmkayH8PSZfoCl.png)
 
 在 Git-flow 开发模型中，你有一个主分支(master branch)，从主分支创建开发分支(develop branch)，所有开发工作提交都基于开发分支。`主分支和开发分支在git-flow 的整个生命周期中都是一直存在的。`
 
@@ -98,13 +99,13 @@ Git流的优点之一是严格控制。仔细查看更改后，只有授权的�
 
 ## Github-flow
 
-<p style="text-align:center">![Github-flow](https://s2.ax1x.com/2020/02/23/31VkjJ.png)</p>
+![github-flow.png](https://i.loli.net/2020/02/23/obvq1wuliJNczU9.png)
 
 Github-flow 是在 git-flow的基础上衍生而来的。他简化了 git-flow 的复杂模型，并且与 Github 可以很好的结合,在此就不赘述了。
 
 ## Trunk-based Development(TBD)
 
-<p style="text-align:center">![Trunk-based Development](https://cn.trunkbaseddevelopment.com/short-lived-feature-branches/slfb_working-copy.png)</p>
+![Trunk-based Development](https://i.loli.net/2020/02/23/5JeLIEG2uxNokS4.png)
 
 在基于主干的开发模型中，所有开发人员都在一个具有开放访问权限的分支上工作。通常它只是master分支。他们将代码提交给它并运行它,非常简单。
 
