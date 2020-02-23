@@ -161,11 +161,12 @@ jobs:
 
 ## 写文章
 
-为了更好的管理发布的文章，建议用 `/year/mouth/article_name.zh.md` 这种格式.
+为了更好的管理发布的文章，建议用 `/year/mouth/article_name.zh.md` 这种格式.也可用我写的Makefile命令
 
 
 ```zsh
-$ hugo new posts/2020/02/first.zh.md
+$ # hugo new posts/2020/02/first.zh.md
+$ make post=first.zh.md
 
 ```
 然后打开`content/posts/2020/02/first.zh.md` 进行文章编辑。
@@ -175,13 +176,35 @@ $ hugo new posts/2020/02/first.zh.md
 在 blog 项目根目录运行如下命令进行预览
 
 ```zsh
-$ hugo server -D
+$ # hugo server -D
+$ make pre
 
+```
+
+## 提交
+
+提交到 git 中，暂存起来
+
+```zsh
+$ make commit message=feat(post): 发布新文章
+```
+
+或者用如下命令
+
+```zsh
+$ git add -A
+$	git commit -m feat(post): 发布新文章
 ```
 
 ## 发布
 
 将本地更新提交到 github 上， 会自动触发actions 然后进行构建，构建完成后自动将代码部署到
+
+```zsh
+$ make pub
+```
+
+或者用
 
 ```zsh
 $ git commit -m "first article"
@@ -192,17 +215,33 @@ $ git push
 
 ## 优化
 
-在敲 hugo 相关的命令的时候比较繁琐，有几个参数经常会敲， 所以在此使用 `Makefile` 优化一下
-```Makefile
-  pre:
-    hugo server -D
-  pub:
-    git pull
-    git push
-```
+在敲 hugo 相关的命令的时候比较繁琐，有几个参数经常会敲， 所以使用 `Makefile` 优化一下, 上面有些命令就是在此定义的。
 
+```Makefile
+  
+post = default.zh.md
+message = git commit
+Year_month = $(shell date +"%Y/%m")
+
+new:
+	hugo new posts/$(Year_month)/$(post)
+
+pre:
+	hugo server -D
+
+commit:
+	git add -A
+	git commit -m "$(message)"
+pub:
+	git pull
+	git push
+```
+* new: 创建文章
 * pre: 写文章时预览
+* commit: 提交到本地暂存区
 * pub: 发布文章
+
+> 尽情享用吧...🎉🎉🎉🎉🎉
 
 ## Reference
 
