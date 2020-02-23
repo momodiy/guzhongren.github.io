@@ -1,5 +1,5 @@
-preview:
+pre:
 	hugo server -D
-publish:
+pub:
 	git pull
 	git push
