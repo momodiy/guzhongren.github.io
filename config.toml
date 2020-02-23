@@ -14,7 +14,7 @@ themesDir = "./themes"
 enableRobotsTXT = true
 # whether to use git commit log to generate lastmod record
 # 是否使用 git 信息来生成文章的上次修改时间
-enableGitInfo = false
+enableGitInfo = true
 # whether to use emoji code
 # 是否使用 emoji 代码
 enableEmoji = true
@@ -25,11 +25,11 @@ enableEmoji = true
     # language code
     languageCode = "en"
     # website title
-    title = "LoveIt Theme"
+    title = "谷中仁的博客"
     # whether to include chinese/japanese/korean
     hasCJKLanguage = false
     # default amount of posts in each pages
-    paginate = 12
+    paginate = 100
     # [UA-XXXXXXXX-X] google analytics code
     googleAnalytics = ""
     # copyright description used only for seo schema
@@ -96,11 +96,11 @@ enableEmoji = true
           [languages.en.params.home.profile]
             enable = true
             # Gravatar Email for preferred avatar in home page
-            gravatarEmail = ""
+            gravatarEmail = "guzhongren@live.cn"
             # URL of avatar shown in home page
             avatarURL = "images/avatar.png"
             # subtitle shown in home page
-            subtitle = "A Clean, Elegant but Advanced Hugo Theme"
+            subtitle = "A geek、full-stack developer..."
             # whether to use typeit animation for subtitle
             typeit = true
             # whether to show social links
@@ -114,16 +114,16 @@ enableEmoji = true
             defaultHiddenFromHomePage = false
         # Social Info in home page
         [languages.en.params.social]
-          GitHub = "xxxx"
-          Linkedin = "xxxx"
-          Twitter = "xxxx"
-          Instagram = "xxxx"
-          Email = "xxxx@xxxx.com"
-          Facebook = "xxxx"
-          Telegram = "xxxx"
+          GitHub = "guzhongren"
+          # Linkedin = "xxxx"
+          # Twitter = "xxxx"
+          # Instagram = "xxxx"
+          Email = "guzhongren@live.cn"
+          # Facebook = "xxxx"
+          # Telegram = "xxxx"
           # Medium = "xxxx"
           # Gitlab = "xxxx"
-          Youtubelegacy = "xxxx"
+          # Youtubelegacy = "xxxx"
           # Youtubecustom = "xxxx"
           # Youtubechannel = "xxxx"
           # Tumblr ="xxxx"
@@ -204,7 +204,7 @@ enableEmoji = true
           # Digg = true
           # Stumbleupon = true
           # Flipboard = true
-          # Weibo = true
+          Weibo = true
           # Renren = true
           # Myspace = true
           # Blogger = true
@@ -260,7 +260,7 @@ enableEmoji = true
           baidu = ""
         # Publisher Info just for SEO
         [languages.en.params.publisher]
-          name = "xxxx"
+          name = "guzhongren's blog"
           [languages.en.params.publisher.logo]
             url = "logo.png"
             width = 127
@@ -314,11 +314,11 @@ enableEmoji = true
     # 网站语言
     languageCode = "zh"
     # 网站标题
-    title = "LoveIt 主题"
+    title = "谷中仁的博客"
     # 是否包括中日韩文字
     hasCJKLanguage = true
     # 默认每页列表显示的文章数目
-    paginate = 12
+    paginate = 100
     # [UA-XXXXXXXX-X] 谷歌分析代号
     googleAnalytics = ""
     # 版权描述，仅仅用于 SEO
@@ -389,7 +389,7 @@ enableEmoji = true
           # 主页显示头像的 URL
           avatarURL = "images/avatar.png"
           # 主页显示的网站副标题
-          subtitle = "一个简洁、优雅且高效的 Hugo 主题"
+          subtitle = "一个极客、全栈开发者"
           # 是否为副标题显示打字机动画
           typeit = true
           # 是否显示社交账号
@@ -403,11 +403,11 @@ enableEmoji = true
           defaultHiddenFromHomePage = false
       # 主页的社交信息设置
       [languages.zh.params.social]
-        GitHub = "xxxx"
+        GitHub = "guzhongren"
         # Linkedin = "xxxx"
-        Twitter = "xxxx"
-        Instagram = "xxxx"
-        Email = "xxxx@example.com"
+        # Twitter = "xxxx"
+        # Instagram = "xxxx"
+        Email = "guzhongren@live.cn"
         # Facebook = "xxxx"
         # Telegram = "xxxx"
         # Medium = "xxxx"
@@ -424,7 +424,7 @@ enableEmoji = true
         # FreeCodeCamp = "xxxx"
         # Bitbucket = "xxxx"
         # Stackoverflow = "xxxx"
-        Weibo = "xxxx"
+        # Weibo = "xxxx"
         # Odnoklassniki = "xxxx"
         # VK = "xxxx"
         # Flickr = "xxxx"
@@ -442,12 +442,12 @@ enableEmoji = true
         # Hackernews = "xxxx"
         # Kickstarter = "xxxx"
         # Patreon = "xxxx"
-        Steam = "xxxx"
+        # Steam = "xxxx"
         # Twitch = "xxxx"
         # Strava = "xxxx"
         # Skype = "xxxx"
         # Whatsapp = "xxxx"
-        Zhihu = "xxxx"
+        Zhihu = "guzhongren"
         # Douban = "xxxx"
         # Angellist = "xxxx"
         # Slidershare = "xxxx"
@@ -466,7 +466,7 @@ enableEmoji = true
         # Gitea = "xxxx"
         # XMPP = "xxxx@example.com"
         # Matrix = "xxxx"
-        Bilibili = "xxxx"
+        # Bilibili = "xxxx"
       # 文章页面配置
       [languages.zh.params.page]
         # 在文章页面是否使用分享功能
@@ -549,7 +549,7 @@ enableEmoji = true
         baidu = ""
       # 出版者信息，仅用于 SEO
       [languages.zh.params.publisher]
-        name = "xxxx"
+        name = "谷中仁"
         [languages.zh.params.publisher.logo]
           url = "logo.png"
           width = 127
@@ -636,8 +636,8 @@ enableEmoji = true
 # Author Info
 # 作者信息
 [author]
-  name = "xxxx"
-  link = ""
+  name = "谷中仁"
+  link = "https://guzhongren.github.io"
 
 # Sitemap Info
 # 网站地图信息
