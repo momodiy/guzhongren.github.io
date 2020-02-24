@@ -279,8 +279,8 @@ enableEmoji = true
         [languages.zh.params.comment.gitalk]
           owner = ""
           repo = ""
-          clientId = ""
-          clientSecret = ""
+          clientId = "2e18563cb40ddba68205"
+          clientSecret = "3e8682bc8126337a224209fb72e87d09f27a9701"
         # Valine 评论系统设置 (https://github.com/xCss/Valine)
         [languages.zh.params.comment.valine]
           enable = false
