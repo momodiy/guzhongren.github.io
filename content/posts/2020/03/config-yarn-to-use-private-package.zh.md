@@ -1,6 +1,24 @@
+---
+title: "Config Yarn to Use Private Package"
+date: 2020-03-05T22:45:03+08:00
+draft: false
+author: "谷中仁"
+authorLink: "https://guzhongren.github.io"
+description: ""
+license: "Creative Commons Attribution 4.0 International license"
 
-# Config Yarn to Use Private Package
+tags: ["yarn", "npm", ".npmrc","private package"]
+categories: ["tool"]
+hiddenFromHomePage: false
 
+featuredImage: ""
+featuredImagePreview: ""
+
+toc: true
+autoCollapseToc: true
+math: true
+comment: true
+---
 
 ![Photo by Jeffrey Czum from Pexels](https://images.pexels.com/photos/3750893/pexels-photo-3750893.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260)
 
@@ -49,7 +67,7 @@ always-auth=true
 
 ## Reference
 
-* [1.https://yarnpkg.com/](https://yarnpkg.com/)
+[1.https://yarnpkg.com/](https://yarnpkg.com/)
 
 ----
 ![谷哥说-微信公众号](https://ftp.bmp.ovh/imgs/2020/02/b7282c60d4d581ad.png)
