@@ -20,8 +20,6 @@ math: true
 comment: true
 ---
 
-![Photo by Jan Kopřiva from Pexels](https://images.pexels.com/photos/3811731/pexels-photo-3811731.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260)
-
 ## 情景
 
 在我们开发中，我们通常需要对某一系列的组件Coding, 但我们是程序员啊，我们怎么能容忍代码重复出现的坏味道呢。所以，对于一些列相同的操作我们就要用到循环处理了。
