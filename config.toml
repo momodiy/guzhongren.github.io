@@ -54,10 +54,15 @@ enableEmoji = true
         url = "/categories/"
         weight = 3
       [[languages.zh.menu.main]]
+        identifier = "email-editor"
+        name = "Email Editor"
+        url = "https://guzhongren.github.io/geekmd/"
+        weight = 4
+      [[languages.zh.menu.main]]
         identifier = "about"
         name = "关于"
         url = "/about/"
-        weight = 4
+        weight = 5
     [languages.zh.params]
       # LoveIt 主题版本
       version = "0.1.X"
