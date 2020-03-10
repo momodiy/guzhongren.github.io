@@ -1,5 +1,5 @@
 ---
-title: "Docker for Mac Has No Docker0"
+title: "There is No Docker0 in docker on MAC"
 date: 2020-03-10T21:19:05+08:00
 draft: false
 author: "谷中仁"
@@ -7,8 +7,8 @@ authorLink: "https://guzhongren.github.io"
 description: ""
 license: "Creative Commons Attribution 4.0 International license"
 
-tags: [""]
-categories: [""]
+tags: ["docker", "container", "mac", "network", "docker0", "sidecar", "host"]
+categories: ["container"]
 hiddenFromHomePage: false
 
 https://www.docker.com/sites/default/files/d8/2019-04/any-appplication.jpg"
