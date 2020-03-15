@@ -27,5 +27,9 @@ comment: true
 
 [1.https://guzhongren.github.io/](https://guzhongren.github.io/)
 
+## Hereby declared（特此申明）
+
+本文仅代表个人观点，与[ThoughtWorks](https://www.thoughtworks.com/) 公司无任何关系。
+
 ----
 ![谷哥说-微信公众号](https://ftp.bmp.ovh/imgs/2020/02/b7282c60d4d581ad.png)
