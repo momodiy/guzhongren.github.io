@@ -11,8 +11,8 @@ tags: ["docker", "container", "mac", "network", "docker0", "sidecar", "host"]
 categories: ["container"]
 hiddenFromHomePage: false
 
-https://www.docker.com/sites/default/files/d8/2019-04/any-appplication.jpg"
-featuredImagePreview: "https://www.docker.com/sites/default/files/d8/2019-04/any-appplication.jpg
+featuredImage: "https://www.docker.com/sites/default/files/d8/2019-04/any-appplication.jpg"
+featuredImagePreview: "https://www.docker.com/sites/default/files/d8/2019-04/any-appplication.jpg"
 
 toc: true
 autoCollapseToc: true
