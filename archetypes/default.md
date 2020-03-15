@@ -25,7 +25,7 @@ comment: true
 
 ## Reference
 
-[1.https://guzhongren.github.io/](https://guzhongren.github.io/)
+* [1.博客：https://guzhongren.github.io/](https://guzhongren.github.io/)*
 
 ## Hereby declared（特此申明）
 
