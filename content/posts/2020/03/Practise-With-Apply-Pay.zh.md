@@ -219,6 +219,12 @@ Hit CTRL-C to stop the server
 
 ## 总结
 
+Apple Pay 的开发需要查看英文文档，一定要查看其`requirement`, 在前期要做好环境配置如 Apple Developer Account;
+
+在正式开发 Apple Pay on Web 的时候，请遵循 Apple Pay on Web 的最佳实践(parent.js & child.js)。 关于这块，我有一点点的经验，欢迎交流。
+
+Apple Pay 的开发文档写的不错，参考其文档可以快速实现简单的需求（dev环境）。
+
 ## Reference
 
 - [1.博客：https://guzhongren.github.io/](https://guzhongren.github.io/)
