@@ -11,8 +11,8 @@ tags: [""]
 categories: [""]
 hiddenFromHomePage: false
 
-featuredImage: "https://images.pexels.com/photos/2881785/pexels-photo-2881785.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
-featuredImagePreview: "https://images.pexels.com/photos/2881785/pexels-photo-2881785.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
+featuredImage: "https://i.loli.net/2020/04/01/bu57crzCFQvHOVd.png"
+featuredImagePreview: "https://i.loli.net/2020/04/01/bu57crzCFQvHOVd.png"
 
 toc: true
 autoCollapseToc: true
@@ -79,6 +79,7 @@ Java开发必备
 * 可按条件生成随机密码(我从来不记我的密码，而且我也记不住)
 * 多端支持
 * 可自定义数据存储方案
+* 可自动填充账号密码
 
 
 ## [Microsoft Todo](https://todo.microsoft.com/tasks/)
@@ -98,7 +99,7 @@ Java开发必备
 
 ## 微信
 
-![微信](https://res.wx.qq.com/a/wx_fed/weixin_portal/res/static/img/3sPNXyP.gif)
+![微信](https://i.loli.net/2020/04/01/IeZ5T6VYBHD8dxU.jpg)
 不管是亲朋还是同事沟通，微信都是非常高效的工具，而且微信里面的小程序现在可以运行在桌面端了，使用场景也越来越多了；还有一个非常好用的功能：截屏！ 以前电脑上会安装QQ， 现在QQ也不用了，快速分享内容并标注微信是不二之选。
 
 
