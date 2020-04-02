@@ -7,8 +7,8 @@ authorLink: "https://guzhongren.github.io"
 description: ""
 license: "Creative Commons Attribution 4.0 International license"
 
-tags: [""]
-categories: [""]
+tags: ["software", "chat", "效率", "娱乐"]
+categories: ["Tool"]
 hiddenFromHomePage: false
 
 featuredImage: "https://i.loli.net/2020/04/01/bu57crzCFQvHOVd.png"
