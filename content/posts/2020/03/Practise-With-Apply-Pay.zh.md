@@ -228,8 +228,8 @@ Apple Pay 的开发文档写的不错，参考其文档可以快速实现简单�
 ## Reference
 
 - [1.博客：https://guzhongren.github.io/](https://guzhongren.github.io/)
-- [2.Apple Pay Developer Document：https://developer.apple.com/documentation/](https://developer.apple.com/documentation/)\*
-- [3.Apple Pay On Web Document：https://developer.apple.com/documentation/apple_pay_on_the_web](https://developer.apple.com/documentation/apple_pay_on_the_web)\*
+- [2.Apple Pay Developer Document：https://developer.apple.com/documentation/](https://developer.apple.com/documentation/)
+- [3.Apple Pay On Web Document：https://developer.apple.com/documentation/apple_pay_on_the_web](https://developer.apple.com/documentation/apple_pay_on_the_web)
 - [4.Apple Pay Demo: https://applepaydemo.apple.com](https://applepaydemo.apple.com)
 - [5.Apple Pay Sandbox-testing: https://developer.apple.com/apple-pay/sandbox-testing/](https://developer.apple.com/apple-pay/sandbox-testing/)
 - [6.Openssl: https://www.openssl.org/](https://www.openssl.org/)
