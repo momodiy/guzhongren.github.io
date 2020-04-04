@@ -30,7 +30,7 @@ comment: true
 
 ## Reference
 
-* [1.博客：https://guzhongren.github.io/](https://guzhongren.github.io/)*
+* [1.博客：https://guzhongren.github.io/](https://guzhongren.github.io/)
 * [2.http://agiledata.org/essays/tdd.html](http://agiledata.org/essays/tdd.html)
 * [3.https://opensource.com/article/19/10/test-driven-development-best-practices](https://opensource.com/article/19/10/test-driven-development-best-practices)
 * [4.https://osherove.com/blog/2005/4/3/naming-standards-for-unit-tests.html](https://osherove.com/blog/2005/4/3/naming-standards-for-unit-tests.html)
