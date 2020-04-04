@@ -1,7 +1,7 @@
 ---
 title: "Practise With Apply Pay"
 date: 2020-03-21T11:04:51+08:00
-draft: true
+draft: false 
 author: "谷中仁"
 authorLink: "https://guzhongren.github.io"
 description: ""
