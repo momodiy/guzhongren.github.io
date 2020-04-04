@@ -25,7 +25,8 @@ comment: true
 
 ## Reference
 
-* [1.博客：https://guzhongren.github.io/](https://guzhongren.github.io/)*
+* [1.博客：https://guzhongren.github.io/](https://guzhongren.github.io/)
+* [2.图床：https://sm.ms/](https://sm.ms/)
 
 ## Hereby declared（特此申明）
 
