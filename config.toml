@@ -284,15 +284,15 @@ enableEmoji = true
         [languages.zh.params.comment.gitalk]
           owner = ""
           repo = ""
-          clientId = "2e18563cb40ddba68205"
-          clientSecret = "3e8682bc8126337a224209fb72e87d09f27a9701"
+          clientId = ""
+          clientSecret = ""
         # Valine 评论系统设置 (https://github.com/xCss/Valine)
         [languages.zh.params.comment.valine]
-          enable = false
-          appId = ""
-          appKey = ""
+          enable = true
+          appId = "vHp6sVKaU50sadCcqtsfmyNk-gzGzoHsz"
+          appKey = "QokAhgYgtSeA6xsLCrBywuix"
           placeholder = "你的评论 ..."
-          notify = false
+          notify = true
           verify = true
           avatar = "mp"
           # meta= ""
