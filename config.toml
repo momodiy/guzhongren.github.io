@@ -289,8 +289,8 @@ enableEmoji = true
         # Valine 评论系统设置 (https://github.com/xCss/Valine)
         [languages.zh.params.comment.valine]
           enable = true
-          appId = "vHp6sVKaU50sadCcqtsfmyNk-gzGzoHsz"
-          appKey = "QokAhgYgtSeA6xsLCrBywuix"
+          appId = "S5a4fsDhfd9VzdyhX3bIcAVo-gzGzoHsz"
+          appKey = "ep78k7p5v0veV2k5TT8D14Nf"
           placeholder = "你的评论 ..."
           notify = true
           verify = true
