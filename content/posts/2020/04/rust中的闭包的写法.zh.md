@@ -29,21 +29,21 @@ comment: true
 ###  闭包语法
 
 ```rust
-    fn add_one_v1(x: u32) -> u32 {x + 1 }
-    let add_one_v2 = |x: u32| -> u32 {x + 1};
-    let add_one_v3 = |x| {x + 1};
-    let add_one_v4 = |x| x + 1;
+ fn add_one_v1(x: u32) -> u32 {x + 1 }
+ let add_one_v2 = |x: u32| -> u32 {x + 1};
+ let add_one_v3 = |x| {x + 1};
+ let add_one_v4 = |x| x + 1;
 
 ```
 
 ### 使用闭包
 
 ```rust
-    let a = add_one_v1(5);
-    let b = add_one_v2(5);
-    let c = add_one_v3(5);
-    let d = add_one_v4(5);
-    println!("a={}, b={}, c={}, d={}", a, b, c, d);
+ let a = add_one_v1(5);
+ let b = add_one_v2(5);
+ let c = add_one_v3(5);
+ let d = add_one_v4(5);
+ println!("a={}, b={}, c={}, d={}", a, b, c, d);
 
 ```
 
@@ -58,15 +58,15 @@ comment: true
 语言描述有点模糊，那么用代码说明问题
 
 ```rust
-		// 不能推导两次的示例
-    let example_closure = |x| x;
+ // 不能推导两次的示例
+ let example_closure = |x| x;
 
-		let s = example_closure(String::from("hello"));
-		println!("第一次{}", s);
-    // 如果参数为数字5 ，则报错
-    // let n = example_closure(5);
-    let n = example_closure(5.to_string());
-    println!("第二次{}", n);
+ let s = example_closure(String::from("hello"));
+ println!("第一次{}", s);
+ // 如果参数为数字5 ，则报错
+ // let n = example_closure(5);
+ let n = example_closure(5.to_string());
+ println!("第二次{}", n);
 ```
 
 在上面我们定义了一个参数为x, 返回值为x的闭包，但是x的类型我们并没有指定。
@@ -91,12 +91,6 @@ error[E0308]: mismatched types
 ## 总结
 
 Rust的闭包感觉和js的函数的写法很像，感觉到了Rust又借鉴了部分js的语法。
-
-
-
-
-
-
 
 
 ## Reference
