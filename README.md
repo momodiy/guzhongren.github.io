@@ -9,8 +9,8 @@
 ## 生成模板文章
 
 ```zsh
-$ # make post=[article_name].zh.md
-$ make post=article.zh.md
+$ # make post="[article_name].zh.md"
+$ make post="article.zh.md"
 ```
 
 ## 预览
