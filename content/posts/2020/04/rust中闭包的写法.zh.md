@@ -1,5 +1,5 @@
 ---
-title: "Rust中的闭包的写法"
+title: "Rust中闭包的写法"
 date: 2020-04-07T22:26:14+08:00
 draft: false
 author: "谷中仁"
