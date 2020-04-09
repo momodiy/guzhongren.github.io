@@ -1,7 +1,7 @@
 ---
 title: "调试bash"
 date: 2020-04-06T23:09:54+08:00
-draft: true
+draft: false
 author: "谷中仁"
 authorLink: "https://guzhongren.github.io"
 description: ""
