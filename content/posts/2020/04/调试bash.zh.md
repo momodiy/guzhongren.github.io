@@ -71,9 +71,9 @@ sh -x run.sh
 
 ## Reference
 
-* [1.博客：https://guzhongren.github.io/](https://guzhongren.github.io/)
-* [2.图床：https://sm.ms/](https://sm.ms/)
-* [3.编写可靠bash脚本的一些技巧：https://mp.weixin.qq.com/s/VmM_U4RefRBHwIw8NegC8Q](https://mp.weixin.qq.com/s/VmM_U4RefRBHwIw8NegC8Q)
+* [1.博客:https://guzhongren.github.io/](https://guzhongren.github.io/)
+* [2.图床:https://sm.ms/](https://sm.ms/)
+* [3.编写可靠bash脚本的一些技巧:https://mp.weixin.qq.com/s/VmM_U4RefRBHwIw8NegC8Q](https://mp.weixin.qq.com/s/VmM_U4RefRBHwIw8NegC8Q)
 *
 
 ## Hereby declared（特此申明）
