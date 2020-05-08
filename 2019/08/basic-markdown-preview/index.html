@@ -1,0 +1,699 @@
+<!doctype html><html lang=zh><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=robots content="noodp"><meta http-equiv=x-ua-compatible content="IE=edge, chrome=1"><title>Markdown 基本语法预览 | 谷中仁的博客</title><meta name=Description content="这是一篇用于预览 Markdown 基本语法的文章。"><meta property="og:title" content="Markdown 基本语法预览"><meta property="og:description" content="这是一篇用于预览 Markdown 基本语法的文章。"><meta property="og:type" content="article"><meta property="og:url" content="https://guzhongren.github.io/2019/08/basic-markdown-preview/"><meta property="article:published_time" content="2019-08-25T16:22:42+08:00"><meta property="article:modified_time" content="2020-02-23T16:45:43+08:00"><meta property="og:site_name" content="谷中仁的博客"><meta name=twitter:card content="summary"><meta name=twitter:title content="Markdown 基本语法预览"><meta name=twitter:description content="这是一篇用于预览 Markdown 基本语法的文章。"><meta name=theme-color content="#ffffff"><meta name=msapplication-TileColor content="#da532c"><link rel=canonical href=https://guzhongren.github.io/2019/08/basic-markdown-preview/><link rel="shortcut icon" type=image/x-icon href=/favicon.ico><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=manifest href=/site.webmanifest><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><link rel=prev href=https://guzhongren.github.io/2019/06/k8s-1.15.0-%E5%AE%89%E8%A3%85%E8%AE%B0%E5%BD%95/><link rel=next href=https://guzhongren.github.io/2019/09/golang-with-sqllite-practice/><link rel=stylesheet href=/css/style.min.css><link rel=stylesheet href=/css/lib/fontawesome-free/all.min.css><link rel=stylesheet href=/css/lib/animate/animate.min.css><meta name=msvalidate.01 content="https://cn.bing.com/?mkt=zh-CN"><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"Markdown 基本语法预览","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/guzhongren.github.io\/2019\/08\/basic-markdown-preview\/"},"image":{"@type":"ImageObject","url":"https:\/\/guzhongren.github.io\/images\/avatar.png","width":800,"height":600},"genre":"posts","keywords":"Markdown, syntax","wordcount":4689,"url":"https:\/\/guzhongren.github.io\/2019\/08\/basic-markdown-preview\/","datePublished":"2019-08-25T16:22:42\x2b08:00","dateModified":"2020-02-23T16:45:43\x2b08:00","license":"This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher":{"@type":"Organization","name":"谷中仁","logo":{"@type":"ImageObject","url":"https:\/\/guzhongren.github.io\/images\/avatar.png","width":127,"height":40}},"description":"这是一篇用于预览 Markdown 基本语法的文章。"}</script></head><body><script>if(!window.localStorage||!window.localStorage.getItem('theme')){window.isDark=window.matchMedia('(prefers-color-scheme: dark)').matches;}else{window.isDark=(window.localStorage&&window.localStorage.getItem('theme'))==='dark';}
+window.isDark&&document.body.classList.add('dark-theme');</script><div class=wrapper><header class=desktop id=header-desktop><div class=header-wrapper><div class="header-title animated bounceIn"><a href=/>谷中仁的博客</a></div><div class=menu><a class=menu-item href=/posts/>文章</a><a class=menu-item href=/tags/>标签</a><a class=menu-item href=/categories/>分类</a><a class=menu-item href=/geekmd/>Email Editor</a><a class=menu-item href=/about/>关于</a><a href=javascript:void(0); class=theme-switch title=切换主题>
+<i class="fas fa-adjust fa-rotate-180 fa-fw"></i></a></div></div></header><header class=mobile id=header-mobile><div class=header-wrapper><div class=header-container><div class="header-title animated bounceIn"><a href=/>谷中仁的博客</a></div><div class=menu-toggle id=menu-toggle-mobile><span></span><span></span><span></span></div></div><div class=menu id=menu-mobile><a class=menu-item href=/posts/>文章</a><a class=menu-item href=/tags/>标签</a><a class=menu-item href=/categories/>分类</a><a class=menu-item href=/geekmd/>Email Editor</a><a class=menu-item href=/about/>关于</a><a href=javascript:void(0); class=theme-switch title=切换主题>
+<i class="fas fa-adjust fa-rotate-180 fa-fw"></i></a></div></div></header><script>window.desktopHeaderMode="fixed";window.mobileHeaderMode="auto";</script><main class=main><div class=container><article class="page single"><h1 class="single-title animated flipInX">Markdown 基本语法预览</h1><div class=post-meta><div class=post-meta-line><span class=post-author><a class=author href=https://guzhongren.github.io rel=author target=_blank><i class="fas fa-user-circle fa-fw"></i>谷中仁</a>
+</span>&nbsp;<span class=post-category>收录于&nbsp;
+<span><a href=/categories/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86><i class="far fa-folder fa-fw"></i>基础知识</a></span></span></div><div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i><time datetime=2019-08-25>2019-08-25</time>&nbsp;
+<i class="fas fa-pencil-alt fa-fw"></i>约 4689 字&nbsp;
+<i class="far fa-clock fa-fw"></i>预计阅读 10 分钟&nbsp;</div></div><div class=toc id=toc-auto><h2 class=toc-title>目录</h2><div class=toc-content id=toc-content-auto></div></div><div class=toc id=toc-static><details><summary><div class=toc-title><span>目录</span>
+<span><i class="details icon fas fa-angle-down"></i></span></div></summary><div class=toc-content id=toc-content-static><nav id=TableOfContents><ul><li><a href=#1-引言>1 引言</a></li><li><a href=#2-块和内联元素>2 块和内联元素</a></li><li><a href=#3-叶子块>3 叶子块</a><ul><li><a href=#31-换行符>3.1 换行符</a></li><li><a href=#32-标题>3.2 标题</a></li></ul></li><li><a href=#h2-二级标题>H2 二级标题</a><ul><li><a href=#h3-三级标题>H3 三级标题</a><ul><li><a href=#h4-四级标题>H4 四级标题</a><ul><li><a href=#h5-五级标题>H5 五级标题</a><ul><li><a href=#h6-六级标题>H6 六级标题</a></li></ul></li></ul></li></ul></li><li><a href=#33-代码块>3.3 代码块</a></li><li><a href=#34-段落>3.4 段落</a></li><li><a href=#35-引用链接的定义>3.5 引用链接的定义</a></li><li><a href=#36-空白行>3.6 空白行</a></li></ul></li><li><a href=#4-容器块>4 容器块</a><ul><li><a href=#41-引用>4.1 引用</a></li><li><a href=#42-无序列表>4.2 无序列表</a></li><li><a href=#43-有序列表>4.3 有序列表</a></li><li><a href=#44-任务列表>4.4 任务列表</a></li><li><a href=#45-表格>4.5 表格</a></li></ul></li><li><a href=#3-页内锚>3. 页内锚</a></li><li><a href=#footnote>4. 脚注</a></li><li><a href=#5-内联格式>5. 内联格式</a></li><li><a href=#6-图片>6. 图片</a></li><li><a href=#abbreviation>Abbreviation</a></li><li><a href=#unordered-list>Unordered List</a></li><li><a href=#ordered-list>Ordered List</a></li><li><a href=#mixed-lists>Mixed Lists</a></li><li><a href=#blocks>Blocks</a></li><li><a href=#block-quotes>Block Quotes</a></li><li><a href=#fenced-block>Fenced Block</a></li><li><a href=#tables>Tables</a></li><li><a href=#smart-strong>Smart Strong</a></li><li><a href=#smarty>Smarty</a></li><li><a href=#neseted-fences>Neseted Fences</a></li><li><a href=#section-7>Github Emoji</a><ul><li><a href=#people>People</a></li><li><a href=#nature>Nature</a></li><li><a href=#objects>Objects</a></li><li><a href=#places>Places</a></li><li><a href=#symbols>Symbols</a></li></ul></li><li><a href=#insert>Insert</a></li><li><a href=#admonition>Admonition</a></li></ul></nav></div></details></div><div class=content><p>这是一篇用于预览 <i class="fab fa-markdown fa-fw"></i>Markdown 基本语法的文章。</p><p>文章内容基于 <a href=https://github.github.com/gfm target=_blank rel="noopener noreffer">GitHub Flavored Markdown Spec</a>
+。</p><p>不包含复杂的规则说明，仅仅展示 GFM 所约定的 Markdown 基本语法。</p><h2 id=1-引言>1 引言</h2><p><i class="fab fa-markdown fa-fw"></i><strong>Markdown</strong> 是一种用于编写结构化文档的纯文本格式。它基于电子邮件和论坛文章的格式所约定。
+它由 John Gruber (在 Aaron Swartz 的帮助下)开发，于 2004 年以语法描述和用于将 Markdown 转换为 HTML 的 Perl 脚本 (Markdown.pl) 的形式发布。</p><p>在接下来的十年中，许多实现被开发出来。一些用脚注、表和其他文档元素的约定扩展了原始 Markdown 语法。
+有些允许 Markdown 文档以 HTML 以外的格式呈现。 像 reddit，StackOverflow 和 GitHub 这样的网站有上百万的用户在使用 Markdown。
+Markdown 开始被应用于网络以外的领域，包括作者书籍、文章、幻灯片、信件和课堂笔记。</p><h2 id=2-块和内联元素>2 块和内联元素</h2><p>我们可以把一个文档看成一系列的块，如段落、引用、列表、标题和代码块。</p><p>有些块(如引号和列表)可以包含其它的块，即 <strong>容器块</strong>；
+其他的块(如标题和段落)则包含内联元素(如文本、链接、强调、图像、内联代码等)，即 <strong>叶子块</strong>。</p><p>块的符号总是优先于内联元素的符号。例如：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-markdown data-lang=markdown><span class=k>-</span> `one
+<span class=k>-</span> two`
+</code></pre></td></tr></table></div></div><ul><li>`one</li><li>two`</li></ul><h2 id=3-叶子块>3 叶子块</h2><p>本节描述用于组成 Markdown 文档的不同类型的叶子块。</p><h3 id=31-换行符>3.1 换行符</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-markdown data-lang=markdown>***
+------
+  <span class=gs>__</span><span class=gs>__</span>
+</code></pre></td></tr></table></div></div><hr><hr><hr><h3 id=32-标题>3.2 标题</h3><div class="admonition note"><p class=admonition-title><i class="icon fas fa-pencil-alt"></i>关于 ATX 风格标题和 Setext 风格标题</p><div class=admonition-content><p>本文只展示 ATX 风格标题，关于 Setext 风格标题的介绍请参考 <a href=https://github.github.com/gfm/#setext-heading target=_blank rel="noopener noreffer">GFM Setext headings 说明</a>
+。</p><p>笔者不推荐在 Hugo 的 Markdown 文档中使用 Setext 风格标题。</p></div></div><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-markdown data-lang=markdown><span class=gu>## H2 二级标题
+</span><span class=gu></span><span class=gu>### H3 三级标题
+</span><span class=gu></span><span class=gu>#### H4 四级标题
+</span><span class=gu></span><span class=gu>##### H5 五级标题
+</span><span class=gu></span><span class=gu>###### H6 六级标题
+</span></code></pre></td></tr></table></div></div><h2 id=h2-二级标题>H2 二级标题</h2><h3 id=h3-三级标题>H3 三级标题</h3><h4 id=h4-四级标题>H4 四级标题</h4><h5 id=h5-五级标题>H5 五级标题</h5><h6 id=h6-六级标题>H6 六级标题</h6><h3 id=33-代码块>3.3 代码块</h3><div class="admonition note"><p class=admonition-title><i class="icon fas fa-pencil-alt"></i>关于缩进式代码块和围栏式代码块</p><div class=admonition-content><p>本文只展示围栏式代码块，关于缩进式代码块的介绍请参考 <a href=https://github.github.com/gfm/#indented-code-block target=_blank rel="noopener noreffer">GFM Indented code blocks 说明</a>
+。</p><p>笔者不推荐在 Hugo 的 Markdown 文档中使用缩进式代码块。</p></div></div><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-markdown data-lang=markdown><span class=s>```
+</span><span class=s></span>foo()
+<span class=s>```</span>
+
+~~~
+foo()
+~~~
+
+````
+foo()
+````
+
+<span class=s>```</span><span class=s>ruby</span><span class=s>
+</span><span class=s></span><span class=k>def</span> <span class=nc></span><span class=o></span><span class=nf>foo</span><span class=p>(</span><span class=n>x</span><span class=p>)</span>
+  <span class=k>return</span> <span class=mi>3</span>
+<span class=o></span><span class=k>end</span>
+<span class=s>```</span>
+</code></pre></td></tr></table></div></div><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-fallback data-lang=fallback>foo()
+</code></pre></td></tr></table></div></div><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-fallback data-lang=fallback>foo()
+</code></pre></td></tr></table></div></div><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-fallback data-lang=fallback>foo()
+</code></pre></td></tr></table></div></div><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-ruby data-lang=ruby><span class=k>def</span> <span class=nc></span><span class=o></span><span class=nf>foo</span><span class=p>(</span><span class=n>x</span><span class=p>)</span>
+  <span class=k>return</span> <span class=mi>3</span>
+<span class=o></span><span class=k>end</span>
+</code></pre></td></tr></table></div></div><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=hl><span class=lnt>22
+</span></span><span class=lnt>23
+</span><span class=hl><span class=lnt>24
+</span></span><span class=hl><span class=lnt>25
+</span></span><span class=hl><span class=lnt>26
+</span></span></code></pre></td><td class=lntd><pre class=chroma><code class=language-go data-lang=go><span class=kn>package</span> <span class=nx>main</span>
+
+<span class=hl><span class=kn>import</span> <span class=s>&#34;fmt&#34;</span>
+</span>
+<span class=hl><span class=kd>func</span> <span class=nf>main</span><span class=p>(</span><span class=p>)</span> <span class=p>{</span>
+</span><span class=hl>  <span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=s>&#34;Hello, 世界&#34;</span><span class=p>)</span>
+</span><span class=hl><span class=p>}</span></span></code></pre></td></tr></table></div></div><h3 id=34-段落>3.4 段落</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-markdown data-lang=markdown>这是一个段落。
+这还是之前段落的一部分。
+
+这是新的段落。
+</code></pre></td></tr></table></div></div><p>这是一个段落。
+这还是之前段落的一部分。</p><p>这是新的段落。</p><h3 id=35-引用链接的定义>3.5 引用链接的定义</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-markdown data-lang=markdown>[foo]: / &#34;title&#34;
+
+[foo]
+
+[bar]: /
+
+[bar]
+</code></pre></td></tr></table></div></div><p><a href=/ title=title rel="noopener noreffer">foo</a></p><p><a href=/ rel="noopener noreffer">bar</a></p><h3 id=36-空白行>3.6 空白行</h3><p>块之间的空白行将被忽略，除了它们在确定列表是紧还是松时所起的作用。</p><p>文档开头和结尾的空行也会被忽略。</p><h2 id=4-容器块>4 容器块</h2><h3 id=41-引用>4.1 引用</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-markdown data-lang=markdown><span class=k>&gt; </span><span class=ge>Foo
+</span><span class=ge></span><span class=k>&gt;
+</span><span class=k></span><span class=ge>&gt; - **bar**
+</span><span class=ge></span><span class=k>&gt; </span><span class=ge>- baz
+</span></code></pre></td></tr></table></div></div><blockquote><p>Foo</p><ul><li><strong>bar</strong></li><li>baz</li></ul></blockquote><h3 id=42-无序列表>4.2 无序列表</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-markdown data-lang=markdown><span class=k>-</span> 项目 1
+    <span class=k>*</span> 项目 A
+    <span class=k>-</span> 项目 B
+        一些说明
+        + 项目 a
+        <span class=k>*</span> 项目 b
+        <span class=k>-</span> 项目 c
+    + 项目 C
++ 项目 2
+<span class=k>*</span> 项目 3
+</code></pre></td></tr></table></div></div><ul><li>项目 1<ul><li>项目 A</li></ul><ul><li>项目 B
+一些说明<ul><li>项目 a</li></ul><ul><li>项目 b</li></ul><ul><li>项目 c</li></ul></li></ul><ul><li>项目 C</li></ul></li></ul><ul><li>项目 2</li></ul><ul><li>项目 3</li></ul><h3 id=43-有序列表>4.3 有序列表</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-markdown data-lang=markdown><span class=k>1.</span> 项目 1
+    <span class=k>1.</span> 项目 A
+    <span class=k>2.</span> 项目 B
+        一些说明
+        <span class=k>1.</span> 项目 a
+        <span class=k>2.</span> 项目 b
+        <span class=k>3.</span> 项目 c
+    <span class=k>3.</span> 项目 C
+<span class=k>2.</span> 项目 2
+<span class=k>3.</span> 项目 3
+</code></pre></td></tr></table></div></div><ol><li>项目 1<ol><li>项目 A</li><li>项目 B
+一些说明<ol><li>项目 a</li><li>项目 b</li><li>项目 c</li></ol></li><li>项目 C</li></ol></li><li>项目 2</li><li>项目 3</li></ol><h3 id=44-任务列表>4.4 任务列表</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-markdown data-lang=markdown><span class=k>- </span><span class=k>[ ]</span> 任务 1
+    <span class=k>* </span><span class=k>[X]</span> 任务 A
+    <span class=k>-</span> 任务 B
+        + [ ] 任务 a
+        <span class=k>* </span><span class=k>[ ]</span> 任务 b
+        <span class=k>- </span><span class=k>[X]</span> 任务 c
+    + [X] 任务 C
++ [ ] 任务 2
+<span class=k>* </span><span class=k>[X]</span> 任务 3
+</code></pre></td></tr></table></div></div><ul><li><i class="far fa-check-square fa-fw"></i>任务 1<ul><li><i class="far fa-square fa-fw"></i>任务 A</li></ul><ul><li>任务 B<ul><li><i class="far fa-check-square fa-fw"></i>任务 a</li></ul><ul><li><i class="far fa-check-square fa-fw"></i>任务 b</li></ul><ul><li><i class="far fa-square fa-fw"></i>任务 c</li></ul></li></ul><ul><li><i class="far fa-square fa-fw"></i>任务 C</li></ul></li></ul><ul><li><i class="far fa-check-square fa-fw"></i>任务 2</li></ul><ul><li><i class="far fa-square fa-fw"></i>任务 3</li></ul><h3 id=45-表格>4.5 表格</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-markdown data-lang=markdown>| <span class=ge>_颜色_</span>      | 水果          | 蔬菜         |
+| ----------  |:---------------:| -----------:|
+| 红色           | <span class=ge>*苹果*</span>         | 辣椒      |
+| <span class=gd>~~橙色~~</span>    | 橘子         | <span class=gs>**胡萝卜</span><span class=gs>**</span>        |
+| 绿色         | <span class=gd>~~***梨子***~~</span> | 菠菜           |
+</code></pre></td></tr></table></div></div><table><thead><tr><th><em>颜色</em></th><th align=center>水果</th><th align=right>蔬菜</th></tr></thead><tbody><tr><td>红色</td><td align=center><em>苹果</em></td><td align=right>辣椒</td></tr><tr><td><del>橙色</del></td><td align=center>橘子</td><td align=right><strong>胡萝卜</strong></td></tr><tr><td>绿色</td><td align=center><del><em><strong>梨子</strong></em></del></td><td align=right>菠菜</td></tr></tbody></table><h2 id=3-页内锚>3. 页内锚</h2><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-markdown data-lang=markdown>[<span class=nt>脚注</span>](<span class=na>#footnote</span>)
+
+<span class=gu>## 4. 脚注 {#footnote}
+</span></code></pre></td></tr></table></div></div><p><a href=#footnote rel="noopener noreffer">脚注</a></p><h2 id=footnote>4. 脚注</h2><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-markdown data-lang=markdown>这是一个基本的数字脚注[^1]
+
+带有 &#34;label&#34; 标签的脚注[^label]
+
+下定义的脚注[^!DEF]
+
+带有链接的脚注[^pa]
+
+[^1]: 这是一个基本的数字脚注
+[^label]: 带有 &#34;label&#34; 标签的脚注
+[^pa]: [<span class=nt>LoveIt 主题</span>](<span class=na>https://github.com/dillonzq/LoveIt</span>)
+[^!DEF]: 下定义的脚注
+</code></pre></td></tr></table></div></div><p>这是一个基本的数字脚注<sup id=fnref:1><a href=#fn:1 class=footnote-ref role=doc-noteref>1</a></sup></p><p>带有 &ldquo;label&rdquo; 标签的脚注<sup id=fnref:2><a href=#fn:2 class=footnote-ref role=doc-noteref>2</a></sup></p><p>下定义的脚注<sup id=fnref:3><a href=#fn:3 class=footnote-ref role=doc-noteref>3</a></sup></p><p>带有链接的脚注<sup id=fnref:4><a href=#fn:4 class=footnote-ref role=doc-noteref>4</a></sup></p><h2 id=5-内联格式>5. 内联格式</h2><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-markdown data-lang=markdown><span class=sb>`内联代码块`</span>
+
+&lt;kbd&gt;ctrl&lt;/kbd&gt;+&lt;kbd&gt;alt&lt;/kbd&gt;+&lt;kbd&gt;del&lt;/kbd&gt;
+
+<span class=gs>**加粗 1</span><span class=gs>**</span> 和 <span class=gs>__加粗 2</span><span class=gs>__</span>
+
+<span class=ge>*倾斜 1*</span>  和 <span class=ge>_倾斜 2_</span>
+
+<span class=gd>~~删除线~~</span>
+
+<span class=gs>***加粗 1 和 倾斜 1</span><span class=gs>**</span>*
+
+<span class=gs>___加粗 2 和 倾斜 2_</span><span class=gs>__</span>
+
+<span class=gs>__*加粗 2 和 倾斜 1*</span><span class=gs>__</span>
+
+<span class=gs>**_加粗 1 和 倾斜 2_</span><span class=gs>**</span>
+
+<span class=gd>~~*删除线 倾斜 1*~~</span> 和 <span class=ge>*~~删除线 倾斜 2~~*</span>
+
+<span class=gd>~~_删除线 倾斜 2_~~</span> 和  <span class=ge>_~~删除线 倾斜 2~~_</span>
+
+<span class=gd>~~**删除线 加粗 1**~~</span> 和 <span class=gs>**~~删除线 加粗 1~~</span><span class=gs>**</span>
+
+<span class=gd>~~__删除线 加粗 2__~~</span> 和 <span class=gs>__~~删除线 加粗 2~~</span><span class=gs>__</span>
+
+<span class=gd>~~***删除线 倾斜 1 加粗 1***~~</span> 和 <span class=gs>***~~删除线 倾斜 1 加粗 1~~</span><span class=gs>**</span>*
+
+<span class=gd>~~___删除线 倾斜 2 加粗 2___~~</span> 和 <span class=gs>___~~删除线 倾斜 2 加粗 2~~_</span><span class=gs>__</span>
+
+<span class=gs>**~~*删除线 倾斜 1 加粗 1*~~</span><span class=gs>**</span> 和 <span class=ge>*~~*</span>*删除线 倾斜 1 加粗 1**~~*
+
+<span class=gs>__~~_删除线 倾斜 2 加粗 2_~~</span><span class=gs>__</span> 和 _~~__删除线 倾斜 2 加粗 2__~~_
+
+<span class=gs>**~~_删除线 倾斜 2 加粗 1_~~</span><span class=gs>**</span> 和 <span class=ge>_~~*</span>*删除线 倾斜 2 加粗 1**~~_
+
+<span class=gs>__~~*删除线 倾斜 1 加粗 2*~~</span><span class=gs>__</span> 和 *~~__删除线 倾斜 1 加粗 2__~~*
+</code></pre></td></tr></table></div></div><p><code>内联代码块</code></p><p><kbd>ctrl</kbd>+<kbd>alt</kbd>+<kbd>del</kbd></p><p><strong>加粗 1</strong> 和 <strong>加粗 2</strong></p><p><em>倾斜 1</em> 和 <em>倾斜 2</em></p><p><del>删除线</del></p><p><em><strong>加粗 1 和 倾斜 1</strong></em></p><p><em><strong>加粗 2 和 倾斜 2</strong></em></p><p><strong><em>加粗 2 和 倾斜 1</em></strong></p><p><strong><em>加粗 1 和 倾斜 2</em></strong></p><p><del><em>删除线 倾斜 1</em></del> 和 <em><del>删除线 倾斜 2</del></em></p><p><del>_删除线 倾斜 2_</del> 和 <em><del>删除线 倾斜 2</del></em></p><p><del><strong>删除线 加粗 1</strong></del> 和 <strong><del>删除线 加粗 1</del></strong></p><p><del>__删除线 加粗 2__</del> 和 <strong><del>删除线 加粗 2</del></strong></p><p><del><em><strong>删除线 倾斜 1 加粗 1</strong></em></del> 和 <em><strong><del>删除线 倾斜 1 加粗 1</del></strong></em></p><p><del>___删除线 倾斜 2 加粗 2___</del> 和 <em><strong><del>删除线 倾斜 2 加粗 2</del></strong></em></p><p><strong><del><em>删除线 倾斜 1 加粗 1</em></del></strong> 和 <em><del><strong>删除线 倾斜 1 加粗 1</strong></del></em></p><p><strong><del>_删除线 倾斜 2 加粗 2_</del></strong> 和 <em><del>__删除线 倾斜 2 加粗 2__</del></em></p><p><strong><del>_删除线 倾斜 2 加粗 1_</del></strong> 和 <em><del><strong>删除线 倾斜 2 加粗 1</strong></del></em></p><p><strong><del><em>删除线 倾斜 1 加粗 2</em></del></strong> 和 <em><del>__删除线 倾斜 1 加粗 2__</del></em></p><h2 id=6-图片>6. 图片</h2><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-markdown data-lang=markdown>Web image
+![<span class=nt>Web Picture</span>](<span class=na>https://static.dillonzq.com/images/20190817130904-U6cPUk.jpg &#34;Web Picture&#34;</span>)
+
+Local image
+![<span class=nt>Local Picture</span>](<span class=na>/images/Apple-Devices-Preview.png</span>)
+
+contact@revolunet.com
+
+<span class=ni>@revolunet</span>
+
+Issue <span class=ni>#1</span>
+
+https://github.com/revolunet/sublimetext-markdown-preview/
+
+This is a link https://github.com/revolunet/sublimetext-markdown-preview/.
+
+This is a link &#34;https://github.com/revolunet/sublimetext-markdown-preview/&#34;.
+
+With this link (https://github.com/revolunet/sublimetext-markdown-preview/), it still works.
+</code></pre></td></tr></table></div></div><p>Web image<figure><img src=/svg/loading.min.svg data-sizes=auto data-src=https://static.dillonzq.com/images/20190817130904-U6cPUk.jpg alt="Web Picture" title="Web Picture" class=lazyload><figcaption class=image-caption>Web Picture</figcaption></figure></p><p>Local image<figure><img src=/svg/loading.min.svg data-sizes=auto data-src=/images/Apple-Devices-Preview.png alt="Local Picture" title="Local Picture" class=lazyload><figcaption class=image-caption>Local Picture</figcaption></figure></p><p><a href=https://www.google.com>https://www.google.com</a></p><p><a href=mailto:contact@revolunet.com>contact@revolunet.com</a></p><p>@revolunet</p><p>Issue #1</p><p><a href=https://github.com/revolunet/sublimetext-markdown-preview/>https://github.com/revolunet/sublimetext-markdown-preview/</a></p><p>This is a link <a href=https://github.com/revolunet/sublimetext-markdown-preview/>https://github.com/revolunet/sublimetext-markdown-preview/</a>.</p><p>This is a link &ldquo;<a href=https://github.com/revolunet/sublimetext-markdown-preview/%22>https://github.com/revolunet/sublimetext-markdown-preview/"</a>.</p><p>With this link (<a href=https://github.com/revolunet/sublimetext-markdown-preview/),>https://github.com/revolunet/sublimetext-markdown-preview/),</a> it still works.</p><h2 id=abbreviation>Abbreviation</h2><p>Abbreviations source are found in a separate markdown file specified in frontmatter.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-fallback data-lang=fallback>The HTML specification 
+is maintained by the W3C.
+
+*[HTML]: Hyper Text Markup Language
+*[W3C]:  World Wide Web Consortium
+</code></pre></td></tr></table></div></div><p>The HTML specification
+is maintained by the W3C.</p><h2 id=unordered-list>Unordered List</h2><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-fallback data-lang=fallback>Unordered List
+
+- item 1
+    * item A
+    * item B
+        more text
+        + item a
+        + item b
+        + item c
+    * item C
+- item 2
+- item 3
+</code></pre></td></tr></table></div></div><p>Unordered List</p><ul><li>item 1<ul><li>item A</li><li>item B
+more text<ul><li>item a</li><li>item b</li><li>item c</li></ul></li><li>item C</li></ul></li><li>item 2</li><li>item 3</li></ul><h2 id=ordered-list>Ordered List</h2><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-fallback data-lang=fallback>Ordered List
+
+1. item 1
+    1. item A
+    2. item B
+        more text
+        1. item a
+        2. item b
+        3. item c
+    3. item C
+2. item 2
+3. item 3
+</code></pre></td></tr></table></div></div><p>Ordered List</p><ol><li>item 1<ol><li>item A</li><li>item B
+more text<ol><li>item a</li><li>item b</li><li>item c</li></ol></li><li>item C</li></ol></li><li>item 2</li><li>item 3</li></ol><h2 id=mixed-lists>Mixed Lists</h2><p><code>Really Mixed Lists</code> should break with <code>sane_lists</code> on.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-fallback data-lang=fallback>Mixed Lists
+
+- item 1
+    * [X] item A
+    * [ ] item B
+        more text
+        1. item a
+        2. itemb
+        3. item c
+    * [X] item C
+- item 2
+- item 3
+
+
+Really Mixed Lists
+
+- item 1
+    * [X] item A
+    - item B
+        more text
+        1. item a
+        + itemb
+        + [ ] item c
+    3. item C
+2. item 2
+- [X] item 3
+</code></pre></td></tr></table></div></div><p>Mixed Lists</p><ul><li>item 1<ul><li><i class="far fa-square fa-fw"></i>item A</li><li><i class="far fa-check-square fa-fw"></i>item B
+more text<ol><li>item a</li><li>itemb</li><li>item c</li></ol></li><li><i class="far fa-square fa-fw"></i>item C</li></ul></li><li>item 2</li><li>item 3</li></ul><p>Really Mixed Lists</p><ul><li>item 1<ul><li><i class="far fa-square fa-fw"></i>item A</li></ul><ul><li>item B
+more text<ol><li>item a</li></ol><ul><li>itemb</li><li><i class="far fa-check-square fa-fw"></i>item c</li></ul></li></ul><ol start=3><li>item C</li></ol></li></ul><ol start=2><li>item 2</li></ol><ul><li><i class="far fa-square fa-fw"></i>item 3</li></ul><h2 id=blocks>Blocks</h2><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-fallback data-lang=fallback>    This is a block.
+
+    This is more of a block.
+
+</code></pre></td></tr></table></div></div><pre><code>This is a block.
+
+This is more of a block.
+</code></pre><h2 id=block-quotes>Block Quotes</h2><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-fallback data-lang=fallback>&gt; This is a block quote
+&gt;&gt; How does it look?
+</code></pre></td></tr></table></div></div><blockquote><p>This is a block quote.</p><blockquote><p>How does it look?
+I think it looks good.</p></blockquote></blockquote><h2 id=fenced-block>Fenced Block</h2><p>Assuming guessing is not enabled.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-fallback data-lang=fallback>```
+// Fenced **without** highlighting
+function doIt() {
+    for (var i = 1; i &lt;= slen ; i^^) {
+        setTimeout(&#34;document.z.textdisplay.value = newMake()&#34;, i*300);
+        setTimeout(&#34;window.status = newMake()&#34;, i*300);
+    }
+}
+```
+
+```javascript
+// Fenced **with** highlighting
+function doIt() {
+    for (var i = 1; i &lt;= slen ; i^^) {
+        setTimeout(&#34;document.z.textdisplay.value = newMake()&#34;, i*300);
+        setTimeout(&#34;window.status = newMake()&#34;, i*300);
+    }
+}
+```
+</code></pre></td></tr></table></div></div><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-fallback data-lang=fallback>// Fenced **without** highlighting
+function doIt() {
+    for (var i = 1; i &lt;= slen ; i^^) {
+        setTimeout(&#34;document.z.textdisplay.value = newMake()&#34;, i*300);
+        setTimeout(&#34;window.status = newMake()&#34;, i*300);
+    }
+}
+</code></pre></td></tr></table></div></div><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-javascript data-lang=javascript><span class=c1>// Fenced **with** highlighting
+</span><span class=c1></span><span class=kd>function</span> <span class=nx>doIt</span><span class=p>(</span><span class=p>)</span> <span class=p>{</span>
+    <span class=k>for</span> <span class=p>(</span><span class=kd>var</span> <span class=nx>i</span> <span class=o>=</span> <span class=mi>1</span><span class=p>;</span> <span class=nx>i</span> <span class=o>&lt;=</span> <span class=nx>slen</span> <span class=p>;</span> <span class=nx>i</span><span class=o>^</span><span class=o>^</span><span class=p>)</span> <span class=p>{</span>
+        <span class=nx>setTimeout</span><span class=p>(</span><span class=s2>&#34;document.z.textdisplay.value = newMake()&#34;</span><span class=p>,</span> <span class=nx>i</span><span class=o>*</span><span class=mi>300</span><span class=p>)</span><span class=p>;</span>
+        <span class=nx>setTimeout</span><span class=p>(</span><span class=s2>&#34;window.status = newMake()&#34;</span><span class=p>,</span> <span class=nx>i</span><span class=o>*</span><span class=mi>300</span><span class=p>)</span><span class=p>;</span>
+    <span class=p>}</span>
+<span class=p>}</span>
+</code></pre></td></tr></table></div></div><h2 id=tables>Tables</h2><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-fallback data-lang=fallback>| _颜色_      | 水果          | 蔬菜         |
+| ------------- |:---------------:| -----------------:|
+| red           | *苹果*         | [辣椒](#) |
+| ~~橙色~~    | 橘子         | **胡萝卜**        |
+| 绿色         | ~~***梨子***~~ | 菠菜           |
+</code></pre></td></tr></table></div></div><table><thead><tr><th><em>颜色</em></th><th align=center>水果</th><th align=right>蔬菜</th></tr></thead><tbody><tr><td>red</td><td align=center><em>苹果</em></td><td align=right><a href=# rel="noopener noreffer">辣椒</a></td></tr><tr><td><del>橙色</del></td><td align=center>橘子</td><td align=right><strong>胡萝卜</strong></td></tr><tr><td>绿色</td><td align=center><del><em><strong>梨子</strong></em></del></td><td align=right>菠菜</td></tr></tbody></table><table><thead><tr><th>Class or Enum</th><th>Year</th><th>Month</th><th align=center>Day</th><th align=center>Hours</th><th align=center>Minutes</th><th>Seconds*</th><th align=center>Zone Offset</th><th align=center>Zone ID</th><th>toString Output</th><th>Where Discussed</th></tr></thead><tbody><tr><td><code>Instant</code></td><td></td><td></td><td align=center></td><td align=center></td><td align=center></td><td><center><figure><img src=/svg/loading.min.svg data-sizes=auto data-src=/favicon-16x16.png alt=checked title=checked class=lazyload><figcaption class=image-caption>checked</figcaption></figure></center></td><td align=center></td><td align=center></td><td><code>2013-08-20T15:16:26.355Z</code></td><td><a href=https://docs.oracle.com/javase/tutorial/datetime/iso/instant.html target=_blank rel="noopener noreffer">Instant Class</a></td></tr><tr><td><code>LocalDate</code></td><td><center><figure><img src=/svg/loading.min.svg data-sizes=auto data-src=/favicon-16x16.png alt=checked title=checked class=lazyload><figcaption class=image-caption>checked</figcaption></figure></center></td><td><center><figure><img src=/svg/loading.min.svg data-sizes=auto data-src=/favicon-16x16.png alt=checked title=checked class=lazyload><figcaption class=image-caption>checked</figcaption></figure></center></td><td align=center><center><figure><img src=/svg/loading.min.svg data-sizes=auto data-src=/favicon-16x16.png alt=checked title=checked class=lazyload><figcaption class=image-caption>checked</figcaption></figure></center></td><td align=center></td><td align=center></td><td></td><td align=center></td><td align=center></td><td><code>2013-08-20</code></td><td><a href=https://docs.oracle.com/javase/tutorial/datetime/iso/date.html target=_blank rel="noopener noreffer">Date Classes</a></td></tr><tr><td><code>LocalDateTime</code></td><td><center><figure><img src=/svg/loading.min.svg data-sizes=auto data-src=/favicon-16x16.png alt=checked title=checked class=lazyload><figcaption class=image-caption>checked</figcaption></figure></center></td><td><center><figure><img src=/svg/loading.min.svg data-sizes=auto data-src=/favicon-16x16.png alt=checked title=checked class=lazyload><figcaption class=image-caption>checked</figcaption></figure></center></td><td align=center><center><figure><img src=/svg/loading.min.svg data-sizes=auto data-src=/favicon-16x16.png alt=checked title=checked class=lazyload><figcaption class=image-caption>checked</figcaption></figure></center></td><td align=center><center><figure><img src=/svg/loading.min.svg data-sizes=auto data-src=/favicon-16x16.png alt=checked title=checked class=lazyload><figcaption class=image-caption>checked</figcaption></figure></center></td><td align=center><center><figure><img src=/svg/loading.min.svg data-sizes=auto data-src=/favicon-16x16.png alt=checked title=checked class=lazyload><figcaption class=image-caption>checked</figcaption></figure></center></td><td><center><figure><img src=/svg/loading.min.svg data-sizes=auto data-src=/favicon-16x16.png alt=checked title=checked class=lazyload><figcaption class=image-caption>checked</figcaption></figure></center></td><td align=center></td><td align=center></td><td><code>2013-08-20T08:16:26.937</code></td><td><a href=https://docs.oracle.com/javase/tutorial/datetime/iso/datetime.html target=_blank rel="noopener noreffer">Date and Time Classes</a></td></tr><tr><td><code>ZonedDateTime</code></td><td><center><figure><img src=/svg/loading.min.svg data-sizes=auto data-src=/favicon-16x16.png alt=checked title=checked class=lazyload><figcaption class=image-caption>checked</figcaption></figure></center></td><td><center><figure><img src=/svg/loading.min.svg data-sizes=auto data-src=/favicon-16x16.png alt=checked title=checked class=lazyload><figcaption class=image-caption>checked</figcaption></figure></center></td><td align=center><center><figure><img src=/svg/loading.min.svg data-sizes=auto data-src=/favicon-16x16.png alt=checked title=checked class=lazyload><figcaption class=image-caption>checked</figcaption></figure></center></td><td align=center><center><figure><img src=/svg/loading.min.svg data-sizes=auto data-src=/favicon-16x16.png alt=checked title=checked class=lazyload><figcaption class=image-caption>checked</figcaption></figure></center></td><td align=center><center><figure><img src=/svg/loading.min.svg data-sizes=auto data-src=/favicon-16x16.png alt=checked title=checked class=lazyload><figcaption class=image-caption>checked</figcaption></figure></center></td><td><center><figure><img src=/svg/loading.min.svg data-sizes=auto data-src=/favicon-16x16.png alt=checked title=checked class=lazyload><figcaption class=image-caption>checked</figcaption></figure></center></td><td align=center><center><figure><img src=/svg/loading.min.svg data-sizes=auto data-src=/favicon-16x16.png alt=checked title=checked class=lazyload><figcaption class=image-caption>checked</figcaption></figure></center></td><td align=center><center><figure><img src=/svg/loading.min.svg data-sizes=auto data-src=/favicon-16x16.png alt=checked title=checked class=lazyload><figcaption class=image-caption>checked</figcaption></figure></center></td><td><code>2013-08-21T00:16:26.941+09:00[Asia/Tokyo]</code></td><td><a href=https://docs.oracle.com/javase/tutorial/datetime/iso/timezones.html target=_blank rel="noopener noreffer">Time Zone and Offset Classes</a></td></tr><tr><td><code>LocalTime</code></td><td></td><td></td><td align=center></td><td align=center><center><figure><img src=/svg/loading.min.svg data-sizes=auto data-src=/favicon-16x16.png alt=checked title=checked class=lazyload><figcaption class=image-caption>checked</figcaption></figure></center></td><td align=center><center><figure><img src=/svg/loading.min.svg data-sizes=auto data-src=/favicon-16x16.png alt=checked title=checked class=lazyload><figcaption class=image-caption>checked</figcaption></figure></center></td><td><center><figure><img src=/svg/loading.min.svg data-sizes=auto data-src=/favicon-16x16.png alt=checked title=checked class=lazyload><figcaption class=image-caption>checked</figcaption></figure></center></td><td align=center></td><td align=center></td><td><code>08:16:26.943</code></td><td><a href=https://docs.oracle.com/javase/tutorial/datetime/iso/datetime.html target=_blank rel="noopener noreffer">Date and Time Classes</a></td></tr><tr><td><code>MonthDay</code></td><td></td><td><center><figure><img src=/svg/loading.min.svg data-sizes=auto data-src=/favicon-16x16.png alt=checked title=checked class=lazyload><figcaption class=image-caption>checked</figcaption></figure></center></td><td align=center><center><figure><img src=/svg/loading.min.svg data-sizes=auto data-src=/favicon-16x16.png alt=checked title=checked class=lazyload><figcaption class=image-caption>checked</figcaption></figure></center></td><td align=center></td><td align=center></td><td></td><td align=center></td><td align=center></td><td><code>--08-20</code></td><td><a href=https://docs.oracle.com/javase/tutorial/datetime/iso/date.html target=_blank rel="noopener noreffer">Date Classes</a></td></tr><tr><td><code>Year</code></td><td><center><figure><img src=/svg/loading.min.svg data-sizes=auto data-src=/favicon-16x16.png alt=checked title=checked class=lazyload><figcaption class=image-caption>checked</figcaption></figure></center></td><td></td><td align=center></td><td align=center></td><td align=center></td><td></td><td align=center></td><td align=center></td><td><code>2013</code></td><td><a href=https://docs.oracle.com/javase/tutorial/datetime/iso/date.html target=_blank rel="noopener noreffer">Date Classes</a></td></tr><tr><td><code>YearMonth</code></td><td><center><figure><img src=/svg/loading.min.svg data-sizes=auto data-src=/favicon-16x16.png alt=checked title=checked class=lazyload><figcaption class=image-caption>checked</figcaption></figure></center></td><td><center><figure><img src=/svg/loading.min.svg data-sizes=auto data-src=/favicon-16x16.png alt=checked title=checked class=lazyload><figcaption class=image-caption>checked</figcaption></figure></center></td><td align=center></td><td align=center></td><td align=center></td><td></td><td align=center></td><td align=center></td><td><code>2013-08</code></td><td><a href=https://docs.oracle.com/javase/tutorial/datetime/iso/date.html target=_blank rel="noopener noreffer">Date Classes</a></td></tr><tr><td><code>Month</code></td><td></td><td><center><figure><img src=/svg/loading.min.svg data-sizes=auto data-src=/favicon-16x16.png alt=checked title=checked class=lazyload><figcaption class=image-caption>checked</figcaption></figure></center></td><td align=center></td><td align=center></td><td align=center></td><td></td><td align=center></td><td align=center></td><td><code>AUGUST</code></td><td><a href=https://docs.oracle.com/javase/tutorial/datetime/iso/enum.html target=_blank rel="noopener noreffer">DayOfWeek and Month Enums</a></td></tr><tr><td><code>OffsetDateTime</code></td><td><center><figure><img src=/svg/loading.min.svg data-sizes=auto data-src=/favicon-16x16.png alt=checked title=checked class=lazyload><figcaption class=image-caption>checked</figcaption></figure></center></td><td><center><figure><img src=/svg/loading.min.svg data-sizes=auto data-src=/favicon-16x16.png alt=checked title=checked class=lazyload><figcaption class=image-caption>checked</figcaption></figure></center></td><td align=center><center><figure><img src=/svg/loading.min.svg data-sizes=auto data-src=/favicon-16x16.png alt=checked title=checked class=lazyload><figcaption class=image-caption>checked</figcaption></figure></center></td><td align=center><center><figure><img src=/svg/loading.min.svg data-sizes=auto data-src=/favicon-16x16.png alt=checked title=checked class=lazyload><figcaption class=image-caption>checked</figcaption></figure></center></td><td align=center><center><figure><img src=/svg/loading.min.svg data-sizes=auto data-src=/favicon-16x16.png alt=checked title=checked class=lazyload><figcaption class=image-caption>checked</figcaption></figure></center></td><td><center><figure><img src=/svg/loading.min.svg data-sizes=auto data-src=/favicon-16x16.png alt=checked title=checked class=lazyload><figcaption class=image-caption>checked</figcaption></figure></center></td><td align=center><center><figure><img src=/svg/loading.min.svg data-sizes=auto data-src=/favicon-16x16.png alt=checked title=checked class=lazyload><figcaption class=image-caption>checked</figcaption></figure></center></td><td align=center></td><td><code>2013-08-20T08:16:26.954-07:00</code></td><td><a href=https://docs.oracle.com/javase/tutorial/datetime/iso/timezones.html target=_blank rel="noopener noreffer">Time Zone and Offset Classes</a></td></tr><tr><td><code>OffsetTime</code></td><td></td><td></td><td align=center></td><td align=center><center><figure><img src=/svg/loading.min.svg data-sizes=auto data-src=/favicon-16x16.png alt=checked title=checked class=lazyload><figcaption class=image-caption>checked</figcaption></figure></center></td><td align=center><center><figure><img src=/svg/loading.min.svg data-sizes=auto data-src=/favicon-16x16.png alt=checked title=checked class=lazyload><figcaption class=image-caption>checked</figcaption></figure></center></td><td><center><figure><img src=/svg/loading.min.svg data-sizes=auto data-src=/favicon-16x16.png alt=checked title=checked class=lazyload><figcaption class=image-caption>checked</figcaption></figure></center></td><td align=center><center><figure><img src=/svg/loading.min.svg data-sizes=auto data-src=/favicon-16x16.png alt=checked title=checked class=lazyload><figcaption class=image-caption>checked</figcaption></figure></center></td><td align=center></td><td><code>08:16:26.957-07:00</code></td><td><a href=https://docs.oracle.com/javase/tutorial/datetime/iso/timezones.html target=_blank rel="noopener noreffer">Time Zone and Offset Classes</a></td></tr><tr><td><code>Duration</code></td><td></td><td></td><td align=center>**</td><td align=center>**</td><td align=center>**</td><td><center><figure><img src=/svg/loading.min.svg data-sizes=auto data-src=/favicon-16x16.png alt=checked title=checked class=lazyload><figcaption class=image-caption>checked</figcaption></figure></center></td><td align=center></td><td align=center></td><td><code>PT20H</code> (20 hours)</td><td><a href=https://docs.oracle.com/javase/tutorial/datetime/iso/period.html target=_blank rel="noopener noreffer">Period and Duration</a></td></tr><tr><td><code>Period</code></td><td><center><figure><img src=/svg/loading.min.svg data-sizes=auto data-src=/favicon-16x16.png alt=checked title=checked class=lazyload><figcaption class=image-caption>checked</figcaption></figure></center></td><td><center><figure><img src=/svg/loading.min.svg data-sizes=auto data-src=/favicon-16x16.png alt=checked title=checked class=lazyload><figcaption class=image-caption>checked</figcaption></figure></center></td><td align=center><center><figure><img src=/svg/loading.min.svg data-sizes=auto data-src=/favicon-16x16.png alt=checked title=checked class=lazyload><figcaption class=image-caption>checked</figcaption></figure></center></td><td align=center></td><td align=center></td><td></td><td align=center>***</td><td align=center>***</td><td><code>P10D</code> (10 days)</td><td><a href=https://docs.oracle.com/javase/tutorial/datetime/iso/period.html target=_blank rel="noopener noreffer">Period and Duration</a></td></tr></tbody></table><h2 id=smart-strong>Smart Strong</h2><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-fallback data-lang=fallback>Text with double__underscore__words.
+
+__Strong__ still works.
+
+__this__works__too__
+</code></pre></td></tr></table></div></div><p>Text with double__underscore__words.</p><p><strong>Strong</strong> still works.</p><p><strong>this__works__too</strong></p><h2 id=smarty>Smarty</h2><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-fallback data-lang=fallback>&#34;double quotes&#34;
+
+&#39;single quotes&#39;
+
+da--sh
+
+elipsis...
+</code></pre></td></tr></table></div></div><p>&ldquo;double quotes&rdquo;</p><p>&lsquo;single quotes&rsquo;</p><p>da&ndash;sh</p><p>elipsis&mldr;</p><h2 id=neseted-fences>Neseted Fences</h2><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-fallback data-lang=fallback>    ```
+    This will still be parsed
+    as a normal indented code block.
+    ```
+
+```
+This will still be parsed
+as a fenced code block.
+```
+
+- This is a list that contains multiple code blocks.
+
+    - Here is an indented block
+
+            ```
+            This will still be parsed
+            as a normal indented code block.
+            ```
+
+    - Here is a fenced code block:
+
+        ```
+        This will still be parsed
+        as a fenced code block.
+        ```
+
+        &gt; ```
+        &gt; Blockquotes?
+        &gt; Not a problem!
+        &gt; ```
+</code></pre></td></tr></table></div></div><pre><code>```
+This will still be parsed
+as a normal indented code block.
+```
+</code></pre><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-fallback data-lang=fallback>This will still be parsed
+as a fenced code block.
+</code></pre></td></tr></table></div></div><ul><li><p>This is a list that contains multiple code blocks.</p><ul><li><p>Here is an indented block</p><pre><code>  ```
+  This will still be parsed
+  as a normal indented code block.
+  ```
+</code></pre></li><li><p>Here is a fenced code block:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-fallback data-lang=fallback>This will still be parsed
+as a fenced code block.
+</code></pre></td></tr></table></div></div><blockquote><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-fallback data-lang=fallback>Blockquotes?
+Not a problem!
+</code></pre></td></tr></table></div></div></blockquote></li></ul></li></ul><h2 id=section-7>Github Emoji</h2><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-markdown data-lang=markdown>This is a test for emoji 😄.  The emojis are images linked to github assets :octocat:.
+</code></pre></td></tr></table></div></div><p>This is a test for emoji 😄. The emojis are images linked to github assets :octocat:.</p><h3 id=people>People</h3><p>👍👎👽👼💢😠😧😲👶💙😊💥🙇:bowtie:👦👰💔👤👥👏😰💥😖😕👷👮👫💑💏😢😿💘💃👯💨😞😥💫😵💧👂❗😑👀👊👪😨:feelsgood:🐾:finnadie:🔥✊😳😦🖕👧:goberserk::godmode:💚❕❔😬😄😀💂💇✋💩🙉❤😍😻💓💗:hurtrealbad:😯👿💁😇👺👹😂😹💏😗😽😚😘😙😆👄💌👨👲👳😷💆🤘💪🎵💅:neckbeard:😐🙅😶👃🎶👌🙆👴👵👐😮😔😣🙍👱🙎👇👈👉☝👆💩😾🙏👸👊💜❓😡:rage1::rage2::rage3::rage4:✋🙌🙋☺😌💞🏃🏃😆😱🙀🙈💩💀😴😪😄😸😃😺😈😏😼😭✨💖🙊💬⭐🌟😛😝😜🕶:suspect:😓💦😅💭👎👍😫👅😤:trollface:💕👬👭😒✌🚶👋😩😉👩😟💛😋💤</p><h3 id=nature>Nature</h3><p>🐜🐤🐻🐝🐞🐦🌼🐡🐗💐🐛🌵🐪🐈🐈🌸🌰🐔☁🐄🐄🌙🐊🌀🌳🐕🐕🐬🐉🐲🐪🌾🌍🌎🌏🐘🌲🍂🌓🌛🐟🌁🍀🐸🌕🌝🌐🐐🐹🐥🐣🌿🌺🐝🐎🐨🌗🌜🍃🐆🍁🌌🐒🐵🌔🐁🐁🍄🌑🌚🌃🌊:octocat:🐙🐂🌴🐼⛅🐾🐧🐖🐖🐽🐩🐇🐇🐎🐏🐀🐓🌹🌱🐑🐚🐌🐍❄☃:squirrel:🌞🌻☀🐅🐅🐠🌷🐢☂🌋🌘🌖🐃🌒🌔🐋🐋🐺⚡</p><h3 id=objects>Objects</h3><p>🎱⏰🍎🎨👟🍼🎈🎍🍌📊⚾🏀🛀🛁🔋🍺🍻🔔🍱🚴👙🎂🃏✒📘💣📖🔖📑📚👢🎳🍞💼💡🍰📅📲📷🍬📇💿📉📈🍒🍫🎄🎬📋📕🔐🌂♣🍸☕💻🎊🍪🌽💳👑🔮🍛🍮🍡🎯📅♦💵🎎🚪🍩👗📀📧🥚🍆🔌✉️✉📩💶👓📠📁🎆🍥🎣🎏🔦🐬💾🎴🏈👣🍴🍤🍟🎲💎👻🎁💝⛳🍇🍏📗🎸🔫🍔🔨👜🎧♥🔆👠🔪🍯🏇⌛⏳🍨🍦📥📨📱🎃👖🔑👘🏮📒🍋💄🔒🔏🍭➿🔊📢🔅🔍🔎🀄📫📪📬📭👞🍖📣🍈📝🎤🔬💽💸💰🎓🚵🎥🎹🎼🔇📛👔📰🔕📓📔🔩🍢📖📂📙📤📦📄📃📟📎🍑🍐✏✏☎️💊🍍🍕📯📮👝🍗💷👛📌📻🍜🎀🍚🍙🍘🎑💍🏉🎽🍶👡🎅🛰🎷🎒✂📜💺🍧👕👞🚿🎿🚬🏂⚽🔉👾♠🍝❇🎇🔈🍲📏🍓🏄🍣🍠🏊💉🎉🎋🍊🍵☎📞🔭🎾🚽🍅🎩📐🏆🍹🎺👕📺🔓📼📹🎮🎻⌚🍉🎐🍷👚👒🔧💴</p><h3 id=places>Places</h3><p>🚡✈🚑⚓🚛🏧🏦💈🔰🚲🚙⛵️🌉🚅🚄🚌🚏🚗🎠🏁⛪🎪🌇🌇🇨🇳🚧🏪🎌🇩🇪🏬🇪🇸🏰🏤🏭🎡🚒⛲🇫🇷⛽🇬🇧🚁🏥🏨♨🏠🏡🇮🇹🏮🗾🏯🇯🇵🇰🇷🚈🏩🚐🚝🗻🚠🚞🗿🏢🚘🚍🚔🚖🎭🚓🏤🚃🌈🚗🚀🎢🚨📍🚣🇷🇺⛵🏫🚢🎰🚤🌠🚉🗽🚂🌅🌄🚟🚕⛺🎫🗼🚜🚥🚆🚆🚊🚩🚎🚚🇬🇧🇺🇸🚦⚠💒</p><h3 id=symbols>Symbols</h3><p>💯🔢🅰🆎🔤🔡🉑♒♈◀⏬⏫⬇🔽▶⤵⤴⬅↙↘➡↪⬆↕🔼↖↗🔃🔄🅱🚼🔙🛄☑‼⚫⬛◾◼▪🔲♋🔠♑💹🚸🎦🆑🕐🕙🕥🕚🕦🕛🕧🕜🕑🕝🕒🕞🕓🕟🕔🕠🕕🕡🕖🕢🕗🕣🕘🕤㊗🆒©➰💱🛃💠🚯8️⃣✴✳🔚⏩5️⃣4️⃣🆓♊#️⃣💟✔➗💲❗️➖✖➕🆔🉐ℹ⁉🔟🈁🔵🔷🔶🛅↔↩♌♎🔗ⓜ🚹🚇📴❎🆕🆖9️⃣🚳⛔🚫📵🚷🚭🚱⭕🅾🆗🔛1️⃣⛎🅿〽🛂♓🚰🚮🔘♻🔴®🔁🔂🚻⏪🈂♐♏㊙7️⃣:shipit:📶6️⃣🔯🔹🔸🔺🔻🔜🆘🔣♉3️⃣™🔝🔱🔀2️⃣🈹🈴🈺🈯🈷🈶🈵🈚🈸🈲🈳🔞🆙📳♍🆚〰🚾♿✅⚪💮⬜◽◻▫🔳🚺❌0️⃣</p><h2 id=insert>Insert</h2><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-fallback data-lang=fallback>^^insert^^
+
+^^*insert 倾斜*^^  *^^insert 倾斜 2^^*
+
+^^_insert 倾斜_^^  _^^insert 倾斜 2^^_
+
+^^**insert 加粗**^^  **^^insert 加粗 2^^**
+
+^^__insert 加粗__^^  __^^insert 加粗 2^^__
+
+^^***insert 倾斜 加粗***^^  ***^^insert 倾斜 加粗 2^^***
+
+^^___insert 倾斜 加粗___^^  ___^^insert 倾斜 加粗 2^^___
+
+**^^*insert 倾斜 加粗*^^**  *^^**insert 倾斜 加粗 2**^^*
+
+__^^_insert 倾斜 加粗_^^__  _^^__insert 倾斜 加粗 2__^^_
+
+**^^_insert 倾斜 加粗_^^**  _^^**insert 倾斜 加粗 2**^^_
+
+__^^*insert 倾斜 加粗*^^__  *^^__insert 倾斜 加粗 2__^^*
+</code></pre></td></tr></table></div></div><p>^^insert^^</p><p>^^<em>insert 倾斜</em>^^ <em>^^insert 倾斜 2^^</em></p><p>^^_insert 倾斜_^^ <em>^^insert 倾斜 2^^</em></p><p>^^<strong>insert 加粗</strong>^^ <strong>^^insert 加粗 2^^</strong></p><p>^^__insert 加粗__^^ <strong>^^insert 加粗 2^^</strong></p><p>^^<em><strong>insert 倾斜 加粗</strong></em>^^ <em><strong>^^insert 倾斜 加粗 2^^</strong></em></p><p>^^___insert 倾斜 加粗___^^ <em><strong>^^insert 倾斜 加粗 2^^</strong></em></p><p><strong>^^<em>insert 倾斜 加粗</em>^^</strong> <em>^^<strong>insert 倾斜 加粗 2</strong>^^</em></p><p><strong>^^_insert 倾斜 加粗_^^</strong> <em>^^__insert 倾斜 加粗 2__^^</em></p><p><strong>^^_insert 倾斜 加粗_^^</strong> <em>^^<strong>insert 倾斜 加粗 2</strong>^^</em></p><p><strong>^^<em>insert 倾斜 加粗</em>^^</strong> <em>^^__insert 倾斜 加粗 2__^^</em></p><h2 id=admonition>Admonition</h2><div class="admonition note"><p class=admonition-title><i class="icon fas fa-pencil-alt"></i>Admonition note</p><div class=admonition-content>This is the content of the admonition.</div></div><div class="admonition abstract"><p class=admonition-title><i class="icon fas fa-list-ul"></i>Admonition abstract</p><div class=admonition-content>This is the content of the admonition.</div></div><div class="admonition info"><p class=admonition-title><i class="icon fas fa-info-circle"></i>Admonition info</p><div class=admonition-content>This is the content of the admonition.</div></div><div class="admonition tip"><p class=admonition-title><i class="icon fas fa-lightbulb"></i>Admonition tip</p><div class=admonition-content>This is the content of the admonition.</div></div><div class="admonition success"><p class=admonition-title><i class="icon fas fa-check-circle"></i>Admonition success</p><div class=admonition-content>This is the content of the admonition.</div></div><div class="admonition question"><p class=admonition-title><i class="icon fas fa-question-circle"></i>Admonition question</p><div class=admonition-content>This is the content of the admonition.</div></div><div class="admonition warning"><p class=admonition-title><i class="icon fas fa-exclamation-triangle"></i>Admonition warning</p><div class=admonition-content>This is the content of the admonition.</div></div><div class="admonition failure"><p class=admonition-title><i class="icon fas fa-times-circle"></i>Admonition failure</p><div class=admonition-content>This is the content of the admonition.</div></div><div class="admonition danger"><p class=admonition-title><i class="icon fas fa-skull-crossbones"></i>Admonition danger</p><div class=admonition-content>This is the content of the admonition.</div></div><div class="admonition bug"><p class=admonition-title><i class="icon fas fa-bug"></i>Admonition bug</p><div class=admonition-content>This is the content of the admonition.</div></div><div class="admonition example"><p class=admonition-title><i class="icon fas fa-list-ol"></i>Admonition example</p><div class=admonition-content>This is the content of the admonition.</div></div><div class="admonition quote"><p class=admonition-title><i class="icon fas fa-quote-right"></i>Admonition quote</p><div class=admonition-content>This is the content of the admonition.</div></div><details class="admonition note"><summary class=admonition-title><i class="icon fas fa-pencil-alt"></i>Admonition<i class="details fas fa-angle-down"></i></summary><div class=admonition-content>This is the content of the admonition.</div></details><hr><p><figure><img src=/svg/loading.min.svg data-sizes=auto data-src=https://ftp.bmp.ovh/imgs/2020/02/b7282c60d4d581ad.png alt=谷哥说-微信公众号 title=谷哥说-微信公众号 class=lazyload><figcaption class=image-caption>谷哥说-微信公众号</figcaption></figure></p><section class=footnotes role=doc-endnotes><hr><ol><li id=fn:1 role=doc-endnote><p>这是一个基本的数字脚注 <a href=#fnref:1 class=footnote-backref role=doc-backlink>&#8617;&#xfe0e;</a></p></li><li id=fn:2 role=doc-endnote><p>带有 &ldquo;label&rdquo; 标签的脚注 <a href=#fnref:2 class=footnote-backref role=doc-backlink>&#8617;&#xfe0e;</a></p></li><li id=fn:3 role=doc-endnote><p>下定义的脚注 <a href=#fnref:3 class=footnote-backref role=doc-backlink>&#8617;&#xfe0e;</a></p></li><li id=fn:4 role=doc-endnote><p><a href=https://github.com/dillonzq/LoveIt target=_blank rel="noopener noreffer">LoveIt 主题</a>
+<a href=#fnref:4 class=footnote-backref role=doc-backlink>&#8617;&#xfe0e;</a></p></li></ol></section></div><div class=post-footer id=post-footer><div class=post-info><div class=post-info-line><div class=post-info-mod><span>本文于 2020-02-23 更新</span></div><div class=post-info-license></div></div><div class=post-info-line><div class=post-info-md><span><a class=link-to-markdown href=https://guzhongren.github.io/2019/08/basic-markdown-preview/index.md target=_blank>阅读原始文档</a></span></div><div class=post-info-share><span><a href=javascript:void(0); title="分享到 Twitter" data-sharer=twitter data-url=https://guzhongren.github.io/2019/08/basic-markdown-preview/ data-title="Markdown 基本语法预览" data-hashtags=Markdown,syntax><i class="fab fa-twitter fa-fw"></i></a><a href=javascript:void(0); title="分享到 Facebook" data-sharer=facebook data-url=https://guzhongren.github.io/2019/08/basic-markdown-preview/ data-hashtag=Markdown><i class="fab fa-facebook-square fa-fw"></i></a><a href=javascript:void(0); title="分享到 微博" data-sharer=weibo data-url=https://guzhongren.github.io/2019/08/basic-markdown-preview/ data-title="Markdown 基本语法预览"><i class="fab fa-weibo fa-fw"></i></a><a href=javascript:void(0); title="分享到 人人" data-sharer=renren data-url=https://guzhongren.github.io/2019/08/basic-markdown-preview/><i class="fab fa-renren fa-fw"></i></a><a href=javascript:void(0); title="分享到 百度" data-sharer=baidu data-url=https://guzhongren.github.io/2019/08/basic-markdown-preview/ data-title="Markdown 基本语法预览"><i class="loveit it-baidu-fill"></i></a><a href=javascript:void(0); title="分享到 Evernote" data-sharer=evernote data-url=https://guzhongren.github.io/2019/08/basic-markdown-preview/ data-title="Markdown 基本语法预览"><i class="fab fa-evernote fa-fw"></i></a></span></div></div></div><div class=post-info-more><section><span><a href=/tags/markdown><i class="fas fa-tag fa-fw"></i>Markdown</a>
+</span>&nbsp;<span>
+<a href=/tags/syntax><i class="fas fa-tag fa-fw"></i>syntax</a>
+</span>&nbsp;</section><section><span><a href=javascript:window.history.back();>返回</a></span>&nbsp;|&nbsp;<span><a href=/>主页</a></span></section></div><div class=post-nav><a href=https://guzhongren.github.io/2019/06/k8s-1.15.0-%E5%AE%89%E8%A3%85%E8%AE%B0%E5%BD%95/ class=prev rel=prev title="K8s 1.15.0 安装记录"><i class="fas fa-angle-left fa-fw"></i>K8s 1.15.0 安装记录</a>
+<a href=https://guzhongren.github.io/2019/09/golang-with-sqllite-practice/ class=next rel=next title="Golang With SQLLite Practice">Golang With SQLLite Practice<i class="fas fa-angle-right fa-fw"></i></a></div></div><div class=comment></div></article></div></main><footer class=footer><div class=copyright><div class=copyright-line>由 <a href=https://gohugo.io/ target=_blank rel="external nofollow noopener noreffer">Hugo</a> 强力驱动 | 主题 - <a href=https://github.com/dillonzq/LoveIt target=_blank rel="external nofollow noopener noreffer">LoveIt<i class="far fa-heart fa-fw"></i></a></div><div class=copyright-line><i class="far fa-copyright fa-fw"></i><span itemprop=copyrightYear>2019 - 2020</span><span class=author itemprop=copyrightHolder>&nbsp;<a href=https://guzhongren.github.io target=_blank>谷中仁</a></span>&nbsp;|&nbsp;<span class=license><a rel="license external nofollow noopener noreffer" href=https://creativecommons.org/licenses/by-nc/4.0/ target=_blank>CC BY-NC 4.0</a></span></div></div></footer></div><a href=# class="dynamic-to-top animated faster" id=dynamic-to-top><span>&nbsp;</span>
+</a><script>document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$",right:"$",display:false},{left:"$$",right:"$$",display:true},{left:"\\(",right:"\\)",display:false},{left:"\\[",right:"\\]",display:true},]});});</script><link rel=stylesheet href=/css/lib/iconfont/iconfont.min.css><link rel=stylesheet href=/css/lib/katex/katex.min.css><link rel=stylesheet href=/css/lib/katex/copy-tex.min.css><script src=/js/lib/smooth-scroll/smooth-scroll.polyfills.min.js></script><script src=/js/lib/sharer/sharer.min.js></script><script src=/js/lib/lazysizes/lazysizes.min.js></script><script src=/js/lib/katex/katex.min.js></script><script src=/js/lib/katex/auto-render.min.js></script><script src=/js/lib/katex/copy-tex.min.js></script><script src=/js/lib/katex/mhchem.min.js></script><script src=/js/theme.min.js></script></body></html>

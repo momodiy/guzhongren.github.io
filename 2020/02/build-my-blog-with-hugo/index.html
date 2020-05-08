@@ -1,0 +1,232 @@
+<!doctype html><html lang=zh><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=robots content="noodp"><meta http-equiv=x-ua-compatible content="IE=edge, chrome=1"><title>Build My Blog With Hugo | 谷中仁的博客</title><meta name=Description content="使用 Hugo 构建个人博客"><meta property="og:title" content="Build My Blog With Hugo"><meta property="og:description" content="使用 Hugo 构建个人博客"><meta property="og:type" content="article"><meta property="og:url" content="https://guzhongren.github.io/2020/02/build-my-blog-with-hugo/"><meta property="article:published_time" content="2020-02-23T18:17:51+08:00"><meta property="article:modified_time" content="2020-02-23T23:03:57+08:00"><meta property="og:site_name" content="谷中仁的博客"><meta name=twitter:card content="summary"><meta name=twitter:title content="Build My Blog With Hugo"><meta name=twitter:description content="使用 Hugo 构建个人博客"><meta name=theme-color content="#ffffff"><meta name=msapplication-TileColor content="#da532c"><link rel=canonical href=https://guzhongren.github.io/2020/02/build-my-blog-with-hugo/><link rel="shortcut icon" type=image/x-icon href=/favicon.ico><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=manifest href=/site.webmanifest><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><link rel=prev href=https://guzhongren.github.io/2020/02/version-management-strategy/><link rel=next href=https://guzhongren.github.io/2020/03/config-yarn-to-use-private-package/><link rel=stylesheet href=/css/style.min.css><link rel=stylesheet href=/css/lib/fontawesome-free/all.min.css><link rel=stylesheet href=/css/lib/animate/animate.min.css><meta name=msvalidate.01 content="https://cn.bing.com/?mkt=zh-CN"><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"Build My Blog With Hugo","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/guzhongren.github.io\/2020\/02\/build-my-blog-with-hugo\/"},"image":{"@type":"ImageObject","url":"https:\/\/guzhongren.github.io\/images\/avatar.png","width":800,"height":600},"genre":"posts","keywords":"hugo, blog, git, Makefile","wordcount":1204,"url":"https:\/\/guzhongren.github.io\/2020\/02\/build-my-blog-with-hugo\/","datePublished":"2020-02-23T18:17:51\x2b08:00","dateModified":"2020-02-23T23:03:57\x2b08:00","license":"This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher":{"@type":"Organization","name":"谷中仁","logo":{"@type":"ImageObject","url":"https:\/\/guzhongren.github.io\/images\/avatar.png","width":127,"height":40}},"description":"使用 Hugo 构建个人博客"}</script></head><body><script>if(!window.localStorage||!window.localStorage.getItem('theme')){window.isDark=window.matchMedia('(prefers-color-scheme: dark)').matches;}else{window.isDark=(window.localStorage&&window.localStorage.getItem('theme'))==='dark';}
+window.isDark&&document.body.classList.add('dark-theme');</script><div class=wrapper><header class=desktop id=header-desktop><div class=header-wrapper><div class="header-title animated bounceIn"><a href=/>谷中仁的博客</a></div><div class=menu><a class=menu-item href=/posts/>文章</a><a class=menu-item href=/tags/>标签</a><a class=menu-item href=/categories/>分类</a><a class=menu-item href=/geekmd/>Email Editor</a><a class=menu-item href=/about/>关于</a><a href=javascript:void(0); class=theme-switch title=切换主题>
+<i class="fas fa-adjust fa-rotate-180 fa-fw"></i></a></div></div></header><header class=mobile id=header-mobile><div class=header-wrapper><div class=header-container><div class="header-title animated bounceIn"><a href=/>谷中仁的博客</a></div><div class=menu-toggle id=menu-toggle-mobile><span></span><span></span><span></span></div></div><div class=menu id=menu-mobile><a class=menu-item href=/posts/>文章</a><a class=menu-item href=/tags/>标签</a><a class=menu-item href=/categories/>分类</a><a class=menu-item href=/geekmd/>Email Editor</a><a class=menu-item href=/about/>关于</a><a href=javascript:void(0); class=theme-switch title=切换主题>
+<i class="fas fa-adjust fa-rotate-180 fa-fw"></i></a></div></div></header><script>window.desktopHeaderMode="fixed";window.mobileHeaderMode="auto";</script><main class=main><div class=container><article class="page single"><h1 class="single-title animated flipInX">Build My Blog With Hugo</h1><div class=post-meta><div class=post-meta-line><span class=post-author><a class=author href=https://guzhongren.github.io rel=author target=_blank><i class="fas fa-user-circle fa-fw"></i>谷中仁</a>
+</span>&nbsp;<span class=post-category>收录于&nbsp;
+<span><a href=/categories/tool><i class="far fa-folder fa-fw"></i>Tool</a></span></span></div><div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i><time datetime=2020-02-23>2020-02-23</time>&nbsp;
+<i class="fas fa-pencil-alt fa-fw"></i>约 1204 字&nbsp;
+<i class="far fa-clock fa-fw"></i>预计阅读 3 分钟&nbsp;</div></div><div class=toc id=toc-auto><h2 class=toc-title>目录</h2><div class=toc-content id=toc-content-auto></div></div><div class=toc id=toc-static><details><summary><div class=toc-title><span>目录</span>
+<span><i class="details icon fas fa-angle-down"></i></span></div></summary><div class=toc-content id=toc-content-static><nav id=TableOfContents><ul><li><a href=#overview>Overview</a></li><li><a href=#安装>安装</a><ul><li><a href=#golang>Golang</a></li><li><a href=#hugo>Hugo</a></li><li><a href=#生成博客站点>生成博客站点</a></li><li><a href=#安装-loveithttpsgithubcomdillonzqloveit-主题>安装 LoveIt 主题</a></li><li><a href=#配置-configtoml>配置 config.toml</a></li></ul></li><li><a href=#优化模板>优化模板</a><ul><li><a href=#上传到-github>上传到 Github</a><ul><li><a href=#创建-blog分支>创建 blog分支</a></li><li><a href=#创建personal_token-或者deploy-token>创建PERSONAL_TOKEN, 或者Deploy Token</a></li></ul></li></ul></li><li><a href=#自动化部署配置>自动化部署配置</a></li><li><a href=#写文章>写文章</a></li><li><a href=#预览>预览</a></li><li><a href=#提交>提交</a></li><li><a href=#发布>发布</a></li><li><a href=#优化>优化</a></li><li><a href=#reference>Reference</a></li></ul></nav></div></details></div><div class=content><p><figure><img src=/svg/loading.min.svg data-sizes=auto data-src="https://images.pexels.com/photos/868306/pexels-photo-868306.jpeg?cs=srgb&dl=orange-and-green-camping-tent-under-starry-sky-868306.jpg&fm=jpg" alt="Photo by Daniel Ap from Pexels" title="Photo by Daniel Ap from Pexels" class=lazyload><figcaption class=image-caption>Photo by Daniel Ap from Pexels</figcaption></figure></p><h2 id=overview>Overview</h2><p><code>Hugo</code>是一款基于 golang 实现的静态网站生成器。以其简单、易用、高效、易扩展、快速部署受到开发者的喜爱，比起<a href=https://hexo.io/ target=_blank rel="noopener noreffer">Hexo</a>
+感觉更轻便。下图是我初步实现的博客截图。</p><p><figure><img src=/svg/loading.min.svg data-sizes=auto data-src=https://pic4.zhimg.com/80/v2-074dbc08888a5aa31642c53bce79297f_hd.jpg alt=博客截图 title=博客截图 class=lazyload><figcaption class=image-caption>博客截图</figcaption></figure></p><h2 id=安装>安装</h2><h3 id=golang>Golang</h3><p>Hugo 是基于Go语言的，所以需要安装go, 我的机器是Mac, 所以直接用 homebrew 就搞定。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-zsh data-lang=zsh>$ brew install go
+</code></pre></td></tr></table></div></div><h3 id=hugo>Hugo</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-zsh data-lang=zsh>$ brew install hugo
+</code></pre></td></tr></table></div></div><h3 id=生成博客站点>生成博客站点</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-zsh data-lang=zsh>$ hugo new site blog
+</code></pre></td></tr></table></div></div><h3 id=安装-loveithttpsgithubcomdillonzqloveit-主题>安装 <a href=https://github.com/dillonzq/LoveIt target=_blank rel="noopener noreffer">LoveIt</a>
+主题</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-zsh data-lang=zsh>$ <span class=nb>cd</span> blog
+$ git init
+$ git submodule add https://github.com/dillonzq/LoveIt.git themes/LoveIt
+</code></pre></td></tr></table></div></div><h3 id=配置-configtoml>配置 config.toml</h3><p>将<code>themes/LoveIt/exampleSite/config.toml</code> copy 到 blog 根目录，并根据需要修改里面的配置。</p><blockquote><p>注： 需要将 copy 过来的config.toml 里的 themeDir 由<code>../..</code> 改为 <code>./themes</code></p></blockquote><h2 id=优化模板>优化模板</h2><p>Hugo 生成的 markdown 文件都是由<code>archetypes/default.md</code>生成的， 所以我们可以在模板里加入一些我们通常使用的文案和图片。 比如：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-toml data-lang=toml><span class=err>-</span><span class=err>-</span><span class=err>-</span>
+<span class=nx>title</span><span class=err>:</span> <span class=s2>&#34;{{ replace .Name &#34;</span><span class=err>-</span><span class=s2>&#34; &#34;</span> <span class=s2>&#34; | title }}&#34;</span>
+<span class=nx>date</span><span class=err>:</span> <span class=err>{</span><span class=err>{</span> <span class=p>.</span><span class=nx>Date</span> <span class=err>}</span><span class=err>}</span>
+<span class=nx>draft</span><span class=err>:</span> <span class=kc>true</span>
+<span class=nx>author</span><span class=err>:</span> <span class=s2>&#34;谷中仁&#34;</span>
+<span class=nx>authorLink</span><span class=err>:</span> <span class=s2>&#34;https://guzhongren.github.io&#34;</span>
+<span class=nx>description</span><span class=err>:</span> <span class=s2>&#34;&#34;</span>
+<span class=nx>license</span><span class=err>:</span> <span class=s2>&#34;Creative Commons Attribution 4.0 International license&#34;</span>
+
+<span class=nx>tags</span><span class=err>:</span> <span class=p>[</span><span class=s2>&#34;&#34;</span><span class=p>]</span>
+<span class=nx>categories</span><span class=err>:</span> <span class=p>[</span><span class=s2>&#34;&#34;</span><span class=p>]</span>
+<span class=nx>hiddenFromHomePage</span><span class=err>:</span> <span class=kc>false</span>
+
+<span class=nx>featuredImage</span><span class=err>:</span> <span class=s2>&#34;&#34;</span>
+<span class=nx>featuredImagePreview</span><span class=err>:</span> <span class=s2>&#34;&#34;</span>
+
+<span class=nx>toc</span><span class=err>:</span> <span class=kc>true</span>
+<span class=nx>autoCollapseToc</span><span class=err>:</span> <span class=kc>true</span>
+<span class=nx>math</span><span class=err>:</span> <span class=kc>true</span>
+<span class=nx>comment</span><span class=err>:</span> <span class=kc>true</span>
+<span class=err>-</span><span class=err>-</span><span class=err>-</span>
+
+
+<span class=c>## Reference</span>
+
+
+<span class=err>-</span><span class=err>-</span><span class=err>-</span><span class=err>-</span>
+<span class=err>!</span><span class=p>[</span><span class=nx>谷哥说</span><span class=err>-</span><span class=nx>微信公众号</span><span class=p>]</span><span class=err>(</span><span class=nx>https</span><span class=err>:</span><span class=err>/</span><span class=err>/</span><span class=nx>ftp</span><span class=p>.</span><span class=nx>bmp</span><span class=p>.</span><span class=nx>ovh</span><span class=err>/</span><span class=nx>imgs</span><span class=err>/</span><span class=mi>2020</span><span class=err>/</span><span class=mi>02</span><span class=err>/</span><span class=nx>b7282c60d4d581ad</span><span class=p>.</span><span class=nx>png</span><span class=err>)</span>
+</code></pre></td></tr></table></div></div><p>生成文章后，直接更新需要更新的字段，如标签（tags）和分类（categories）等，然后在中间直接写文章就可以。</p><h3 id=上传到-github>上传到 Github</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-zsh data-lang=zsh>$ git remote add origin git@github.com:guzhongren/guzhongren.github.io.git
+$ git add .
+$ git commit -m <span class=s2>&#34;init&#34;</span>
+$ git push -u origin master
+
+</code></pre></td></tr></table></div></div><h4 id=创建-blog分支>创建 <code>blog</code>分支</h4><p>在 Github 上个创建 blog 分支。我们的博客都会在 blog 分支</p><h4 id=创建personal_token-或者deploy-token>创建<code>PERSONAL_TOKEN</code>, 或者Deploy Token</h4><p>我们在<a href=https://github.com/settings/tokens target=_blank rel="noopener noreffer">Developer settings</a>
+以 PERSONAL_TOKEN 为例。<figure><img src=/svg/loading.min.svg data-sizes=auto data-src=https://pic4.zhimg.com/80/v2-12b6bf464fe3bc0020eddc1660b9a590_hd.jpg alt=Image title=Image class=lazyload><figcaption class=image-caption>Image</figcaption></figure></p><p>然后在项目设置的Secret中用<code>PERSONAL_TOKEN</code>添加<figure><img src=/svg/loading.min.svg data-sizes=auto data-src=https://pic4.zhimg.com/80/v2-776abce099d89d67e2b1f35b8b71d18d_hd.jpg alt=Image title=Image class=lazyload><figcaption class=image-caption>Image</figcaption></figure></p><h2 id=自动化部署配置>自动化部署配置</h2><p>既然博客基于 github, 那么我们可以直接用 <a href=https://github.com/features/actions target=_blank rel="noopener noreffer">Github Actions</a>
+, 在项目页点击<code>Actions</code>, 创建一个 Workflow,其内容大致如下</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-yaml data-lang=yaml><span class=k>name</span><span class=p>:</span><span class=w> </span>github<span class=w> </span>pages<span class=w>
+</span><span class=w>
+</span><span class=w></span><span class=k>on</span><span class=p>:</span><span class=w>
+</span><span class=w></span><span class=w>  </span><span class=k>push</span><span class=p>:</span><span class=w>
+</span><span class=w></span><span class=w>    </span><span class=k>branches</span><span class=p>:</span><span class=w>
+</span><span class=w></span><span class=w>      </span>- blog<span class=w>
+</span><span class=w>
+</span><span class=w></span><span class=k>jobs</span><span class=p>:</span><span class=w>
+</span><span class=w></span><span class=w>  </span><span class=k>build-deploy</span><span class=p>:</span><span class=w>
+</span><span class=w></span><span class=w>    </span><span class=k>runs-on</span><span class=p>:</span><span class=w> </span>ubuntu-latest<span class=w>
+</span><span class=w>    </span><span class=k>steps</span><span class=p>:</span><span class=w>
+</span><span class=w></span><span class=w>    </span>- <span class=k>uses</span><span class=p>:</span><span class=w> </span>actions/checkout@v1<span class=w> </span><span class=c># 必须用v1 ，v2 不支持 submodule</span><span class=w>
+</span><span class=w>      </span><span class=k>with</span><span class=p>:</span><span class=w>
+</span><span class=w></span><span class=w>        </span><span class=k>submodules</span><span class=p>:</span><span class=w> </span><span class=kc>true</span><span class=w>
+</span><span class=w>
+</span><span class=w>    </span>- <span class=k>name</span><span class=p>:</span><span class=w> </span>Setup<span class=w> </span>Hugo<span class=w>
+</span><span class=w>      </span><span class=k>uses</span><span class=p>:</span><span class=w> </span>peaceiris/actions-hugo@v2<span class=w>
+</span><span class=w>      </span><span class=k>with</span><span class=p>:</span><span class=w>
+</span><span class=w></span><span class=w>        </span><span class=k>hugo-version</span><span class=p>:</span><span class=w> </span><span class=s1>&#39;0.64.0&#39;</span><span class=w>
+</span><span class=w>
+</span><span class=w>    </span>- <span class=k>name</span><span class=p>:</span><span class=w> </span>Build<span class=w>
+</span><span class=w>      </span><span class=k>run</span><span class=p>:</span><span class=w> </span>hugo<span class=w> </span>--minify<span class=w>
+</span><span class=w>
+</span><span class=w>    </span>- <span class=k>name</span><span class=p>:</span><span class=w> </span>add<span class=w> </span>nojekyll<span class=w>
+</span><span class=w>      </span><span class=k>run</span><span class=p>:</span><span class=w> </span>touch<span class=w> </span>./public/.nojekyll<span class=w>
+</span><span class=w>
+</span><span class=w>    </span>- <span class=k>name</span><span class=p>:</span><span class=w> </span>Deploy<span class=w>
+</span><span class=w>      </span><span class=k>uses</span><span class=p>:</span><span class=w> </span>peaceiris/actions-gh-pages@v3<span class=w>
+</span><span class=w>      </span><span class=k>with</span><span class=p>:</span><span class=w>
+</span><span class=w></span><span class=w>        </span><span class=c># deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}</span><span class=w>
+</span><span class=w>        </span><span class=k>personal_token</span><span class=p>:</span><span class=w> </span>${{<span class=w> </span>secrets.PERSONAL_TOKEN<span class=w> </span>}}<span class=w>
+</span><span class=w>        </span><span class=k>publish_dir</span><span class=p>:</span><span class=w> </span>./public<span class=w>
+</span><span class=w>        </span><span class=k>publish_branch</span><span class=p>:</span><span class=w> </span>master<span class=w>
+</span><span class=w>        </span><span class=k>user_name</span><span class=p>:</span><span class=w> </span>guzhongren<span class=w>
+</span><span class=w>        </span><span class=k>user_email</span><span class=p>:</span><span class=w> </span>guzhongren@live.cn<span class=w>
+</span></code></pre></td></tr></table></div></div><h2 id=写文章>写文章</h2><p>为了更好的管理发布的文章，建议用 <code>/year/mouth/article_name.zh.md</code> 这种格式.也可用我写的Makefile命令</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-zsh data-lang=zsh>$ <span class=c1># hugo new posts/2020/02/first.zh.md</span>
+$ make <span class=nv>post</span><span class=o>=</span>first.zh.md
+
+</code></pre></td></tr></table></div></div><p>然后打开<code>content/posts/2020/02/first.zh.md</code> 进行文章编辑。</p><h2 id=预览>预览</h2><p>在 blog 项目根目录运行如下命令进行预览</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-zsh data-lang=zsh>$ <span class=c1># hugo server -D</span>
+$ make pre
+
+</code></pre></td></tr></table></div></div><h2 id=提交>提交</h2><p>提交到 git 中，暂存起来</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-zsh data-lang=zsh>$ make commit <span class=nv>message</span><span class=o>=</span>feat<span class=o>(</span>post<span class=o>)</span>: 发布新文章
+</code></pre></td></tr></table></div></div><p>或者用如下命令</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-zsh data-lang=zsh>$ git add -A
+$	git commit -m feat<span class=o>(</span>post<span class=o>)</span>: 发布新文章
+</code></pre></td></tr></table></div></div><h2 id=发布>发布</h2><p>将本地更新提交到 github 上， 会自动触发actions 然后进行构建，构建完成后自动将代码部署到</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-zsh data-lang=zsh>$ make pub
+</code></pre></td></tr></table></div></div><p>或者用</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-zsh data-lang=zsh>$ git commit -m <span class=s2>&#34;first article&#34;</span>
+$ git pull
+$ git push
+
+</code></pre></td></tr></table></div></div><h2 id=优化>优化</h2><p>在敲 hugo 相关的命令的时候比较繁琐，有几个参数经常会敲， 所以使用 <code>Makefile</code> 优化一下, 上面有些命令就是在此定义的。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-Makefile data-lang=Makefile>  
+<span class=nv>post</span> <span class=o>=</span> default.zh.md
+<span class=nv>message</span> <span class=o>=</span> git commit
+<span class=nv>Year_month</span> <span class=o>=</span> <span class=k>$(</span>shell date +<span class=s2>&#34;%Y/%m&#34;</span><span class=k>)</span>
+
+<span class=nf>new</span><span class=o>:</span>
+	hugo new posts/<span class=k>$(</span>Year_month<span class=k>)</span>/<span class=k>$(</span>post<span class=k>)</span>
+
+<span class=nf>pre</span><span class=o>:</span>
+	hugo server -D
+
+<span class=nf>commit</span><span class=o>:</span>
+	git add -A
+	git commit -m <span class=s2>&#34;</span><span class=k>$(</span>message<span class=k>)</span><span class=s2>&#34;</span>
+<span class=nf>pub</span><span class=o>:</span>
+	git pull
+	git push
+</code></pre></td></tr></table></div></div><ul><li>new: 创建文章</li><li>pre: 写文章时预览</li><li>commit: 提交到本地暂存区</li><li>pub: 发布文章</li></ul><blockquote><p>尽情享用吧&mldr;🎉🎉🎉🎉🎉</p></blockquote><h2 id=reference>Reference</h2><ul><li>1.<a href=https://gohugo.io/ target=_blank rel="noopener noreffer">https://gohugo.io/</a></li><li>2.<a href=https://golang.google.cn/ target=_blank rel="noopener noreffer">https://golang.google.cn/</a></li><li>3.<a href=https://github.com/dillonzq/LoveIt target=_blank rel="noopener noreffer">https://github.com/dillonzq/LoveIt</a></li><li>4.<a href=https://github.com/features/actions target=_blank rel="noopener noreffer">https://github.com/features/actions</a></li><li>5.<a href=https://github.com/settings/tokens target=_blank rel="noopener noreffer">https://github.com/settings/tokens</a></li></ul><hr><p><figure><img src=/svg/loading.min.svg data-sizes=auto data-src=https://ftp.bmp.ovh/imgs/2020/02/b7282c60d4d581ad.png alt=谷哥说-微信公众号 title=谷哥说-微信公众号 class=lazyload><figcaption class=image-caption>谷哥说-微信公众号</figcaption></figure></p></div><div class=post-footer id=post-footer><div class=post-info><div class=post-info-line><div class=post-info-mod><span>本文于 2020-02-23 更新</span></div><div class=post-info-license><span>采用 Creative Commons Attribution 4.0 International license 协议发布</span></div></div><div class=post-info-line><div class=post-info-md><span><a class=link-to-markdown href=https://guzhongren.github.io/2020/02/build-my-blog-with-hugo/index.md target=_blank>阅读原始文档</a></span></div><div class=post-info-share><span><a href=javascript:void(0); title="分享到 Twitter" data-sharer=twitter data-url=https://guzhongren.github.io/2020/02/build-my-blog-with-hugo/ data-title="Build My Blog With Hugo" data-hashtags=hugo,blog,git,Makefile><i class="fab fa-twitter fa-fw"></i></a><a href=javascript:void(0); title="分享到 Facebook" data-sharer=facebook data-url=https://guzhongren.github.io/2020/02/build-my-blog-with-hugo/ data-hashtag=hugo><i class="fab fa-facebook-square fa-fw"></i></a><a href=javascript:void(0); title="分享到 微博" data-sharer=weibo data-url=https://guzhongren.github.io/2020/02/build-my-blog-with-hugo/ data-title="Build My Blog With Hugo"><i class="fab fa-weibo fa-fw"></i></a><a href=javascript:void(0); title="分享到 人人" data-sharer=renren data-url=https://guzhongren.github.io/2020/02/build-my-blog-with-hugo/><i class="fab fa-renren fa-fw"></i></a><a href=javascript:void(0); title="分享到 百度" data-sharer=baidu data-url=https://guzhongren.github.io/2020/02/build-my-blog-with-hugo/ data-title="Build My Blog With Hugo"><i class="loveit it-baidu-fill"></i></a><a href=javascript:void(0); title="分享到 Evernote" data-sharer=evernote data-url=https://guzhongren.github.io/2020/02/build-my-blog-with-hugo/ data-title="Build My Blog With Hugo"><i class="fab fa-evernote fa-fw"></i></a></span></div></div></div><div class=post-info-more><section><span><a href=/tags/hugo><i class="fas fa-tag fa-fw"></i>hugo</a>
+</span>&nbsp;<span>
+<a href=/tags/blog><i class="fas fa-tag fa-fw"></i>blog</a>
+</span>&nbsp;<span>
+<a href=/tags/git><i class="fas fa-tag fa-fw"></i>git</a>
+</span>&nbsp;<span>
+<a href=/tags/makefile><i class="fas fa-tag fa-fw"></i>Makefile</a>
+</span>&nbsp;</section><section><span><a href=javascript:window.history.back();>返回</a></span>&nbsp;|&nbsp;<span><a href=/>主页</a></span></section></div><div class=post-nav><a href=https://guzhongren.github.io/2020/02/version-management-strategy/ class=prev rel=prev title="Version Management Strategy"><i class="fas fa-angle-left fa-fw"></i>Version Management Strategy</a>
+<a href=https://guzhongren.github.io/2020/03/config-yarn-to-use-private-package/ class=next rel=next title="Config Yarn to Use Private Package">Config Yarn to Use Private Package<i class="fas fa-angle-right fa-fw"></i></a></div></div><div class=comment></div></article></div></main><footer class=footer><div class=copyright><div class=copyright-line>由 <a href=https://gohugo.io/ target=_blank rel="external nofollow noopener noreffer">Hugo</a> 强力驱动 | 主题 - <a href=https://github.com/dillonzq/LoveIt target=_blank rel="external nofollow noopener noreffer">LoveIt<i class="far fa-heart fa-fw"></i></a></div><div class=copyright-line><i class="far fa-copyright fa-fw"></i><span itemprop=copyrightYear>2019 - 2020</span><span class=author itemprop=copyrightHolder>&nbsp;<a href=https://guzhongren.github.io target=_blank>谷中仁</a></span>&nbsp;|&nbsp;<span class=license><a rel="license external nofollow noopener noreffer" href=https://creativecommons.org/licenses/by-nc/4.0/ target=_blank>CC BY-NC 4.0</a></span></div></div></footer></div><a href=# class="dynamic-to-top animated faster" id=dynamic-to-top><span>&nbsp;</span>
+</a><script>document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$",right:"$",display:false},{left:"$$",right:"$$",display:true},{left:"\\(",right:"\\)",display:false},{left:"\\[",right:"\\]",display:true},]});});</script><link rel=stylesheet href=/css/lib/iconfont/iconfont.min.css><link rel=stylesheet href=/css/lib/katex/katex.min.css><link rel=stylesheet href=/css/lib/katex/copy-tex.min.css><script src=/js/lib/smooth-scroll/smooth-scroll.polyfills.min.js></script><script src=/js/lib/sharer/sharer.min.js></script><script src=/js/lib/lazysizes/lazysizes.min.js></script><script src=/js/lib/katex/katex.min.js></script><script src=/js/lib/katex/auto-render.min.js></script><script src=/js/lib/katex/copy-tex.min.js></script><script src=/js/lib/katex/mhchem.min.js></script><script src=/js/theme.min.js></script></body></html>
