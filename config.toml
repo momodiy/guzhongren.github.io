@@ -261,6 +261,14 @@ enableEmoji = true
         title = ""
         weight = 3
       [[languages.zh-cn.menu.main]]
+        identifier = "Editor"
+        pre = ""
+        post = ""
+        name = "GeekMd"
+        url = "https://guzhongren.github.io/geekmd/"
+        title = ""
+        weight = 4
+      [[languages.zh-cn.menu.main]]
         identifier = "about"
         pre = ""
         post = ""
