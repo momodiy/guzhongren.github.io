@@ -9,15 +9,6 @@ license: "Creative Commons Attribution 4.0 International license"
 
 tags: ["yarn", "npm", ".npmrc","private package"]
 categories: ["tool"]
-hiddenFromHomePage: false
-
-featuredImage: ""
-featuredImagePreview: ""
-
-toc: true
-autoCollapseToc: true
-math: true
-comment: true
 ---
 
 ![Photo by Jeffrey Czum from Pexels](https://images.pexels.com/photos/3750893/pexels-photo-3750893.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260)

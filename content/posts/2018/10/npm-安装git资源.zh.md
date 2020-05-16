@@ -9,15 +9,7 @@ license: "Creative Commons Attribution 4.0 International license"
 
 tags: ["npm", "git", "registry", "私服"]
 categories: ["npm"]
-hiddenFromHomePage: false
-
 featuredImage: "https://images.pexels.com/photos/3979186/pexels-photo-3979186.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
-featuredImagePreview: "https://images.pexels.com/photos/3979186/pexels-photo-3979186.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
-
-toc: true
-autoCollapseToc: true
-math: true
-comment: true
 ---
 ## 引言
 

@@ -9,15 +9,7 @@ license: "Creative Commons Attribution 4.0 International license"
 
 tags: ["Rust", "Closure", "闭包"]
 categories: ["Language"]
-hiddenFromHomePage: false
-
 featuredImage: "https://images.pexels.com/photos/3609267/pexels-photo-3609267.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
-featuredImagePreview: "https://images.pexels.com/photos/3609267/pexels-photo-3609267.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
-
-toc: true
-autoCollapseToc: true
-math: true
-comment: true
 ---
 
 在鲁迅的文章《孔乙己》中说，茴香豆的茴字有好几种写法，记得没错的话应该是四种，具体哪四种请参考下文引用。

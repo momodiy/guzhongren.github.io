@@ -6,18 +6,9 @@ author: "谷中仁"
 authorLink: "https://guzhongren.github.io"
 description: ""
 license: "Creative Commons Attribution 4.0 International license"
-
 tags: ["ssh", "keychain", "linux", "ssh-add"]
 categories: ["tool"]
-hiddenFromHomePage: false
-
-featuredImage: ""
-featuredImagePreview: ""
-
-toc: true
-autoCollapseToc: true
-math: true
-comment: true
+featuredImage: "https://images.pexels.com/photos/2881785/pexels-photo-2881785.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
 ---
 
 ![Photo by Marco Trinidad from Pexels](https://images.pexels.com/photos/2881785/pexels-photo-2881785.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260)

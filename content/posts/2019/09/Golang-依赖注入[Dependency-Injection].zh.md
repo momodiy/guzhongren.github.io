@@ -9,15 +9,8 @@ license: "Creative Commons Attribution 4.0 International license"
 
 tags: ["golang", "Dependency Injection", "DI", "test", "TDD", "Fprintf", "io.Writer"]
 categories: ["Golang"]
-hiddenFromHomePage: false
 
 featuredImage: "https://golang.google.cn/lib/godoc/images/footer-gopher.jpg"
-featuredImagePreview: "https://golang.google.cn/lib/godoc/images/go-logo-blue.svg"
-
-toc: true
-autoCollapseToc: true
-math: true
-comment: true
 ---
 
 # Dependency Injection 🧪

@@ -9,15 +9,6 @@ license: "Creative Commons Attribution 4.0 International license"
 
 tags: ["hugo","blog", "git", "Makefile"]
 categories: ["tool"]
-hiddenFromHomePage: false
-
-featuredImage: ""
-featuredImagePreview: ""
-
-toc: true
-autoCollapseToc: true
-math: true
-comment: true
 ---
 
 ![Photo by Daniel Ap from Pexels](https://images.pexels.com/photos/868306/pexels-photo-868306.jpeg?cs=srgb&dl=orange-and-green-camping-tent-under-starry-sky-868306.jpg&fm=jpg)

@@ -9,15 +9,8 @@ license: "Creative Commons Attribution 4.0 International license"
 
 tags: ["golang", "go", "shell", "path", "github", "module"]
 categories: ["Golang"]
-hiddenFromHomePage: false
 
 featuredImage: "https://images.pexels.com/photos/3467149/pexels-photo-3467149.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260"
-featuredImagePreview: "https://images.pexels.com/photos/3467149/pexels-photo-3467149.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260"
-
-toc: true
-autoCollapseToc: true
-math: true
-comment: true
 ---
 
 

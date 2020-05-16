@@ -9,15 +9,7 @@ license: "Creative Commons Attribution 4.0 International license"
 
 tags: [" Agile", "tdd", "方法论", "总结", "原则","套路", "单元测试"]
 categories: ["Agile"]
-hiddenFromHomePage: false
-
 featuredImage: "https://i.loli.net/2020/04/02/ryXZAQDkdS94l3W.png"
-featuredImagePreview: "https://i.loli.net/2020/04/02/ryXZAQDkdS94l3W.png"
-
-toc: true
-autoCollapseToc: true
-math: true
-comment: true
 ---
 
 本思维导图中大部分内容由[@haihaio](https://github.com/haihaio)完成。

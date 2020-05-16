@@ -10,15 +10,6 @@ license: ""
 
 tags: ["Markdown", "syntax"]
 categories: ["基础知识"]
-hiddenFromHomePage: false
-
-featuredImage: ""
-featuredImagePreview: ""
-
-toc: true
-autoCollapseToc: true
-math: true
-comment: true
 ---
 
 这是一篇用于预览 :(fab fa-markdown): Markdown 基本语法的文章。

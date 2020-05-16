@@ -9,15 +9,7 @@ license: "Creative Commons Attribution 4.0 International license"
 
 tags: ["Rust", "doc", "comment", "rust docs --open", "lib", "tips"]
 categories: ["Rust"]
-hiddenFromHomePage: false
-
 featuredImage: "https://i.loli.net/2020/04/16/nBq8Zc2u3IV7Pmf.jpg"
-featuredImagePreview: "https://i.loli.net/2020/04/16/nBq8Zc2u3IV7Pmf.jpg"
-
-toc: true
-autoCollapseToc: true
-math: true
-comment: true
 ---
 
 ## 前言

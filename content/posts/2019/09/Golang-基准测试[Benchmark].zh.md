@@ -9,15 +9,7 @@ license: "Creative Commons Attribution 4.0 International license"
 
 tags: ["go", "Benchmark", "golang", "test", "testing", "单元测试", "基准测试", "TDD"]
 categories: ["Golang"]
-hiddenFromHomePage: false
-
 featuredImage: "https://golang.google.cn/lib/godoc/images/footer-gopher.jpg"
-featuredImagePreview: "https://golang.google.cn/lib/godoc/images/go-logo-blue.svg"
-
-toc: true
-autoCollapseToc: true
-math: true
-comment: true
 ---
 
 # Benchmark 🧪

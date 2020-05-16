@@ -9,15 +9,7 @@ license: "Creative Commons Attribution 4.0 International license"
 
 tags: ["Web", "wams", "webAssembly", "rust"]
 categories: ["Web"]
-hiddenFromHomePage: false
-
 featuredImage: ""
-featuredImagePreview: ""
-
-toc: true
-autoCollapseToc: true
-math: true
-comment: true
 ---
 
 ![Photo by La Miko from Pexels](https://images.pexels.com/photos/3681653/pexels-photo-3681653.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260)

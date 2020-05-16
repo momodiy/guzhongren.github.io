@@ -8,7 +8,7 @@ new:
 	hugo new posts/$(Year_month)/$(post)
 
 pre:
-	hugo server -D
+	hugo server -v -D
 
 commit:
 	git add -A

@@ -9,15 +9,6 @@ license: "Creative Commons Attribution 4.0 International license"
 
 tags: ["git", "git-flow", "trunk-based development", "TBD"]
 categories: ["git"]
-hiddenFromHomePage: false
-
-featuredImage: ""
-featuredImagePreview: ""
-
-toc: true
-autoCollapseToc: true
-math: true
-comment: true
 ---
 
 ![Photo by Matheus Natan from Pexels](https://yqfile.alicdn.com/3b84530723a76268f2a99d3b65b3a354e87fe309.jpeg)

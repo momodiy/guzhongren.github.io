@@ -9,15 +9,7 @@ license: "Creative Commons Attribution 4.0 International license"
 
 tags: ["software", "chat", "效率", "娱乐"]
 categories: ["Tool"]
-hiddenFromHomePage: false
-
 featuredImage: "https://i.loli.net/2020/04/01/bu57crzCFQvHOVd.png"
-featuredImagePreview: "https://i.loli.net/2020/04/01/bu57crzCFQvHOVd.png"
-
-toc: true
-autoCollapseToc: true
-math: true
-comment: true
 ---
 
 > 软件常用常新，软件大多的目的都是效率，办公，沟通，和娱乐等。虽说Mac 也有自己的时间机器，可以随时将新机器回复到旧机器上，但是作为分享和传播，那么写一篇文章那是最有效率的了，也可为自己后期使用做备份。

@@ -9,15 +9,7 @@ license: "Creative Commons Attribution 4.0 International license"
 
 tags: ["English", "host meeting", "standup meeting", "主持站会", "Tasking", "Agile"]
 categories: ["Agile"]
-hiddenFromHomePage: false
-
 featuredImage: "https://pic4.zhimg.com/80/v2-f8af3dcb49b2e0bdbfd7060fb36bdd5f.jpg"
-featuredImagePreview: "https://pic4.zhimg.com/80/v2-f8af3dcb49b2e0bdbfd7060fb36bdd5f.jpg"
-
-toc: true
-autoCollapseToc: true
-math: true
-comment: true
 ---
 
 ## 场景

@@ -9,15 +9,7 @@ license: "Creative Commons Attribution 4.0 International license"
 
 tags: ["Rust", "Debug", "VS", "Code"]
 categories: ["tool"]
-hiddenFromHomePage: false
-
 featuredImage: ""
-featuredImagePreview: ""
-
-toc: true
-autoCollapseToc: true
-math: true
-comment: true
 ---
 
 ![Photo by Jan Kopřiva from Pexels](https://images.pexels.com/photos/3858142/pexels-photo-3858142.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260)

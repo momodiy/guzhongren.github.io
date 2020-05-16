@@ -9,49 +9,42 @@ license: "Creative Commons Attribution 4.0 International license"
 
 tags: ["Golang", "go", "SQLLite"]
 categories: ["Golang"]
-hiddenFromHomePage: false
-
 featuredImage: "https://i.loli.net/2020/03/29/JEtYLcPTCDIU2bs.png"
-featuredImagePreview: "https://i.loli.net/2020/03/29/JEtYLcPTCDIU2bs.png"
-
-toc: true
-autoCollapseToc: true
-math: true
-comment: true
 ---
 
 <!-- TOC -->
 
-
-  - [简介](#简介)
-  - [目标](#目标)
-  - [目的](#目的)
-  - [Coding](#coding)
-    - [目录结构](#目录结构)
-    - [封装 error 函数](#封装-error-函数)
-    - [安装 SQLLite 库及其他库](#安装-sqllite-库及其他库)
-    - [申明 DB 全局变量](#申明-db-全局变量)
-    - [初始化数据库](#初始化数据库)
-    - [用户模型构建及原子操作](#用户模型构建及原子操作)
-      - [用户模型](#用户模型)
-      - [新增](#新增)
-      - [删除](#删除)
-      - [修改](#修改)
-      - [查询](#查询)
-    - [在应用中启动并调用用户模型的方法](#在应用中启动并调用用户模型的方法)
-    - [运行结果展示](#运行结果展示)
-  - [总结](#总结)
+- [简介](#%E7%AE%80%E4%BB%8B)
+- [目标](#%E7%9B%AE%E6%A0%87)
+- [目的](#%E7%9B%AE%E7%9A%84)
+- [Coding](#coding)
+  - [目录结构](#%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84)
+  - [封装 error 函数](#%E5%B0%81%E8%A3%85-error-%E5%87%BD%E6%95%B0)
+  - [安装 SQLLite 库及其他库](#%E5%AE%89%E8%A3%85-sqllite-%E5%BA%93%E5%8F%8A%E5%85%B6%E4%BB%96%E5%BA%93)
+  - [申明 DB 全局变量](#%E7%94%B3%E6%98%8E-db-%E5%85%A8%E5%B1%80%E5%8F%98%E9%87%8F)
+  - [初始化数据库](#%E5%88%9D%E5%A7%8B%E5%8C%96%E6%95%B0%E6%8D%AE%E5%BA%93)
+  - [用户模型构建及原子操作](#%E7%94%A8%E6%88%B7%E6%A8%A1%E5%9E%8B%E6%9E%84%E5%BB%BA%E5%8F%8A%E5%8E%9F%E5%AD%90%E6%93%8D%E4%BD%9C)
+    - [用户模型](#%E7%94%A8%E6%88%B7%E6%A8%A1%E5%9E%8B)
+    - [新增](#%E6%96%B0%E5%A2%9E)
+    - [删除](#%E5%88%A0%E9%99%A4)
+    - [修改](#%E4%BF%AE%E6%94%B9)
+    - [查询](#%E6%9F%A5%E8%AF%A2)
+  - [在应用中启动并调用用户模型的方法](#%E5%9C%A8%E5%BA%94%E7%94%A8%E4%B8%AD%E5%90%AF%E5%8A%A8%E5%B9%B6%E8%B0%83%E7%94%A8%E7%94%A8%E6%88%B7%E6%A8%A1%E5%9E%8B%E7%9A%84%E6%96%B9%E6%B3%95)
+  - [运行结果展示](#%E8%BF%90%E8%A1%8C%E7%BB%93%E6%9E%9C%E5%B1%95%E7%A4%BA)
+- [总结](#%E6%80%BB%E7%BB%93)
+- [Reference](#reference)
+- [Hereby declared（特此申明）](#hereby-declared%E7%89%B9%E6%AD%A4%E7%94%B3%E6%98%8E)
 
 <!-- /TOC -->
 
-## 1.1. 简介
+## 简介
 
 [SQLite](about:blank) 是一个进程内的库，实现了自给自足的、无服务器的、零配置的、事务性的 SQL 数据库引擎。它是一个零配置的数据库，这意味着与其他数据库一样，你不需要在系统中配置。在 Golang 中使用SQLLite 也相当简单，只需要安装 SQLLite 的Golang  包即可使用；
 Golang 就不多介绍了，能看到这个肯定对 [Golang](https://golang.google.cn/) 有一定的了解。
 
 仓库地址：<https://github.com/AndorLab/golang-sqllite>
 
-## 1.2. 目标
+## 目标
 
 使用 SQLLite 通过构建一个社区用户表，包含如下字段; 通过 SQLLite 的 API 实现对社区用户表进行增删改查。
 
@@ -63,13 +56,13 @@ Golang 就不多介绍了，能看到这个肯定对 [Golang](https://golang.goo
 | 4    | skills   | string | 技能     |
 | 5    | created  | int64  | 创建时间 |
 
-## 1.3. 目的
+## 目的
 
 了解 SQLLite ，学习 Golang 操作 SQLLite, 巩固 Golang 基础知识。
 
-## 1.4. Coding
+## Coding
 
-### 1.4.1. 目录结构
+### 目录结构
 
 项目采用 Golang 传统的平铺式目录
 
@@ -89,7 +82,7 @@ Golang 就不多介绍了，能看到这个肯定对 [Golang](https://golang.goo
 
 ```
 
-### 1.4.2. 封装 error 函数
+### 封装 error 函数
 
 因为在 go 中会有很多的 error 的判断，为了代码精简，我们特封装一下 error; 下面的 *interface{}* 代表任何类型，类似 TypeScript 中的 *any*。
 
@@ -104,7 +97,7 @@ func checkErr(data interface{}, err error) (interface{}, error) {
 }
 ```
 
-### 1.4.3. 安装 SQLLite 库及其他库
+### 安装 SQLLite 库及其他库
 
 使用 go modules 之后，将所需的包放在 import 中，使用 *go mod tidy* 命令后，go 会自动安装程序使用到的包。
 
@@ -122,7 +115,7 @@ SQLLite 包
 _ "github.com/mattn/go-sqlite3"
 ```
 
-### 1.4.4. 申明 DB 全局变量
+### 申明 DB 全局变量
 
 因为在程序中，我们要通过数据库来获取数据，那么存在一个全局的数据库指针是很有必要的。
 
@@ -131,7 +124,7 @@ _ "github.com/mattn/go-sqlite3"
 var db = new(sql.DB)
 ```
 
-### 1.4.5. 初始化数据库
+### 初始化数据库
 
 SQLLite 初始化数据库非常简单，只要指定数据库驱动和数据库文件就可以。为了在程序的整个生命周期中操作数据库，我们将 db 返回。
 
@@ -162,11 +155,11 @@ func initDB() {
 }
 ```
 
-### 1.4.6. 用户模型构建及原子操作
+### 用户模型构建及原子操作
 
 构建现代程序，强调程序的健壮性，封装就是比较重要的；用 MVC、 MVVM 的观点，我们需要有一个 Model 来提供对象的原子操作。在这，我们将用户抽象为UserModel，对用户的增删改查封装到 *insert*、*dleete*、*update* 和 *query*。
 
-#### 1.4.6.1. 用户模型
+#### 用户模型
 
 ```golang
 // UserModel 用户模型
@@ -181,7 +174,7 @@ type UserModel struct {
 ```
 对用户的原子操作
 
-#### 1.4.6.2. 新增
+#### 新增
 
 ```golang
 // insert 新增
@@ -194,7 +187,7 @@ func (u UserModel) insert() (sql.Result, error) {
 }
 ```
 
-#### 1.4.6.3. 删除
+#### 删除
 
 ```golang
 // delete 删除
@@ -209,7 +202,7 @@ func (u UserModel) delete(id int64) int64 {
 }
 ```
 
-#### 1.4.6.4. 修改
+#### 修改
 
 ```golang
 // update	更新用户技能
@@ -224,7 +217,7 @@ func (u UserModel) update(id int) int64 {
 }
 ```
 
-#### 1.4.6.5. 查询
+#### 查询
 
 ```golang
 // query 查询
@@ -243,7 +236,7 @@ func (u UserModel) query() ([]UserModel, error) {
 }
 ```
 
-### 1.4.7. 在应用中启动并调用用户模型的方法
+### 在应用中启动并调用用户模型的方法
 
 在上面我们完成了对用户模型及原子操作的封装，那么接下来就是通过应用程序将分装的内容调用，传入正确的参数进行调用。
 我们在此封装一个 *startAPP* 方法，在这个里面我们调用封装好的用户操作的接口，实现功能。
@@ -288,7 +281,7 @@ func (u UserModel) query() ([]UserModel, error) {
   log.Info("查：", list)
 ```
 
-### 1.4.8. 运行结果展示
+### 运行结果展示
 
 ```shell
 $ make run
@@ -300,7 +293,7 @@ go run *.go
 {"time":"2019-08-31T14:21:48.942696+08:00","level":"INFO","prefix":"-","file":"server.go","line":"38","message":"查：[]"}
 ```
 
-## 1.5. 总结
+## 总结
 
 SQLLite 对开发者非常友好，不用安装在机器上，只要指定SQLLite的驱动和数据库存储文件即可对 SQLLite 数据库进行操作；Golang 作为比较流行的语言，对数据库也非常友好，提供了基本的数据库接口，
 至于用户需要什么样的数据库，自己开发对应的数据库驱动即可。当然在 GitHub 已经有很多开源爱好者开发了比较流行的数据库的驱动可以直接拿来用。

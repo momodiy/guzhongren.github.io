@@ -9,15 +9,7 @@ license: "Creative Commons Attribution 4.0 International license"
 
 tags: ["code", "refactor", "react", "reactNative", "技术债务"]
 categories: ["Code"]
-hiddenFromHomePage: false
-
 featuredImage: "https://images.pexels.com/photos/3811731/pexels-photo-3811731.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260"
-featuredImagePreview: "https://images.pexels.com/photos/3811731/pexels-photo-3811731.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260"
-
-toc: true
-autoCollapseToc: true
-math: true
-comment: true
 ---
 
 ## 情景

@@ -9,15 +9,7 @@ license: "Creative Commons Attribution 4.0 International license"
 
 tags: ["git"]
 categories: ["git", "revert", "multRevert"]
-hiddenFromHomePage: false
-
 featuredImage: "https://yqfile.alicdn.com/4a5a82578aaa956e2fc4b83847feba87e44ad848.png"
-featuredImagePreview: "https://yqfile.alicdn.com/4a5a82578aaa956e2fc4b83847feba87e44ad848.png"
-
-toc: true
-autoCollapseToc: true
-math: true
-comment: true
 ---
 
 

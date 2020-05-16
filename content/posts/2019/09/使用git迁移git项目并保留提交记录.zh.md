@@ -9,15 +9,7 @@ license: "Creative Commons Attribution 4.0 International license"
 
 tags: ["git", "git mirror", "git bare", "git commit", "origin"]
 categories: ["Tool"]
-hiddenFromHomePage: false
-
 featuredImage: "https://i.loli.net/2020/03/29/EZGJPfDjFAvM2Ug.jpg"
-featuredImagePreview: "https://i.loli.net/2020/03/29/EZGJPfDjFAvM2Ug.jpg"
-
-toc: true
-autoCollapseToc: true
-math: true
-comment: true
 ---
 
 ## 场景

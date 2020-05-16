@@ -9,15 +9,7 @@ license: "Creative Commons Attribution 4.0 International license"
 
 tags: ["Docker"]
 categories: ["Docker", "Golang", "shell", "Registry", "harbor", "docker-compose"]
-hiddenFromHomePage: false
-
 featuredImage: "https://i.loli.net/2020/03/29/moaTGH6EWiqyhRt.png"
-featuredImagePreview: "https://i.loli.net/2020/03/29/moaTGH6EWiqyhRt.png"
-
-toc: true
-autoCollapseToc: true
-math: true
-comment: true
 ---
 ## 场景
  
