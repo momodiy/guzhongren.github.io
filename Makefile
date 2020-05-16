@@ -16,3 +16,5 @@ commit:
 pub:
 	git pull
 	git push
+updateTheme:
+	git submodule foreach git pull origin master
