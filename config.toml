@@ -997,7 +997,7 @@ enableEmoji = true
     # lunr.js@2.3.8 https://lunrjs.com/
     lunrJS = "https://cdnjs.cloudflare.com/ajax/libs/lunr.js/2.3.8/lunr.min.js"
     # algoliasearch@4.2.0 https://github.com/algolia/algoliasearch-client-javascript
-    algoliasearchJS = "https://cdnjs.cloudflare.com/ajax/libs/algoliasearch/4.2.0/algoliasearch.min.js"
+    algoliasearchJS = "https://cdn.bootcdn.net/ajax/libs/algoliasearch/4.2.0/algoliasearch.umd.js"
     # lazysizes@5.2.0 https://github.com/aFarkas/lazysizes
     lazysizesJS = "https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.2.0/lazysizes.min.js"
     # object-fit-images@3.2.4 https://github.com/fregante/object-fit-images
