@@ -1,0 +1,299 @@
+<!doctype html><html lang=zh-cn><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=robots content="noodp"><meta http-equiv=x-ua-compatible content="IE=edge, chrome=1"><title>Golang With SQLLite Practice - 谷中仁的博客</title><meta name=Description content="谷中仁的博客"><meta property="og:title" content="Golang With SQLLite Practice"><meta property="og:description" content="简介 目标 目的 Coding 目录结构 封装 error 函数 安装 SQLLite 库及其他库 申明 DB 全局变量 初始化数据库 用户模型构建及原子操作 用户模型 新增 删除 修改 查询 在应用中启动并调用用"><meta property="og:type" content="article"><meta property="og:url" content="https://guzhongren.github.io/2019/09/golang-with-sqllite-practice.zh/"><meta property="og:image" content="https://guzhongren.github.io/logo.png"><meta property="article:published_time" content="2019-09-01T10:56:39+08:00"><meta property="article:modified_time" content="2020-05-16T09:45:34+08:00"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="https://guzhongren.github.io/logo.png"><meta name=twitter:title content="Golang With SQLLite Practice"><meta name=twitter:description content="简介 目标 目的 Coding 目录结构 封装 error 函数 安装 SQLLite 库及其他库 申明 DB 全局变量 初始化数据库 用户模型构建及原子操作 用户模型 新增 删除 修改 查询 在应用中启动并调用用"><meta name=application-name content="LoveIt"><meta name=apple-mobile-web-app-title content="LoveIt"><meta name=theme-color content="#ffffff"><meta name=msapplication-TileColor content="#da532c"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://guzhongren.github.io/2019/09/golang-with-sqllite-practice.zh/><link rel=prev href=https://guzhongren.github.io/2019/08/basic-markdown-preview.zh/><link rel=next href=https://guzhongren.github.io/2019/09/golang-%E5%9F%BA%E5%87%86%E6%B5%8B%E8%AF%95benchmark.zh/><link rel=stylesheet href=/lib/normalize/normalize.min.css><link rel=stylesheet href=/css/style.min.css><link rel=stylesheet href=/lib/fontawesome-free/all.min.css><link rel=stylesheet href=/lib/animate/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"Golang With SQLLite Practice","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/guzhongren.github.io\/2019\/09\/golang-with-sqllite-practice.zh\/"},"image":{"@type":"ImageObject","url":"https:\/\/guzhongren.github.io\/cover.png","width":800,"height":600},"genre":"posts","keywords":"Golang, go, SQLLite","wordcount":3372,"url":"https:\/\/guzhongren.github.io\/2019\/09\/golang-with-sqllite-practice.zh\/","datePublished":"2019-09-01T10:56:39+08:00","dateModified":"2020-05-16T09:45:34+08:00","license":"This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher":{"@type":"Organization","name":"xxxx","logo":{"@type":"ImageObject","url":"https:\/\/guzhongren.github.io\/logo.png","width":127,"height":40}},"author":{"@type":"Person","name":"谷中仁"},"description":""}</script></head><body header-desktop=fixed header-mobile=auto><script type=text/javascript>(window.localStorage&&localStorage.getItem('theme')?localStorage.getItem('theme')==='dark':('auto'==='auto'?window.matchMedia('(prefers-color-scheme: dark)').matches:'auto'==='dark'))&&document.body.setAttribute('theme','dark');</script><div id=mask></div><div class=wrapper><header class=desktop id=header-desktop><div class=header-wrapper><div class=header-title><a href=/ title=谷中仁的博客><img class="lazyload logo" src=/svg/loading/small.min.svg data-src=/images/avatar.png data-srcset="/images/avatar.png, /images/avatar.png 1.5x, /images/avatar.png 2x" data-sizes=auto alt=谷中仁的博客 title=谷中仁的博客>谷中仁的博客</a></div><div class=menu><div class=menu-inner><a class=menu-item href=/posts/>所有文章 </a><a class=menu-item href=/tags/>标签 </a><a class=menu-item href=/categories/>分类 </a><a class=menu-item href=/about/>关于 </a><a class=menu-item href=https://github.com/guzhongren title=GitHub rel="noopener noreffer" target=_blank><i class="fab fa-github fa-fw"></i></a><span class="menu-item delimiter"></span><a href=javascript:void(0); class="menu-item language" title=选择语言>简体中文<i class="fas fa-chevron-right fa-fw"></i>
+<select class=language-select id=language-select-desktop onchange="location=this.value;"><option value=/2019/09/golang-with-sqllite-practice.zh/ selected>简体中文</option></select>
+</a><span class="menu-item search" id=search-desktop><input type=text placeholder=搜索文章标题或内容... id=search-input-desktop>
+<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-desktop title=搜索><i class="fas fa-search fa-fw"></i></a><a href=javascript:void(0); class="search-button search-clear" id=search-clear-desktop title=清空><i class="fas fa-times-circle fa-fw"></i></a><span class="search-button search-loading" id=search-loading-desktop><i class="fas fa-spinner fa-fw fa-spin"></i></span></span><a href=javascript:void(0); class="menu-item theme-switch" title=切换主题><i class="fas fa-adjust fa-fw"></i></a></div></div></div></header><header class=mobile id=header-mobile><div class=header-container><div class=header-wrapper><div class=header-title><a href=/ title=谷中仁的博客><img class="lazyload logo" src=/svg/loading/small.min.svg data-src=/images/avatar.png data-srcset="/images/avatar.png, /images/avatar.png 1.5x, /images/avatar.png 2x" data-sizes=auto alt=谷中仁的博客 title=谷中仁的博客>谷中仁的博客</a></div><div class=menu-toggle id=menu-toggle-mobile><span></span><span></span><span></span></div></div><div class=menu id=menu-mobile><div class=search-wrapper><div class="search mobile" id=search-mobile><input type=text placeholder=搜索文章标题或内容... id=search-input-mobile>
+<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-mobile title=搜索><i class="fas fa-search fa-fw"></i></a><a href=javascript:void(0); class="search-button search-clear" id=search-clear-mobile title=清空><i class="fas fa-times-circle fa-fw"></i></a><span class="search-button search-loading" id=search-loading-mobile><i class="fas fa-spinner fa-fw fa-spin"></i></span></div><a href=javascript:void(0); class=search-cancel id=search-cancel-mobile>取消</a></div><a class=menu-item href=/posts/>所有文章</a><a class=menu-item href=/tags/>标签</a><a class=menu-item href=/categories/>分类</a><a class=menu-item href=/about/>关于</a><a class=menu-item href=https://github.com/guzhongren title=GitHub rel="noopener noreffer" target=_blank><i class="fab fa-github fa-fw"></i></a><a href=javascript:void(0); class="menu-item theme-switch" title=切换主题>
+<i class="fas fa-adjust fa-fw"></i></a><a href=javascript:void(0); class=menu-item title=选择语言>简体中文<i class="fas fa-chevron-right fa-fw"></i>
+<select class=language-select onchange="location=this.value;"><option value=/2019/09/golang-with-sqllite-practice.zh/ selected>简体中文</option></select></a></div></div></header><div class="search-dropdown desktop"><div id=search-dropdown-desktop></div></div><div class="search-dropdown mobile"><div id=search-dropdown-mobile></div></div><main class=main><div class=container><div class=toc id=toc-auto><h2 class=toc-title>目录</h2><div class=toc-content id=toc-content-auto></div></div><article class="page single"><h1 class="single-title animated flipInX">Golang With SQLLite Practice</h1><div class=post-meta><div class=post-meta-line><span class=post-author><a href=https://guzhongren.github.io title=Author target=_blank rel="noopener noreffer author" class=author><i class="fas fa-user-circle fa-fw"></i>谷中仁</a></span>&nbsp;
+<span class=post-category>收录于<a href=/categories/golang/>
+<i class="far fa-folder fa-fw"></i>Golang</a></span></div><div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2019-09-01>2019-09-01</time>&nbsp;
+<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 3372 字&nbsp;
+<i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 7 分钟&nbsp;<span id=/2019/09/golang-with-sqllite-practice.zh/ class=leancloud_visitors data-flag-title="Golang With SQLLite Practice">
+<i class="far fa-eye fa-fw"></i>&nbsp;<span class=leancloud-visitors-count></span>&nbsp;次阅读
+</span>&nbsp;</div></div><div class=featured-image><img class=lazyload src=/svg/loading/normal.min.svg data-src=https://i.loli.net/2020/03/29/JEtYLcPTCDIU2bs.png data-srcset="https://i.loli.net/2020/03/29/JEtYLcPTCDIU2bs.png, https://i.loli.net/2020/03/29/JEtYLcPTCDIU2bs.png 1.5x, https://i.loli.net/2020/03/29/JEtYLcPTCDIU2bs.png 2x" data-sizes=auto alt=https://i.loli.net/2020/03/29/JEtYLcPTCDIU2bs.png title=https://i.loli.net/2020/03/29/JEtYLcPTCDIU2bs.png></div><div class="details toc" id=toc-static><div class="details-summary toc-title"><span>目录</span>
+<span><i class="details-icon fas fa-angle-right"></i></span></div><div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents><ul><li><a href=#简介>简介</a></li><li><a href=#目标>目标</a></li><li><a href=#目的>目的</a></li><li><a href=#coding>Coding</a><ul><li><a href=#目录结构>目录结构</a></li><li><a href=#封装-error-函数>封装 error 函数</a></li><li><a href=#安装-sqllite-库及其他库>安装 SQLLite 库及其他库</a></li><li><a href=#申明-db-全局变量>申明 DB 全局变量</a></li><li><a href=#初始化数据库>初始化数据库</a></li><li><a href=#用户模型构建及原子操作>用户模型构建及原子操作</a><ul><li><a href=#用户模型>用户模型</a></li><li><a href=#新增>新增</a></li><li><a href=#删除>删除</a></li><li><a href=#修改>修改</a></li><li><a href=#查询>查询</a></li></ul></li><li><a href=#在应用中启动并调用用户模型的方法>在应用中启动并调用用户模型的方法</a></li><li><a href=#运行结果展示>运行结果展示</a></li></ul></li><li><a href=#总结>总结</a></li><li><a href=#reference>Reference</a></li><li><a href=#hereby-declared特此申明>Hereby declared（特此申明）</a></li></ul></nav></div></div><div class=content id=content><ul><li><a href=#%E7%AE%80%E4%BB%8B rel>简介</a></li><li><a href=#%E7%9B%AE%E6%A0%87 rel>目标</a></li><li><a href=#%E7%9B%AE%E7%9A%84 rel>目的</a></li><li><a href=#coding rel>Coding</a><ul><li><a href=#%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84 rel>目录结构</a></li><li><a href=#%E5%B0%81%E8%A3%85-error-%E5%87%BD%E6%95%B0 rel>封装 error 函数</a></li><li><a href=#%E5%AE%89%E8%A3%85-sqllite-%E5%BA%93%E5%8F%8A%E5%85%B6%E4%BB%96%E5%BA%93 rel>安装 SQLLite 库及其他库</a></li><li><a href=#%E7%94%B3%E6%98%8E-db-%E5%85%A8%E5%B1%80%E5%8F%98%E9%87%8F rel>申明 DB 全局变量</a></li><li><a href=#%E5%88%9D%E5%A7%8B%E5%8C%96%E6%95%B0%E6%8D%AE%E5%BA%93 rel>初始化数据库</a></li><li><a href=#%E7%94%A8%E6%88%B7%E6%A8%A1%E5%9E%8B%E6%9E%84%E5%BB%BA%E5%8F%8A%E5%8E%9F%E5%AD%90%E6%93%8D%E4%BD%9C rel>用户模型构建及原子操作</a><ul><li><a href=#%E7%94%A8%E6%88%B7%E6%A8%A1%E5%9E%8B rel>用户模型</a></li><li><a href=#%E6%96%B0%E5%A2%9E rel>新增</a></li><li><a href=#%E5%88%A0%E9%99%A4 rel>删除</a></li><li><a href=#%E4%BF%AE%E6%94%B9 rel>修改</a></li><li><a href=#%E6%9F%A5%E8%AF%A2 rel>查询</a></li></ul></li><li><a href=#%E5%9C%A8%E5%BA%94%E7%94%A8%E4%B8%AD%E5%90%AF%E5%8A%A8%E5%B9%B6%E8%B0%83%E7%94%A8%E7%94%A8%E6%88%B7%E6%A8%A1%E5%9E%8B%E7%9A%84%E6%96%B9%E6%B3%95 rel>在应用中启动并调用用户模型的方法</a></li><li><a href=#%E8%BF%90%E8%A1%8C%E7%BB%93%E6%9E%9C%E5%B1%95%E7%A4%BA rel>运行结果展示</a></li></ul></li><li><a href=#%E6%80%BB%E7%BB%93 rel>总结</a></li><li><a href=#reference rel>Reference</a></li><li><a href=#hereby-declared%E7%89%B9%E6%AD%A4%E7%94%B3%E6%98%8E rel>Hereby declared（特此申明）</a></li></ul><h2 id=简介>简介</h2><p><a href=about:blank rel>SQLite</a> 是一个进程内的库，实现了自给自足的、无服务器的、零配置的、事务性的 SQL 数据库引擎。它是一个零配置的数据库，这意味着与其他数据库一样，你不需要在系统中配置。在 Golang 中使用SQLLite 也相当简单，只需要安装 SQLLite 的Golang 包即可使用；
+Golang 就不多介绍了，能看到这个肯定对 <a href=https://golang.google.cn/ target=_blank rel="noopener noreffer">Golang</a> 有一定的了解。</p><p>仓库地址：<a href=https://github.com/AndorLab/golang-sqllite>https://github.com/AndorLab/golang-sqllite</a></p><h2 id=目标>目标</h2><p>使用 SQLLite 通过构建一个社区用户表，包含如下字段; 通过 SQLLite 的 API 实现对社区用户表进行增删改查。</p><table><thead><tr><th>序号</th><th>字段</th><th>类型</th><th>说明</th></tr></thead><tbody><tr><td>1</td><td>uid</td><td>int64</td><td>id</td></tr><tr><td>2</td><td>username</td><td>string</td><td>用户名</td></tr><tr><td>3</td><td>city</td><td>string</td><td>城市</td></tr><tr><td>4</td><td>skills</td><td>string</td><td>技能</td></tr><tr><td>5</td><td>created</td><td>int64</td><td>创建时间</td></tr></tbody></table><h2 id=目的>目的</h2><p>了解 SQLLite ，学习 Golang 操作 SQLLite, 巩固 Golang 基础知识。</p><h2 id=coding>Coding</h2><h3 id=目录结构>目录结构</h3><p>项目采用 Golang 传统的平铺式目录</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-shell data-lang=shell>.
+├── LICENSE
+├── Makefile      <span class=c1># 构建工具</span>
+├── README.md     <span class=c1># README</span>
+├── db.go         <span class=c1># 数据库操作</span>
+├── error.go      <span class=c1># 错误处理工具方法</span>
+├── fcc.db        <span class=c1># sqllite 数据库</span>
+├── go.mod        <span class=c1># go modules</span>
+├── go.sum        <span class=c1># go modules</span>
+├── main.go       <span class=c1># 项目入口</span>
+├── server.go     <span class=c1># 应用程序入口</span>
+└── userModel.go  <span class=c1># 用户模型</span>
+
+</code></pre></td></tr></table></div></div><h3 id=封装-error-函数>封装 error 函数</h3><p>因为在 go 中会有很多的 error 的判断，为了代码精简，我们特封装一下 error; 下面的 <em>interface{}</em> 代表任何类型，类似 TypeScript 中的 <em>any</em>。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-golang data-lang=golang><span class=err>#</span> <span class=kt>error</span><span class=p>.</span><span class=k>go</span>
+<span class=kd>func</span> <span class=nf>checkErr</span><span class=p>(</span><span class=nx>data</span> <span class=kd>interface</span><span class=p>{</span><span class=p>}</span><span class=p>,</span> <span class=nx>err</span> <span class=kt>error</span><span class=p>)</span> <span class=p>(</span><span class=kd>interface</span><span class=p>{</span><span class=p>}</span><span class=p>,</span> <span class=kt>error</span><span class=p>)</span> <span class=p>{</span>
+	<span class=k>if</span> <span class=nx>err</span> <span class=o>!=</span> <span class=kc>nil</span> <span class=p>{</span>
+		<span class=nx>log</span><span class=p>.</span><span class=nf>Error</span><span class=p>(</span><span class=nx>err</span><span class=p>)</span>
+		<span class=k>return</span> <span class=kc>nil</span><span class=p>,</span> <span class=nx>err</span>
+	<span class=p>}</span>
+	<span class=k>return</span> <span class=nx>data</span><span class=p>,</span> <span class=nx>err</span>
+<span class=p>}</span>
+</code></pre></td></tr></table></div></div><h3 id=安装-sqllite-库及其他库>安装 SQLLite 库及其他库</h3><p>使用 go modules 之后，将所需的包放在 import 中，使用 <em>go mod tidy</em> 命令后，go 会自动安装程序使用到的包。</p><p>日志相关的库，主要用于在控制台打印结果</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-golang data-lang=golang><span class=err>#</span> <span class=nx>server</span><span class=p>.</span><span class=k>go</span>
+<span class=kn>import</span> <span class=p>(</span>
+	<span class=s>&#34;github.com/labstack/gommon/log&#34;</span>
+<span class=p>)</span>
+
+</code></pre></td></tr></table></div></div><p>SQLLite 包</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-golang data-lang=golang><span class=err>#</span> <span class=nx>db</span><span class=p>.</span><span class=k>go</span>
+<span class=nx>_</span> <span class=s>&#34;github.com/mattn/go-sqlite3&#34;</span>
+</code></pre></td></tr></table></div></div><h3 id=申明-db-全局变量>申明 DB 全局变量</h3><p>因为在程序中，我们要通过数据库来获取数据，那么存在一个全局的数据库指针是很有必要的。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-golang data-lang=golang><span class=err>#</span> <span class=nx>main</span><span class=p>.</span><span class=k>go</span>
+<span class=kd>var</span> <span class=nx>db</span> <span class=p>=</span> <span class=nb>new</span><span class=p>(</span><span class=nx>sql</span><span class=p>.</span><span class=nx>DB</span><span class=p>)</span>
+</code></pre></td></tr></table></div></div><h3 id=初始化数据库>初始化数据库</h3><p>SQLLite 初始化数据库非常简单，只要指定数据库驱动和数据库文件就可以。为了在程序的整个生命周期中操作数据库，我们将 db 返回。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-golang data-lang=golang><span class=c1>// openDB 打开数据库
+</span><span class=c1></span><span class=kd>func</span> <span class=nf>openDB</span><span class=p>(</span><span class=p>)</span> <span class=o>*</span><span class=nx>sql</span><span class=p>.</span><span class=nx>DB</span> <span class=p>{</span>
+	<span class=c1>//打开数据库，如果不存在，则创建
+</span><span class=c1></span>	<span class=nx>db</span><span class=p>,</span> <span class=nx>err</span> <span class=o>:=</span> <span class=nx>sql</span><span class=p>.</span><span class=nf>Open</span><span class=p>(</span><span class=s>&#34;sqlite3&#34;</span><span class=p>,</span> <span class=s>&#34;./fcc.db&#34;</span><span class=p>)</span>
+	<span class=nf>checkErr</span><span class=p>(</span><span class=nx>db</span><span class=p>,</span> <span class=nx>err</span><span class=p>)</span>
+	<span class=k>return</span> <span class=nx>db</span>
+<span class=p>}</span>
+</code></pre></td></tr></table></div></div><p>创建好 db 后，需要创建表结构，执行如下数据库操作命令即可完成用户表的创建。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-golang data-lang=golang><span class=c1>// initDB 初始化数据库
+</span><span class=c1></span><span class=kd>func</span> <span class=nf>initDB</span><span class=p>(</span><span class=p>)</span> <span class=p>{</span>
+	<span class=c1>//创建表
+</span><span class=c1></span>	<span class=nx>sqlTable</span> <span class=o>:=</span> <span class=s>`</span><span class=s>
+</span><span class=s>			CREATE TABLE IF NOT EXISTS userinfo(
+</span><span class=s>					uid INTEGER PRIMARY KEY AUTOINCREMENT,
+</span><span class=s>					username VARCHAR(64) NULL,
+</span><span class=s>					city VARCHAR(64) NULL,
+</span><span class=s>					skills VARCHAR(128) NULL,
+</span><span class=s>					created BIGINT NULL
+</span><span class=s>			);
+</span><span class=s>			</span><span class=s>`</span>
+	<span class=nx>db</span><span class=p>.</span><span class=nf>Exec</span><span class=p>(</span><span class=nx>sqlTable</span><span class=p>)</span>
+<span class=p>}</span>
+</code></pre></td></tr></table></div></div><h3 id=用户模型构建及原子操作>用户模型构建及原子操作</h3><p>构建现代程序，强调程序的健壮性，封装就是比较重要的；用 MVC、 MVVM 的观点，我们需要有一个 Model 来提供对象的原子操作。在这，我们将用户抽象为UserModel，对用户的增删改查封装到 <em>insert</em>、<em>dleete</em>、<em>update</em> 和 <em>query</em>。</p><h4 id=用户模型>用户模型</h4><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-golang data-lang=golang><span class=c1>// UserModel 用户模型
+</span><span class=c1></span><span class=kd>type</span> <span class=nx>UserModel</span> <span class=kd>struct</span> <span class=p>{</span>
+	<span class=nx>uid</span>      <span class=kt>int64</span>
+	<span class=nx>username</span> <span class=kt>string</span>
+	<span class=nx>city</span>     <span class=kt>string</span>
+	<span class=nx>skills</span>   <span class=kt>string</span>
+	<span class=nx>created</span>  <span class=kt>int64</span>
+<span class=p>}</span>
+
+</code></pre></td></tr></table></div></div><p>对用户的原子操作</p><h4 id=新增>新增</h4><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-golang data-lang=golang><span class=c1>// insert 新增
+</span><span class=c1></span><span class=kd>func</span> <span class=p>(</span><span class=nx>u</span> <span class=nx>UserModel</span><span class=p>)</span> <span class=nf>insert</span><span class=p>(</span><span class=p>)</span> <span class=p>(</span><span class=nx>sql</span><span class=p>.</span><span class=nx>Result</span><span class=p>,</span> <span class=kt>error</span><span class=p>)</span> <span class=p>{</span>
+	<span class=nx>stmt</span><span class=p>,</span> <span class=nx>err</span> <span class=o>:=</span> <span class=nx>db</span><span class=p>.</span><span class=nf>Prepare</span><span class=p>(</span><span class=s>&#34;insert into userinfo(username, city, skills, created) values(?,?,?,?)&#34;</span><span class=p>)</span>
+	<span class=nf>checkErr</span><span class=p>(</span><span class=nx>stmt</span><span class=p>,</span> <span class=nx>err</span><span class=p>)</span>
+	<span class=nx>res</span><span class=p>,</span> <span class=nx>err</span> <span class=o>:=</span> <span class=nx>stmt</span><span class=p>.</span><span class=nf>Exec</span><span class=p>(</span><span class=nx>u</span><span class=p>.</span><span class=nx>username</span><span class=p>,</span> <span class=nx>u</span><span class=p>.</span><span class=nx>city</span><span class=p>,</span> <span class=nx>u</span><span class=p>.</span><span class=nx>skills</span><span class=p>,</span> <span class=nx>time</span><span class=p>.</span><span class=nf>Now</span><span class=p>(</span><span class=p>)</span><span class=p>.</span><span class=nf>Unix</span><span class=p>(</span><span class=p>)</span><span class=p>)</span>
+	<span class=nf>checkErr</span><span class=p>(</span><span class=nx>res</span><span class=p>,</span> <span class=nx>err</span><span class=p>)</span>
+	<span class=k>return</span> <span class=nx>res</span><span class=p>,</span> <span class=kc>nil</span>
+<span class=p>}</span>
+</code></pre></td></tr></table></div></div><h4 id=删除>删除</h4><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-golang data-lang=golang><span class=c1>// delete 删除
+</span><span class=c1></span><span class=kd>func</span> <span class=p>(</span><span class=nx>u</span> <span class=nx>UserModel</span><span class=p>)</span> <span class=nb>delete</span><span class=p>(</span><span class=nx>id</span> <span class=kt>int64</span><span class=p>)</span> <span class=kt>int64</span> <span class=p>{</span>
+	<span class=nx>stmt</span><span class=p>,</span> <span class=nx>err</span> <span class=o>:=</span> <span class=nx>db</span><span class=p>.</span><span class=nf>Prepare</span><span class=p>(</span><span class=s>&#34;delete from userinfo where uid=?&#34;</span><span class=p>)</span>
+	<span class=nf>checkErr</span><span class=p>(</span><span class=nx>stmt</span><span class=p>,</span> <span class=nx>err</span><span class=p>)</span>
+	<span class=nx>res</span><span class=p>,</span> <span class=nx>err</span> <span class=o>:=</span> <span class=nx>stmt</span><span class=p>.</span><span class=nf>Exec</span><span class=p>(</span><span class=nx>id</span><span class=p>)</span>
+	<span class=nf>checkErr</span><span class=p>(</span><span class=nx>res</span><span class=p>,</span> <span class=nx>err</span><span class=p>)</span>
+	<span class=nx>affect</span><span class=p>,</span> <span class=nx>err</span> <span class=o>:=</span> <span class=nx>res</span><span class=p>.</span><span class=nf>RowsAffected</span><span class=p>(</span><span class=p>)</span>
+	<span class=nf>checkErr</span><span class=p>(</span><span class=nx>affect</span><span class=p>,</span> <span class=nx>err</span><span class=p>)</span>
+	<span class=k>return</span> <span class=nx>affect</span>
+<span class=p>}</span>
+</code></pre></td></tr></table></div></div><h4 id=修改>修改</h4><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-golang data-lang=golang><span class=c1>// update	更新用户技能
+</span><span class=c1></span><span class=kd>func</span> <span class=p>(</span><span class=nx>u</span> <span class=nx>UserModel</span><span class=p>)</span> <span class=nf>update</span><span class=p>(</span><span class=nx>id</span> <span class=kt>int</span><span class=p>)</span> <span class=kt>int64</span> <span class=p>{</span>
+	<span class=nx>stmt</span><span class=p>,</span> <span class=nx>err</span> <span class=o>:=</span> <span class=nx>db</span><span class=p>.</span><span class=nf>Prepare</span><span class=p>(</span><span class=s>&#34;update userinfo set skills=? where uid=?&#34;</span><span class=p>)</span>
+	<span class=nf>checkErr</span><span class=p>(</span><span class=nx>stmt</span><span class=p>,</span> <span class=nx>err</span><span class=p>)</span>
+	<span class=nx>res</span><span class=p>,</span> <span class=nx>err</span> <span class=o>:=</span> <span class=nx>stmt</span><span class=p>.</span><span class=nf>Exec</span><span class=p>(</span><span class=nx>u</span><span class=p>.</span><span class=nx>skills</span><span class=p>,</span> <span class=nx>id</span><span class=p>)</span>
+	<span class=nf>checkErr</span><span class=p>(</span><span class=nx>res</span><span class=p>,</span> <span class=nx>err</span><span class=p>)</span>
+	<span class=nx>affect</span><span class=p>,</span> <span class=nx>err</span> <span class=o>:=</span> <span class=nx>res</span><span class=p>.</span><span class=nf>RowsAffected</span><span class=p>(</span><span class=p>)</span>
+	<span class=nf>checkErr</span><span class=p>(</span><span class=nx>affect</span><span class=p>,</span> <span class=nx>err</span><span class=p>)</span>
+	<span class=k>return</span> <span class=nx>affect</span>
+<span class=p>}</span>
+</code></pre></td></tr></table></div></div><h4 id=查询>查询</h4><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-golang data-lang=golang><span class=c1>// query 查询
+</span><span class=c1></span><span class=kd>func</span> <span class=p>(</span><span class=nx>u</span> <span class=nx>UserModel</span><span class=p>)</span> <span class=nf>query</span><span class=p>(</span><span class=p>)</span> <span class=p>(</span><span class=p>[</span><span class=p>]</span><span class=nx>UserModel</span><span class=p>,</span> <span class=kt>error</span><span class=p>)</span> <span class=p>{</span>
+	<span class=nx>rows</span><span class=p>,</span> <span class=nx>err</span> <span class=o>:=</span> <span class=nx>db</span><span class=p>.</span><span class=nf>Query</span><span class=p>(</span><span class=s>&#34;select * from userinfo&#34;</span><span class=p>)</span>
+	<span class=nf>checkErr</span><span class=p>(</span><span class=nx>rows</span><span class=p>,</span> <span class=nx>err</span><span class=p>)</span>
+	<span class=kd>var</span> <span class=nx>userList</span> <span class=p>=</span> <span class=p>[</span><span class=p>]</span><span class=nx>UserModel</span><span class=p>{</span><span class=p>}</span>
+	<span class=k>for</span> <span class=nx>rows</span><span class=p>.</span><span class=nf>Next</span><span class=p>(</span><span class=p>)</span> <span class=p>{</span>
+		<span class=kd>var</span> <span class=nx>user</span> <span class=p>=</span> <span class=nx>UserModel</span><span class=p>{</span><span class=p>}</span>
+		<span class=nx>err</span> <span class=p>=</span> <span class=nx>rows</span><span class=p>.</span><span class=nf>Scan</span><span class=p>(</span><span class=o>&amp;</span><span class=nx>user</span><span class=p>.</span><span class=nx>uid</span><span class=p>,</span> <span class=o>&amp;</span><span class=nx>user</span><span class=p>.</span><span class=nx>username</span><span class=p>,</span> <span class=o>&amp;</span><span class=nx>user</span><span class=p>.</span><span class=nx>city</span><span class=p>,</span> <span class=o>&amp;</span><span class=nx>user</span><span class=p>.</span><span class=nx>skills</span><span class=p>,</span> <span class=o>&amp;</span><span class=nx>user</span><span class=p>.</span><span class=nx>created</span><span class=p>)</span>
+		<span class=nf>checkErr</span><span class=p>(</span><span class=kc>nil</span><span class=p>,</span> <span class=nx>err</span><span class=p>)</span>
+		<span class=nx>userList</span> <span class=p>=</span> <span class=nb>append</span><span class=p>(</span><span class=nx>userList</span><span class=p>,</span> <span class=nx>user</span><span class=p>)</span>
+	<span class=p>}</span>
+	<span class=nx>rows</span><span class=p>.</span><span class=nf>Close</span><span class=p>(</span><span class=p>)</span>
+	<span class=k>return</span> <span class=nx>userList</span><span class=p>,</span> <span class=kc>nil</span>
+<span class=p>}</span>
+</code></pre></td></tr></table></div></div><h3 id=在应用中启动并调用用户模型的方法>在应用中启动并调用用户模型的方法</h3><p>在上面我们完成了对用户模型及原子操作的封装，那么接下来就是通过应用程序将分装的内容调用，传入正确的参数进行调用。
+我们在此封装一个 <em>startAPP</em> 方法，在这个里面我们调用封装好的用户操作的接口，实现功能。</p><p>因为数据库要在整个生命周期存在，当程序结束的时候，我们应该将数据库链接释放，所以我们用到了 go 的 <em>defer</em> 关键字</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-golang data-lang=golang><span class=err>#</span> <span class=nx>server</span><span class=p>.</span><span class=k>go</span>
+  <span class=nx>db</span> <span class=p>=</span> <span class=nf>openDB</span><span class=p>(</span><span class=p>)</span>
+  <span class=k>defer</span> <span class=nx>db</span><span class=p>.</span><span class=nf>Close</span><span class=p>(</span><span class=p>)</span>
+  <span class=nf>initDB</span><span class=p>(</span><span class=p>)</span>
+</code></pre></td></tr></table></div></div><p>调用用户操作的增删改查并打印结果, 对于不同的操作，我们应该有不同的数据，所以在程序中会有 <em>user</em>、和 <em>updateUser</em> 两个对象</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-golang data-lang=golang><span class=err>#</span> <span class=nx>server</span><span class=p>.</span><span class=k>go</span>
+  <span class=nx>user</span> <span class=o>:=</span> <span class=nx>UserModel</span><span class=p>{</span>
+  	<span class=nx>username</span><span class=p>:</span> <span class=s>&#34;谷中仁&#34;</span><span class=p>,</span>
+  	<span class=nx>city</span><span class=p>:</span>     <span class=s>`</span><span class=s>西安</span><span class=s>`</span><span class=p>,</span>
+  	<span class=nx>skills</span><span class=p>:</span>   <span class=s>`</span><span class=s>TypeScript</span><span class=s>`</span><span class=p>,</span>
+  <span class=p>}</span>
+  <span class=c1>// insert
+</span><span class=c1></span>  <span class=nx>result</span><span class=p>,</span> <span class=nx>err</span> <span class=o>:=</span> <span class=nx>user</span><span class=p>.</span><span class=nf>insert</span><span class=p>(</span><span class=p>)</span>
+  <span class=nx>id</span><span class=p>,</span> <span class=nx>err</span> <span class=o>:=</span> <span class=nx>result</span><span class=p>.</span><span class=nf>LastInsertId</span><span class=p>(</span><span class=p>)</span>
+  <span class=nf>checkErr</span><span class=p>(</span><span class=nx>id</span><span class=p>,</span> <span class=nx>err</span><span class=p>)</span>
+  <span class=nx>log</span><span class=p>.</span><span class=nf>Info</span><span class=p>(</span><span class=s>&#34;增：操作数据的id:&#34;</span><span class=p>,</span> <span class=nx>id</span><span class=p>)</span>
+  <span class=c1>// update
+</span><span class=c1></span>  <span class=nx>updateUser</span> <span class=o>:=</span> <span class=nx>UserModel</span><span class=p>{</span>
+  	<span class=nx>skills</span><span class=p>:</span> <span class=s>`</span><span class=s>golang</span><span class=s>`</span><span class=p>,</span>
+  <span class=p>}</span>
+  <span class=nx>affectedRow</span> <span class=o>:=</span> <span class=nx>updateUser</span><span class=p>.</span><span class=nf>updateSkills</span><span class=p>(</span><span class=mi>1</span><span class=p>)</span>
+  <span class=nx>log</span><span class=p>.</span><span class=nf>Info</span><span class=p>(</span><span class=s>&#34;改：影响的行数：&#34;</span><span class=p>,</span> <span class=nx>affectedRow</span><span class=p>)</span>
+  <span class=c1>// query
+</span><span class=c1></span>  <span class=nx>queryUser</span> <span class=o>:=</span> <span class=nx>UserModel</span><span class=p>{</span><span class=p>}</span>
+  <span class=nx>list</span><span class=p>,</span> <span class=nx>_</span> <span class=o>:=</span> <span class=nx>queryUser</span><span class=p>.</span><span class=nf>query</span><span class=p>(</span><span class=p>)</span>
+  <span class=nx>log</span><span class=p>.</span><span class=nf>Info</span><span class=p>(</span><span class=s>&#34;查：&#34;</span><span class=p>,</span> <span class=nx>list</span><span class=p>)</span>
+  <span class=c1>// delete
+</span><span class=c1></span>  <span class=nx>affect</span> <span class=o>:=</span> <span class=nx>queryUser</span><span class=p>.</span><span class=nb>delete</span><span class=p>(</span><span class=mi>1</span><span class=p>)</span>
+  <span class=nx>log</span><span class=p>.</span><span class=nf>Info</span><span class=p>(</span><span class=s>&#34;删：&#34;</span><span class=p>,</span> <span class=nx>affect</span><span class=p>)</span>  
+  <span class=c1>// query
+</span><span class=c1></span>  <span class=nx>list</span><span class=p>,</span> <span class=nx>_</span> <span class=p>=</span> <span class=nx>queryUser</span><span class=p>.</span><span class=nf>query</span><span class=p>(</span><span class=p>)</span>
+  <span class=nx>log</span><span class=p>.</span><span class=nf>Info</span><span class=p>(</span><span class=s>&#34;查：&#34;</span><span class=p>,</span> <span class=nx>list</span><span class=p>)</span>
+</code></pre></td></tr></table></div></div><h3 id=运行结果展示>运行结果展示</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-shell data-lang=shell>$ make run
+go run *.go
+<span class=o>{</span><span class=s2>&#34;time&#34;</span>:<span class=s2>&#34;2019-08-31T14:21:48.941164+08:00&#34;</span>,<span class=s2>&#34;level&#34;</span>:<span class=s2>&#34;INFO&#34;</span>,<span class=s2>&#34;prefix&#34;</span>:<span class=s2>&#34;-&#34;</span>,<span class=s2>&#34;file&#34;</span>:<span class=s2>&#34;server.go&#34;</span>,<span class=s2>&#34;line&#34;</span>:<span class=s2>&#34;21&#34;</span>,<span class=s2>&#34;message&#34;</span>:<span class=s2>&#34;增：操作数据的id:1&#34;</span><span class=o>}</span>
+<span class=o>{</span><span class=s2>&#34;time&#34;</span>:<span class=s2>&#34;2019-08-31T14:21:48.941842+08:00&#34;</span>,<span class=s2>&#34;level&#34;</span>:<span class=s2>&#34;INFO&#34;</span>,<span class=s2>&#34;prefix&#34;</span>:<span class=s2>&#34;-&#34;</span>,<span class=s2>&#34;file&#34;</span>:<span class=s2>&#34;server.go&#34;</span>,<span class=s2>&#34;line&#34;</span>:<span class=s2>&#34;27&#34;</span>,<span class=s2>&#34;message&#34;</span>:<span class=s2>&#34;改：影响的行数：1&#34;</span><span class=o>}</span>
+<span class=o>{</span><span class=s2>&#34;time&#34;</span>:<span class=s2>&#34;2019-08-31T14:21:48.942034+08:00&#34;</span>,<span class=s2>&#34;level&#34;</span>:<span class=s2>&#34;INFO&#34;</span>,<span class=s2>&#34;prefix&#34;</span>:<span class=s2>&#34;-&#34;</span>,<span class=s2>&#34;file&#34;</span>:<span class=s2>&#34;server.go&#34;</span>,<span class=s2>&#34;line&#34;</span>:<span class=s2>&#34;31&#34;</span>,<span class=s2>&#34;message&#34;</span>:<span class=s2>&#34;查：[{1 谷中仁 西安 golang 1567232508}]&#34;</span><span class=o>}</span>
+<span class=o>{</span><span class=s2>&#34;time&#34;</span>:<span class=s2>&#34;2019-08-31T14:21:48.942599+08:00&#34;</span>,<span class=s2>&#34;level&#34;</span>:<span class=s2>&#34;INFO&#34;</span>,<span class=s2>&#34;prefix&#34;</span>:<span class=s2>&#34;-&#34;</span>,<span class=s2>&#34;file&#34;</span>:<span class=s2>&#34;server.go&#34;</span>,<span class=s2>&#34;line&#34;</span>:<span class=s2>&#34;34&#34;</span>,<span class=s2>&#34;message&#34;</span>:<span class=s2>&#34;删：1&#34;</span><span class=o>}</span>
+<span class=o>{</span><span class=s2>&#34;time&#34;</span>:<span class=s2>&#34;2019-08-31T14:21:48.942696+08:00&#34;</span>,<span class=s2>&#34;level&#34;</span>:<span class=s2>&#34;INFO&#34;</span>,<span class=s2>&#34;prefix&#34;</span>:<span class=s2>&#34;-&#34;</span>,<span class=s2>&#34;file&#34;</span>:<span class=s2>&#34;server.go&#34;</span>,<span class=s2>&#34;line&#34;</span>:<span class=s2>&#34;38&#34;</span>,<span class=s2>&#34;message&#34;</span>:<span class=s2>&#34;查：[]&#34;</span><span class=o>}</span>
+</code></pre></td></tr></table></div></div><h2 id=总结>总结</h2><p>SQLLite 对开发者非常友好，不用安装在机器上，只要指定SQLLite的驱动和数据库存储文件即可对 SQLLite 数据库进行操作；Golang 作为比较流行的语言，对数据库也非常友好，提供了基本的数据库接口，
+至于用户需要什么样的数据库，自己开发对应的数据库驱动即可。当然在 GitHub 已经有很多开源爱好者开发了比较流行的数据库的驱动可以直接拿来用。</p><p>SQLLite 使用的也是标准的 SQL 语法，可以让不同的开发者快速入手。</p><p>为什么没有用到 Golang 的 Web 框架？</p><p>因为我们的侧重点在 Golang 与 SQLLite，不在 API 实现上，最小化的实现目标，才是我们学习知识最快速的途径。</p><p>原文链接：<a href=https://chinese.freecodecamp.org/news/golang-with-sqllite-practice/>https://chinese.freecodecamp.org/news/golang-with-sqllite-practice/</a></p><h2 id=reference>Reference</h2><ul><li><a href=https://guzhongren.github.io/ target=_blank rel="noopener noreffer">1.博客：https://guzhongren.github.io/</a>*</li><li><a href="https://yq.aliyun.com/articles/716696?spm=a2c4e.11155435.0.0.5d7c3312dFgns3" target=_blank rel="noopener noreffer">2.原文：https://yq.aliyun.com/articles/716696?spm=a2c4e.11155435.0.0.5d7c3312dFgns3</a></li></ul><h2 id=hereby-declared特此申明>Hereby declared（特此申明）</h2><p>本文仅代表个人观点，与<a href=https://www.thoughtworks.com/ target=_blank rel="noopener noreffer">ThoughtWorks</a> 公司无任何关系。</p><hr><p><img class=lazyload src=/svg/loading/small.min.svg data-src=https://ftp.bmp.ovh/imgs/2020/02/b7282c60d4d581ad.png data-srcset="https://ftp.bmp.ovh/imgs/2020/02/b7282c60d4d581ad.png, https://ftp.bmp.ovh/imgs/2020/02/b7282c60d4d581ad.png 1.5x, https://ftp.bmp.ovh/imgs/2020/02/b7282c60d4d581ad.png 2x" data-sizes=auto alt=谷哥说-微信公众号 title=谷哥说-微信公众号></p></div><div class=post-footer id=post-footer><div class=post-info><div class=post-info-line><div class=post-info-mod><span>本文于 2020-05-16 更新&nbsp;<a class=git-hash href=https://github.com/guzhongren/guzhongren.github.io/commit/5d07792fd2bac69f3c00f71b4fc6e9c5dde2d421 target=_blank title="commit by guzhongren(guzhongren@live.cn) 5d07792fd2bac69f3c00f71b4fc6e9c5dde2d421: chore(update): update LoveIt">
+<i class="fas fa-hashtag fa-fw"></i>5d07792</a></span></div><div class=post-info-license><span>采用 Creative Commons Attribution 4.0 International license 协议发布</span></div></div><div class=post-info-line><div class=post-info-md><span><a class=link-to-markdown href=/2019/09/golang-with-sqllite-practice.zh/index.md target=_blank>阅读原始文档</a></span></div><div class=post-info-share><span><a href=javascript:void(0); title="分享到 Twitter" data-sharer=twitter data-url=https://guzhongren.github.io/2019/09/golang-with-sqllite-practice.zh/ data-title="Golang With SQLLite Practice" data-hashtags=Golang,go,SQLLite><i class="fab fa-twitter fa-fw"></i></a><a href=javascript:void(0); title="分享到 Facebook" data-sharer=facebook data-url=https://guzhongren.github.io/2019/09/golang-with-sqllite-practice.zh/ data-hashtag=Golang><i class="fab fa-facebook-square fa-fw"></i></a><a href=javascript:void(0); title="分享到 WhatsApp" data-sharer=whatsapp data-url=https://guzhongren.github.io/2019/09/golang-with-sqllite-practice.zh/ data-title="Golang With SQLLite Practice" data-web><i class="fab fa-whatsapp fa-fw"></i></a><a href=javascript:void(0); title="分享到 Line" data-sharer=line data-url=https://guzhongren.github.io/2019/09/golang-with-sqllite-practice.zh/ data-title="Golang With SQLLite Practice"><i data-svg-src=/lib/simple-icons/icons/line.min.svg></i></a><a href=javascript:void(0); title="分享到 微博" data-sharer=weibo data-url=https://guzhongren.github.io/2019/09/golang-with-sqllite-practice.zh/ data-title="Golang With SQLLite Practice" data-image=https://i.loli.net/2020/03/29/JEtYLcPTCDIU2bs.png><i class="fab fa-weibo fa-fw"></i></a><a href=javascript:void(0); title="分享到 Myspace" data-sharer=myspace data-url=https://guzhongren.github.io/2019/09/golang-with-sqllite-practice.zh/ data-title="Golang With SQLLite Practice" data-description><i data-svg-src=/lib/simple-icons/icons/myspace.min.svg></i></a><a href=javascript:void(0); title="分享到 Blogger" data-sharer=blogger data-url=https://guzhongren.github.io/2019/09/golang-with-sqllite-practice.zh/ data-title="Golang With SQLLite Practice" data-description><i class="fab fa-blogger fa-fw"></i></a><a href=javascript:void(0); title="分享到 Evernote" data-sharer=evernote data-url=https://guzhongren.github.io/2019/09/golang-with-sqllite-practice.zh/ data-title="Golang With SQLLite Practice"><i class="fab fa-evernote fa-fw"></i></a></span></div></div></div><div class=post-info-more><section class=post-tags><i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/golang/>Golang</a>,&nbsp;<a href=/tags/go/>go</a>,&nbsp;<a href=/tags/sqllite/>SQLLite</a></section><section><span><a href=javascript:void(0); onclick=window.history.back();>返回</a></span>&nbsp;|&nbsp;<span><a href=/>主页</a></span></section></div><div class=post-nav><a href=/2019/08/basic-markdown-preview.zh/ class=prev rel=prev title="Markdown 基本语法预览"><i class="fas fa-angle-left fa-fw"></i>Markdown 基本语法预览</a>
+<a href=/2019/09/golang-%E5%9F%BA%E5%87%86%E6%B5%8B%E8%AF%95benchmark.zh/ class=next rel=next title="Golang 基准测试(Benchmark)">Golang 基准测试(Benchmark)<i class="fas fa-angle-right fa-fw"></i></a></div></div><div id=comments><div id=valine class=comment></div><noscript>Please enable JavaScript to view the comments powered by <a href=https://valine.js.org/>Valine</a>.</noscript></div></article></div></main><footer class=footer><div class=footer-container><div class=footer-line>由 <a href=https://gohugo.io/ target=_blank rel="noopener noreffer" title="Hugo 0.64.0">Hugo</a> 强力驱动 | 主题 - <a href=https://github.com/dillonzq/LoveIt target=_blank rel="noopener noreffer" title="LoveIt 0.2.8"><i class="far fa-kiss-wink-heart fa-fw"></i>LoveIt</a></div><div class=footer-line><i class="far fa-copyright fa-fw"></i><span itemprop=copyrightYear>2020</span><span class=author itemprop=copyrightHolder>&nbsp;<a href=https://guzhongren.github.io/ target=_blank>谷中仁</a></span>&nbsp;|&nbsp;<span class=license><a rel="license external nofollow noopener noreffer" href=https://creativecommons.org/licenses/by-nc/4.0/ target=_blank>CC BY-NC 4.0</a></span></div></div></footer></div><div id=fixed-buttons><a href=# id=back-to-top class=fixed-button title=回到顶部><i class="fas fa-arrow-up fa-fw"></i></a><a href=# id=view-comments class=fixed-button title=查看评论><i class="fas fa-comment fa-fw"></i></a></div><link rel=stylesheet href=/lib/valine/valine.min.css><script type=text/javascript src=/lib/valine/Valine.min.js></script><script type=text/javascript src=/lib/smooth-scroll/smooth-scroll.min.js></script><script type=text/javascript src=/lib/autocomplete/autocomplete.min.js></script><script type=text/javascript src=/lib/algoliasearch/algoliasearch-lite.umd.min.js></script><script type=text/javascript src=/lib/lazysizes/lazysizes.min.js></script><script type=text/javascript src=/lib/clipboard/clipboard.min.js></script><script type=text/javascript src=/lib/sharer/sharer.min.js></script><script type=text/javascript>window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{"valine":{"appId":"QGzwQXOqs5JOhN4RGPOkR2mR-MdYXbMMI","appKey":"WBmoGyJtbqUswvfLh6L8iEBr","avatar":"mp","el":"#valine","emojiCDN":"https://cdn.jsdelivr.net/npm/emoji-datasource-google@5.0.1/img/google/64/","emojiMaps":{"100":"1f4af.png","alien":"1f47d.png","anger":"1f4a2.png","angry":"1f620.png","anguished":"1f627.png","astonished":"1f632.png","black_heart":"1f5a4.png","blue_heart":"1f499.png","blush":"1f60a.png","bomb":"1f4a3.png","boom":"1f4a5.png","broken_heart":"1f494.png","brown_heart":"1f90e.png","clown_face":"1f921.png","cold_face":"1f976.png","cold_sweat":"1f630.png","confounded":"1f616.png","confused":"1f615.png","cry":"1f622.png","crying_cat_face":"1f63f.png","cupid":"1f498.png","dash":"1f4a8.png","disappointed":"1f61e.png","disappointed_relieved":"1f625.png","dizzy":"1f4ab.png","dizzy_face":"1f635.png","drooling_face":"1f924.png","exploding_head":"1f92f.png","expressionless":"1f611.png","face_vomiting":"1f92e.png","face_with_cowboy_hat":"1f920.png","face_with_hand_over_mouth":"1f92d.png","face_with_head_bandage":"1f915.png","face_with_monocle":"1f9d0.png","face_with_raised_eyebrow":"1f928.png","face_with_rolling_eyes":"1f644.png","face_with_symbols_on_mouth":"1f92c.png","face_with_thermometer":"1f912.png","fearful":"1f628.png","flushed":"1f633.png","frowning":"1f626.png","ghost":"1f47b.png","gift_heart":"1f49d.png","green_heart":"1f49a.png","grimacing":"1f62c.png","grin":"1f601.png","grinning":"1f600.png","hankey":"1f4a9.png","hear_no_evil":"1f649.png","heart":"2764-fe0f.png","heart_decoration":"1f49f.png","heart_eyes":"1f60d.png","heart_eyes_cat":"1f63b.png","heartbeat":"1f493.png","heartpulse":"1f497.png","heavy_heart_exclamation_mark_ornament":"2763-fe0f.png","hole":"1f573-fe0f.png","hot_face":"1f975.png","hugging_face":"1f917.png","hushed":"1f62f.png","imp":"1f47f.png","innocent":"1f607.png","japanese_goblin":"1f47a.png","japanese_ogre":"1f479.png","joy":"1f602.png","joy_cat":"1f639.png","kiss":"1f48b.png","kissing":"1f617.png","kissing_cat":"1f63d.png","kissing_closed_eyes":"1f61a.png","kissing_heart":"1f618.png","kissing_smiling_eyes":"1f619.png","laughing":"1f606.png","left_speech_bubble":"1f5e8-fe0f.png","love_letter":"1f48c.png","lying_face":"1f925.png","mask":"1f637.png","money_mouth_face":"1f911.png","nauseated_face":"1f922.png","nerd_face":"1f913.png","neutral_face":"1f610.png","no_mouth":"1f636.png","open_mouth":"1f62e.png","orange_heart":"1f9e1.png","partying_face":"1f973.png","pensive":"1f614.png","persevere":"1f623.png","pleading_face":"1f97a.png","pouting_cat":"1f63e.png","purple_heart":"1f49c.png","rage":"1f621.png","relaxed":"263a-fe0f.png","relieved":"1f60c.png","revolving_hearts":"1f49e.png","right_anger_bubble":"1f5ef-fe0f.png","robot_face":"1f916.png","rolling_on_the_floor_laughing":"1f923.png","scream":"1f631.png","scream_cat":"1f640.png","see_no_evil":"1f648.png","shushing_face":"1f92b.png","skull":"1f480.png","skull_and_crossbones":"2620-fe0f.png","sleeping":"1f634.png","sleepy":"1f62a.png","slightly_frowning_face":"1f641.png","slightly_smiling_face":"1f642.png","smile":"1f604.png","smile_cat":"1f638.png","smiley":"1f603.png","smiley_cat":"1f63a.png","smiling_face_with_3_hearts":"1f970.png","smiling_imp":"1f608.png","smirk":"1f60f.png","smirk_cat":"1f63c.png","sneezing_face":"1f927.png","sob":"1f62d.png","space_invader":"1f47e.png","sparkling_heart":"1f496.png","speak_no_evil":"1f64a.png","speech_balloon":"1f4ac.png","star-struck":"1f929.png","stuck_out_tongue":"1f61b.png","stuck_out_tongue_closed_eyes":"1f61d.png","stuck_out_tongue_winking_eye":"1f61c.png","sunglasses":"1f60e.png","sweat":"1f613.png","sweat_drops":"1f4a6.png","sweat_smile":"1f605.png","thinking_face":"1f914.png","thought_balloon":"1f4ad.png","tired_face":"1f62b.png","triumph":"1f624.png","two_hearts":"1f495.png","unamused":"1f612.png","upside_down_face":"1f643.png","weary":"1f629.png","white_frowning_face":"2639-fe0f.png","white_heart":"1f90d.png","wink":"1f609.png","woozy_face":"1f974.png","worried":"1f61f.png","yawning_face":"1f971.png","yellow_heart":"1f49b.png","yum":"1f60b.png","zany_face":"1f92a.png","zipper_mouth_face":"1f910.png","zzz":"1f4a4.png"},"enableQQ":false,"highlight":true,"lang":"zh-cn","pageSize":10,"placeholder":"你的评论 ...","recordIP":true,"visitor":true}},"search":{"algoliaAppID":"PASDMWALPK","algoliaIndex":"index.zh-cn","algoliaSearchKey":"b42948e51daaa93df92381c8e2ac0f93","highlightTag":"em","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"algolia"}};</script><script type=text/javascript src=/js/theme.min.js></script></body></html>

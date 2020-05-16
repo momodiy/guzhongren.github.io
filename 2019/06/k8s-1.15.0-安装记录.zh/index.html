@@ -1,0 +1,903 @@
+<!doctype html><html lang=zh-cn><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=robots content="noodp"><meta http-equiv=x-ua-compatible content="IE=edge, chrome=1"><title>K8s 1.15.0 安装记录 - 谷中仁的博客</title><meta name=Description content="谷中仁的博客"><meta property="og:title" content="K8s 1.15.0 安装记录"><meta property="og:description" content="环境 hostname ip system master 192.168.33.10 CentOS7 node1 192.168.33.11 CentOS7 node2 192.168.33.12 CentOS7 node3 192.168.33.13 CentOS7 node4 192.168.33.14 CentOS7 node5 192.168.33.15 CentOS7 所有节点上操作 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40"><meta property="og:type" content="article"><meta property="og:url" content="https://guzhongren.github.io/2019/06/k8s-1.15.0-%E5%AE%89%E8%A3%85%E8%AE%B0%E5%BD%95.zh/"><meta property="og:image" content="https://guzhongren.github.io/logo.png"><meta property="article:published_time" content="2019-06-30T19:46:11+08:00"><meta property="article:modified_time" content="2019-06-30T19:46:11+08:00"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="https://guzhongren.github.io/logo.png"><meta name=twitter:title content="K8s 1.15.0 安装记录"><meta name=twitter:description content="环境 hostname ip system master 192.168.33.10 CentOS7 node1 192.168.33.11 CentOS7 node2 192.168.33.12 CentOS7 node3 192.168.33.13 CentOS7 node4 192.168.33.14 CentOS7 node5 192.168.33.15 CentOS7 所有节点上操作 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40"><meta name=application-name content="LoveIt"><meta name=apple-mobile-web-app-title content="LoveIt"><meta name=theme-color content="#ffffff"><meta name=msapplication-TileColor content="#da532c"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://guzhongren.github.io/2019/06/k8s-1.15.0-%E5%AE%89%E8%A3%85%E8%AE%B0%E5%BD%95.zh/><link rel=prev href=https://guzhongren.github.io/2019/06/harbor-%E5%AE%89%E8%A3%85%E5%B0%8F%E8%AE%B0.zh/><link rel=next href=https://guzhongren.github.io/2019/08/basic-markdown-preview.zh/><link rel=stylesheet href=/lib/normalize/normalize.min.css><link rel=stylesheet href=/css/style.min.css><link rel=stylesheet href=/lib/fontawesome-free/all.min.css><link rel=stylesheet href=/lib/animate/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"K8s 1.15.0 安装记录","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/guzhongren.github.io\/2019\/06\/k8s-1.15.0-%E5%AE%89%E8%A3%85%E8%AE%B0%E5%BD%95.zh\/"},"image":{"@type":"ImageObject","url":"https:\/\/guzhongren.github.io\/cover.png","width":800,"height":600},"genre":"posts","keywords":"kubernetes, install, cluster, nginx, service","wordcount":2672,"url":"https:\/\/guzhongren.github.io\/2019\/06\/k8s-1.15.0-%E5%AE%89%E8%A3%85%E8%AE%B0%E5%BD%95.zh\/","datePublished":"2019-06-30T19:46:11+08:00","dateModified":"2019-06-30T19:46:11+08:00","license":"This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher":{"@type":"Organization","name":"xxxx","logo":{"@type":"ImageObject","url":"https:\/\/guzhongren.github.io\/logo.png","width":127,"height":40}},"author":{"@type":"Person","name":"谷中仁"},"description":""}</script></head><body header-desktop=fixed header-mobile=auto><script type=text/javascript>(window.localStorage&&localStorage.getItem('theme')?localStorage.getItem('theme')==='dark':('auto'==='auto'?window.matchMedia('(prefers-color-scheme: dark)').matches:'auto'==='dark'))&&document.body.setAttribute('theme','dark');</script><div id=mask></div><div class=wrapper><header class=desktop id=header-desktop><div class=header-wrapper><div class=header-title><a href=/ title=谷中仁的博客><img class="lazyload logo" src=/svg/loading/small.min.svg data-src=/images/avatar.png data-srcset="/images/avatar.png, /images/avatar.png 1.5x, /images/avatar.png 2x" data-sizes=auto alt=谷中仁的博客 title=谷中仁的博客>谷中仁的博客</a></div><div class=menu><div class=menu-inner><a class=menu-item href=/posts/>所有文章 </a><a class=menu-item href=/tags/>标签 </a><a class=menu-item href=/categories/>分类 </a><a class=menu-item href=/about/>关于 </a><a class=menu-item href=https://github.com/guzhongren title=GitHub rel="noopener noreffer" target=_blank><i class="fab fa-github fa-fw"></i></a><span class="menu-item delimiter"></span><a href=javascript:void(0); class="menu-item language" title=选择语言>简体中文<i class="fas fa-chevron-right fa-fw"></i>
+<select class=language-select id=language-select-desktop onchange="location=this.value;"><option value=/2019/06/k8s-1.15.0-%E5%AE%89%E8%A3%85%E8%AE%B0%E5%BD%95.zh/ selected>简体中文</option></select>
+</a><span class="menu-item search" id=search-desktop><input type=text placeholder=搜索文章标题或内容... id=search-input-desktop>
+<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-desktop title=搜索><i class="fas fa-search fa-fw"></i></a><a href=javascript:void(0); class="search-button search-clear" id=search-clear-desktop title=清空><i class="fas fa-times-circle fa-fw"></i></a><span class="search-button search-loading" id=search-loading-desktop><i class="fas fa-spinner fa-fw fa-spin"></i></span></span><a href=javascript:void(0); class="menu-item theme-switch" title=切换主题><i class="fas fa-adjust fa-fw"></i></a></div></div></div></header><header class=mobile id=header-mobile><div class=header-container><div class=header-wrapper><div class=header-title><a href=/ title=谷中仁的博客><img class="lazyload logo" src=/svg/loading/small.min.svg data-src=/images/avatar.png data-srcset="/images/avatar.png, /images/avatar.png 1.5x, /images/avatar.png 2x" data-sizes=auto alt=谷中仁的博客 title=谷中仁的博客>谷中仁的博客</a></div><div class=menu-toggle id=menu-toggle-mobile><span></span><span></span><span></span></div></div><div class=menu id=menu-mobile><div class=search-wrapper><div class="search mobile" id=search-mobile><input type=text placeholder=搜索文章标题或内容... id=search-input-mobile>
+<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-mobile title=搜索><i class="fas fa-search fa-fw"></i></a><a href=javascript:void(0); class="search-button search-clear" id=search-clear-mobile title=清空><i class="fas fa-times-circle fa-fw"></i></a><span class="search-button search-loading" id=search-loading-mobile><i class="fas fa-spinner fa-fw fa-spin"></i></span></div><a href=javascript:void(0); class=search-cancel id=search-cancel-mobile>取消</a></div><a class=menu-item href=/posts/>所有文章</a><a class=menu-item href=/tags/>标签</a><a class=menu-item href=/categories/>分类</a><a class=menu-item href=/about/>关于</a><a class=menu-item href=https://github.com/guzhongren title=GitHub rel="noopener noreffer" target=_blank><i class="fab fa-github fa-fw"></i></a><a href=javascript:void(0); class="menu-item theme-switch" title=切换主题>
+<i class="fas fa-adjust fa-fw"></i></a><a href=javascript:void(0); class=menu-item title=选择语言>简体中文<i class="fas fa-chevron-right fa-fw"></i>
+<select class=language-select onchange="location=this.value;"><option value=/2019/06/k8s-1.15.0-%E5%AE%89%E8%A3%85%E8%AE%B0%E5%BD%95.zh/ selected>简体中文</option></select></a></div></div></header><div class="search-dropdown desktop"><div id=search-dropdown-desktop></div></div><div class="search-dropdown mobile"><div id=search-dropdown-mobile></div></div><main class=main><div class=container><div class=toc id=toc-auto><h2 class=toc-title>目录</h2><div class=toc-content id=toc-content-auto></div></div><article class="page single"><h1 class="single-title animated flipInX">K8s 1.15.0 安装记录</h1><div class=post-meta><div class=post-meta-line><span class=post-author><a href=https://guzhongren.github.io title=Author target=_blank rel="noopener noreffer author" class=author><i class="fas fa-user-circle fa-fw"></i>谷中仁</a></span>&nbsp;
+<span class=post-category>收录于<a href=/categories/kubernetes/>
+<i class="far fa-folder fa-fw"></i>Kubernetes</a></span></div><div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2019-06-30>2019-06-30</time>&nbsp;
+<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 2672 字&nbsp;
+<i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 6 分钟&nbsp;<span id=/2019/06/k8s-1.15.0-%E5%AE%89%E8%A3%85%E8%AE%B0%E5%BD%95.zh/ class=leancloud_visitors data-flag-title="K8s 1.15.0 安装记录">
+<i class="far fa-eye fa-fw"></i>&nbsp;<span class=leancloud-visitors-count></span>&nbsp;次阅读
+</span>&nbsp;</div></div><div class=featured-image><img class=lazyload src=/svg/loading/normal.min.svg data-src="https://images.pexels.com/photos/3872067/pexels-photo-3872067.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" data-srcset="https://images.pexels.com/photos/3872067/pexels-photo-3872067.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260, https://images.pexels.com/photos/3872067/pexels-photo-3872067.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260 1.5x, https://images.pexels.com/photos/3872067/pexels-photo-3872067.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260 2x" data-sizes=auto alt="https://images.pexels.com/photos/3872067/pexels-photo-3872067.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" title="https://images.pexels.com/photos/3872067/pexels-photo-3872067.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"></div><div class="details toc" id=toc-static><div class="details-summary toc-title"><span>目录</span>
+<span><i class="details-icon fas fa-angle-right"></i></span></div><div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents><ul><li><a href=#环境>环境</a></li><li><a href=#所有节点上操作>所有节点上操作</a></li><li><a href=#主节点操作>主节点操作</a></li><li><a href=#各-node-节点上处理>各 Node 节点上处理</a></li><li><a href=#master-节点操作>master 节点操作</a></li><li><a href=#打label>打label</a></li><li><a href=#测试>测试</a></li><li><a href=#reference>Reference</a></li><li><a href=#hereby-declared特此申明>Hereby declared（特此申明）</a></li></ul></nav></div></div><div class=content id=content><h2 id=环境>环境</h2><table><thead><tr><th>hostname</th><th align=left>ip</th><th align=left>system</th><th></th></tr></thead><tbody><tr><td>master</td><td align=left>192.168.33.10</td><td align=left>CentOS7</td><td></td></tr><tr><td>node1</td><td align=left>192.168.33.11</td><td align=left>CentOS7</td><td></td></tr><tr><td>node2</td><td align=left>192.168.33.12</td><td align=left>CentOS7</td><td></td></tr><tr><td>node3</td><td align=left>192.168.33.13</td><td align=left>CentOS7</td><td></td></tr><tr><td>node4</td><td align=left>192.168.33.14</td><td align=left>CentOS7</td><td></td></tr><tr><td>node5</td><td align=left>192.168.33.15</td><td align=left>CentOS7</td><td></td></tr></tbody></table><h2 id=所有节点上操作>所有节点上操作</h2><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>  1
+</span><span class=lnt>  2
+</span><span class=lnt>  3
+</span><span class=lnt>  4
+</span><span class=lnt>  5
+</span><span class=lnt>  6
+</span><span class=lnt>  7
+</span><span class=lnt>  8
+</span><span class=lnt>  9
+</span><span class=lnt> 10
+</span><span class=lnt> 11
+</span><span class=lnt> 12
+</span><span class=lnt> 13
+</span><span class=lnt> 14
+</span><span class=lnt> 15
+</span><span class=lnt> 16
+</span><span class=lnt> 17
+</span><span class=lnt> 18
+</span><span class=lnt> 19
+</span><span class=lnt> 20
+</span><span class=lnt> 21
+</span><span class=lnt> 22
+</span><span class=lnt> 23
+</span><span class=lnt> 24
+</span><span class=lnt> 25
+</span><span class=lnt> 26
+</span><span class=lnt> 27
+</span><span class=lnt> 28
+</span><span class=lnt> 29
+</span><span class=lnt> 30
+</span><span class=lnt> 31
+</span><span class=lnt> 32
+</span><span class=lnt> 33
+</span><span class=lnt> 34
+</span><span class=lnt> 35
+</span><span class=lnt> 36
+</span><span class=lnt> 37
+</span><span class=lnt> 38
+</span><span class=lnt> 39
+</span><span class=lnt> 40
+</span><span class=lnt> 41
+</span><span class=lnt> 42
+</span><span class=lnt> 43
+</span><span class=lnt> 44
+</span><span class=lnt> 45
+</span><span class=lnt> 46
+</span><span class=lnt> 47
+</span><span class=lnt> 48
+</span><span class=lnt> 49
+</span><span class=lnt> 50
+</span><span class=lnt> 51
+</span><span class=lnt> 52
+</span><span class=lnt> 53
+</span><span class=lnt> 54
+</span><span class=lnt> 55
+</span><span class=lnt> 56
+</span><span class=lnt> 57
+</span><span class=lnt> 58
+</span><span class=lnt> 59
+</span><span class=lnt> 60
+</span><span class=lnt> 61
+</span><span class=lnt> 62
+</span><span class=lnt> 63
+</span><span class=lnt> 64
+</span><span class=lnt> 65
+</span><span class=lnt> 66
+</span><span class=lnt> 67
+</span><span class=lnt> 68
+</span><span class=lnt> 69
+</span><span class=lnt> 70
+</span><span class=lnt> 71
+</span><span class=lnt> 72
+</span><span class=lnt> 73
+</span><span class=lnt> 74
+</span><span class=lnt> 75
+</span><span class=lnt> 76
+</span><span class=lnt> 77
+</span><span class=lnt> 78
+</span><span class=lnt> 79
+</span><span class=lnt> 80
+</span><span class=lnt> 81
+</span><span class=lnt> 82
+</span><span class=lnt> 83
+</span><span class=lnt> 84
+</span><span class=lnt> 85
+</span><span class=lnt> 86
+</span><span class=lnt> 87
+</span><span class=lnt> 88
+</span><span class=lnt> 89
+</span><span class=lnt> 90
+</span><span class=lnt> 91
+</span><span class=lnt> 92
+</span><span class=lnt> 93
+</span><span class=lnt> 94
+</span><span class=lnt> 95
+</span><span class=lnt> 96
+</span><span class=lnt> 97
+</span><span class=lnt> 98
+</span><span class=lnt> 99
+</span><span class=lnt>100
+</span><span class=lnt>101
+</span><span class=lnt>102
+</span><span class=lnt>103
+</span><span class=lnt>104
+</span><span class=lnt>105
+</span><span class=lnt>106
+</span><span class=lnt>107
+</span><span class=lnt>108
+</span><span class=lnt>109
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-shell data-lang=shell><span class=o>[</span>root@master install<span class=o>]</span><span class=c1># cat preENV.sh</span>
+
+<span class=c1>#!/bin/bash</span>
+<span class=c1># 关闭防火墙</span>
+systemctl stop firewalld <span class=o>&amp;&amp;</span> systemctl disable firewalld
+<span class=c1># 关闭SELINUX</span>
+setenforce <span class=m>0</span> <span class=o>&amp;&amp;</span> sed -i <span class=s2>&#34;s/SELINUX=enforcing/SELINUX=disabled/g&#34;</span> /etc/selinux/config
+<span class=c1># 关闭Swap</span>
+swapoff -a <span class=o>&amp;&amp;</span> sed -i <span class=s2>&#34;s/\/dev\/mapper\/centos-swap/\#\/dev\/mapper\/centos-swap/g&#34;</span> /etc/fstab
+
+<span class=o>[</span>root@master ~<span class=o>]</span><span class=c1># vim /etc/sysctl.d/k8s.conf</span>
+<span class=o>[</span>root@master ~<span class=o>]</span><span class=c1># cat /etc/sysctl.d/k8s.conf</span>
+net.bridge.bridge-nf-call-ip6tables <span class=o>=</span> <span class=m>1</span>
+net.bridge.bridge-nf-call-iptables <span class=o>=</span> <span class=m>1</span>
+net.ipv4.ip_forward <span class=o>=</span> <span class=m>1</span>
+
+<span class=o>[</span>root@master ~<span class=o>]</span><span class=c1># modprobe br_netfilter &amp;&amp; sysctl -p /etc/sysctl.d/k8s.conf</span>
+net.bridge.bridge-nf-call-ip6tables <span class=o>=</span> <span class=m>1</span>
+net.bridge.bridge-nf-call-iptables <span class=o>=</span> <span class=m>1</span>
+net.ipv4.ip_forward <span class=o>=</span> <span class=m>1</span>
+
+<span class=o>[</span>root@master ~<span class=o>]</span><span class=c1># wget -O /etc/yum.repos.d/CentOS7-Aliyun.repo http://mirrors.aliyun.com/repo/Centos-7.repo</span>
+--2019-06-30 04:26:32--  http://mirrors.aliyun.com/repo/Centos-7.repo
+Resolving mirrors.aliyun.com <span class=o>(</span>mirrors.aliyun.com<span class=o>)</span>... 116.177.250.229, 116.177.250.233, 60.28.226.4, ...
+Connecting to mirrors.aliyun.com <span class=o>(</span>mirrors.aliyun.com<span class=o>)</span><span class=p>|</span>116.177.250.229<span class=p>|</span>:80... connected.
+HTTP request sent, awaiting response... <span class=m>200</span> OK
+Length: <span class=m>2523</span> <span class=o>(</span>2.5K<span class=o>)</span> <span class=o>[</span>application/octet-stream<span class=o>]</span>
+Saving to: ‘/etc/yum.repos.d/CentOS7-Aliyun.repo’
+
+100%<span class=o>[</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span>&gt;<span class=o>]</span> 2,523       --.-K/s   in 0s
+
+2019-06-30 04:26:32 <span class=o>(</span><span class=m>296</span> MB/s<span class=o>)</span> - ‘/etc/yum.repos.d/CentOS7-Aliyun.repo’ saved <span class=o>[</span>2523/2523<span class=o>]</span>
+root@master ~<span class=o>]</span><span class=c1># sudo yum install -y yum-utils \</span>
+  device-mapper-persistent-data <span class=se>\
+</span><span class=se></span>  lvm2
+
+<span class=o>[</span>root@master ~<span class=o>]</span><span class=c1># sudo yum-config-manager \</span>
+    --add-repo <span class=se>\
+</span><span class=se></span>    https://download.docker.com/linux/centos/docker-ce.repo
+<span class=o>[</span>root@master ~<span class=o>]</span><span class=c1># yum install docker-ce -y</span>
+<span class=o>[</span>root@master ~<span class=o>]</span><span class=c1># systemctl enable docker &amp;&amp; systemctl start docker</span>
+Created symlink from /etc/systemd/system/multi-user.target.wants/docker.service to /usr/lib/systemd/system/docker.service.
+
+<span class=o>[</span>root@master ~<span class=o>]</span><span class=c1># mkdir -p /etc/docker</span>
+<span class=o>[</span>root@master ~<span class=o>]</span><span class=c1># sudo tee /etc/docker/daemon.json &lt;&lt;-&#39;EOF&#39;</span>
+<span class=o>{</span>
+  <span class=s2>&#34;registry-mirrors&#34;</span>: <span class=o>[</span><span class=s2>&#34;https://gmjjwogo.mirror.aliyuncs.com&#34;</span><span class=o>]</span>,
+  <span class=s2>&#34;exec-opts&#34;</span>: <span class=o>[</span><span class=s2>&#34;native.cgroupdriver=systemd&#34;</span><span class=o>]</span>
+<span class=o>}</span>
+EOF
+
+
+<span class=o>{</span>
+  <span class=s2>&#34;registry-mirrors&#34;</span>: <span class=o>[</span><span class=s2>&#34;https://gmjjwogo.mirror.aliyuncs.com&#34;</span><span class=o>]</span>,
+  <span class=s2>&#34;exec-opts&#34;</span>: <span class=o>[</span><span class=s2>&#34;native.cgroupdriver=systemd&#34;</span><span class=o>]</span>
+<span class=o>}</span>
+<span class=o>[</span>root@master ~<span class=o>]</span><span class=c1># sudo systemctl daemon-reload &amp;&amp; sudo systemctl restart docker</span>
+
+<span class=o>[</span>root@master ~<span class=o>]</span><span class=c1># docker info |grep Cgroup</span>
+Cgroup Driver: systemd
+
+<span class=o>[</span>root@master ~<span class=o>]</span><span class=c1># # kube-proxy开启ipvs的前置条件</span>
+<span class=o>[</span>root@master ~<span class=o>]</span><span class=c1># cat &gt; /etc/sysconfig/modules/ipvs.modules &lt;&lt;EOF</span>
+<span class=c1>#!/bin/bash</span>
+modprobe -- ip_vs
+modprobe -- ip_vs_rr
+modprobe -- ip_vs_wrr
+modprobe -- ip_vs_sh
+modprobe -- nf_conntrack_ipv4
+EOF
+<span class=o>[</span>root@master ~<span class=o>]</span><span class=c1># chmod 755 /etc/sysconfig/modules/ipvs.modules &amp;&amp; bash /etc/sysconfig/modules/ipvs.modules &amp;&amp; lsmod | grep -e ip_vs -e nf_conntrack_ipv4</span>
+ip_vs_sh               <span class=m>12688</span>  <span class=m>0</span>
+ip_vs_wrr              <span class=m>12697</span>  <span class=m>0</span>
+ip_vs_rr               <span class=m>12600</span>  <span class=m>0</span>
+ip_vs                 <span class=m>145497</span>  <span class=m>6</span> ip_vs_rr,ip_vs_sh,ip_vs_wrr
+nf_conntrack_ipv4      <span class=m>15053</span>  <span class=m>2</span>
+nf_defrag_ipv4         <span class=m>12729</span>  <span class=m>1</span> nf_conntrack_ipv4
+nf_conntrack          <span class=m>133095</span>  <span class=m>7</span> ip_vs,nf_nat,nf_nat_ipv4,xt_conntrack,nf_nat_masquerade_ipv4,nf_conntrack_netlink,nf_conntrack_ipv4
+libcrc32c              <span class=m>12644</span>  <span class=m>4</span> xfs,ip_vs,nf_nat,nf_conntrack
+
+<span class=o>[</span>root@master ~<span class=o>]</span><span class=c1># # 安装kubernetes初始化工具</span>
+<span class=o>[</span>root@master ~<span class=o>]</span><span class=c1># # 使用阿里云的kubernetes源</span>
+<span class=o>[</span>root@master ~<span class=o>]</span><span class=c1># cat &lt;&lt;EOF &gt; /etc/yum.repos.d/kubernetes.repo</span>
+<span class=o>[</span>kubernetes<span class=o>]</span>
+<span class=nv>name</span><span class=o>=</span>Kubernetes
+<span class=nv>baseurl</span><span class=o>=</span>https://mirrors.aliyun.com/kubernetes/yum/repos/kubernetes-el7-x86_64/
+<span class=nv>enabled</span><span class=o>=</span><span class=m>1</span>
+<span class=nv>gpgcheck</span><span class=o>=</span><span class=m>1</span>
+<span class=nv>repo_gpgcheck</span><span class=o>=</span><span class=m>1</span>
+<span class=nv>gpgkey</span><span class=o>=</span>https://mirrors.aliyun.com/kubernetes/yum/doc/yum-key.gpg https://mirrors.aliyun.com/kubernetes/yum/doc/rpm-package-key.gpg
+EOF
+<span class=o>[</span>root@master ~<span class=o>]</span><span class=c1># # 安装k8s 工具 1.15版本</span>
+<span class=o>[</span>root@master ~<span class=o>]</span><span class=c1># yum install -y kubelet kubeadm kubectl</span>
+
+Installed:
+  kubeadm.x86_64 0:1.15.0-0              kubectl.x86_64 0:1.15.0-0              kubelet.x86_64 0:1.15.0-0
+
+Dependency Installed:
+  conntrack-tools.x86_64 0:1.4.4-4.el7                       cri-tools.x86_64 0:1.12.0-0
+  kubernetes-cni.x86_64 0:0.7.5-0                            libnetfilter_cthelper.x86_64 0:1.0.0-9.el7
+  libnetfilter_cttimeout.x86_64 0:1.0.0-6.el7                libnetfilter_queue.x86_64 0:1.0.2-2.el7_2
+  socat.x86_64 0:1.7.3.2-2.el7
+
+Complete!
+<span class=o>[</span>root@master ~<span class=o>]</span><span class=c1># # 启动 kubelet</span>
+<span class=o>[</span>root@master ~<span class=o>]</span><span class=c1># systemctl enable kubelet &amp;&amp; systemctl start kubelet</span>
+Created symlink from /etc/systemd/system/multi-user.target.wants/kubelet.service to /usr/lib/systemd/system/kubelet.service.
+<span class=o>[</span>root@master ~<span class=o>]</span>#
+
+</code></pre></td></tr></table></div></div><h2 id=主节点操作>主节点操作</h2><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>  1
+</span><span class=lnt>  2
+</span><span class=lnt>  3
+</span><span class=lnt>  4
+</span><span class=lnt>  5
+</span><span class=lnt>  6
+</span><span class=lnt>  7
+</span><span class=lnt>  8
+</span><span class=lnt>  9
+</span><span class=lnt> 10
+</span><span class=lnt> 11
+</span><span class=lnt> 12
+</span><span class=lnt> 13
+</span><span class=lnt> 14
+</span><span class=lnt> 15
+</span><span class=lnt> 16
+</span><span class=lnt> 17
+</span><span class=lnt> 18
+</span><span class=lnt> 19
+</span><span class=lnt> 20
+</span><span class=lnt> 21
+</span><span class=lnt> 22
+</span><span class=lnt> 23
+</span><span class=lnt> 24
+</span><span class=lnt> 25
+</span><span class=lnt> 26
+</span><span class=lnt> 27
+</span><span class=lnt> 28
+</span><span class=lnt> 29
+</span><span class=lnt> 30
+</span><span class=lnt> 31
+</span><span class=lnt> 32
+</span><span class=lnt> 33
+</span><span class=lnt> 34
+</span><span class=lnt> 35
+</span><span class=lnt> 36
+</span><span class=lnt> 37
+</span><span class=lnt> 38
+</span><span class=lnt> 39
+</span><span class=lnt> 40
+</span><span class=lnt> 41
+</span><span class=lnt> 42
+</span><span class=lnt> 43
+</span><span class=lnt> 44
+</span><span class=lnt> 45
+</span><span class=lnt> 46
+</span><span class=lnt> 47
+</span><span class=lnt> 48
+</span><span class=lnt> 49
+</span><span class=lnt> 50
+</span><span class=lnt> 51
+</span><span class=lnt> 52
+</span><span class=lnt> 53
+</span><span class=lnt> 54
+</span><span class=lnt> 55
+</span><span class=lnt> 56
+</span><span class=lnt> 57
+</span><span class=lnt> 58
+</span><span class=lnt> 59
+</span><span class=lnt> 60
+</span><span class=lnt> 61
+</span><span class=lnt> 62
+</span><span class=lnt> 63
+</span><span class=lnt> 64
+</span><span class=lnt> 65
+</span><span class=lnt> 66
+</span><span class=lnt> 67
+</span><span class=lnt> 68
+</span><span class=lnt> 69
+</span><span class=lnt> 70
+</span><span class=lnt> 71
+</span><span class=lnt> 72
+</span><span class=lnt> 73
+</span><span class=lnt> 74
+</span><span class=lnt> 75
+</span><span class=lnt> 76
+</span><span class=lnt> 77
+</span><span class=lnt> 78
+</span><span class=lnt> 79
+</span><span class=lnt> 80
+</span><span class=lnt> 81
+</span><span class=lnt> 82
+</span><span class=lnt> 83
+</span><span class=lnt> 84
+</span><span class=lnt> 85
+</span><span class=lnt> 86
+</span><span class=lnt> 87
+</span><span class=lnt> 88
+</span><span class=lnt> 89
+</span><span class=lnt> 90
+</span><span class=lnt> 91
+</span><span class=lnt> 92
+</span><span class=lnt> 93
+</span><span class=lnt> 94
+</span><span class=lnt> 95
+</span><span class=lnt> 96
+</span><span class=lnt> 97
+</span><span class=lnt> 98
+</span><span class=lnt> 99
+</span><span class=lnt>100
+</span><span class=lnt>101
+</span><span class=lnt>102
+</span><span class=lnt>103
+</span><span class=lnt>104
+</span><span class=lnt>105
+</span><span class=lnt>106
+</span><span class=lnt>107
+</span><span class=lnt>108
+</span><span class=lnt>109
+</span><span class=lnt>110
+</span><span class=lnt>111
+</span><span class=lnt>112
+</span><span class=lnt>113
+</span><span class=lnt>114
+</span><span class=lnt>115
+</span><span class=lnt>116
+</span><span class=lnt>117
+</span><span class=lnt>118
+</span><span class=lnt>119
+</span><span class=lnt>120
+</span><span class=lnt>121
+</span><span class=lnt>122
+</span><span class=lnt>123
+</span><span class=lnt>124
+</span><span class=lnt>125
+</span><span class=lnt>126
+</span><span class=lnt>127
+</span><span class=lnt>128
+</span><span class=lnt>129
+</span><span class=lnt>130
+</span><span class=lnt>131
+</span><span class=lnt>132
+</span><span class=lnt>133
+</span><span class=lnt>134
+</span><span class=lnt>135
+</span><span class=lnt>136
+</span><span class=lnt>137
+</span><span class=lnt>138
+</span><span class=lnt>139
+</span><span class=lnt>140
+</span><span class=lnt>141
+</span><span class=lnt>142
+</span><span class=lnt>143
+</span><span class=lnt>144
+</span><span class=lnt>145
+</span><span class=lnt>146
+</span><span class=lnt>147
+</span><span class=lnt>148
+</span><span class=lnt>149
+</span><span class=lnt>150
+</span><span class=lnt>151
+</span><span class=lnt>152
+</span><span class=lnt>153
+</span><span class=lnt>154
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-shell data-lang=shell><span class=o>[</span>root@master install<span class=o>]</span><span class=c1># vim installK8sMasterImage.sh</span>
+<span class=o>[</span>root@master install<span class=o>]</span><span class=c1># cat installK8sMasterImage.sh</span>
+
+<span class=c1>#!/bin/bash</span>
+
+<span class=nb>set</span> -e
+
+<span class=nv>KUBE_VERSION</span><span class=o>=</span>v1.15.0
+<span class=nv>KUBE_PAUSE_VERSION</span><span class=o>=</span>3.1
+<span class=nv>ETCD_VERSION</span><span class=o>=</span>3.3.10
+<span class=nv>CORE_DNS_VERSION</span><span class=o>=</span>1.3.1
+
+<span class=nv>GCR_URL</span><span class=o>=</span>k8s.gcr.io
+<span class=nv>ALIYUN_URL</span><span class=o>=</span>registry.cn-hangzhou.aliyuncs.com/google_containers
+
+<span class=nv>images</span><span class=o>=</span><span class=o>(</span>kube-proxy:<span class=si>${</span><span class=nv>KUBE_VERSION</span><span class=si>}</span>
+kube-scheduler:<span class=si>${</span><span class=nv>KUBE_VERSION</span><span class=si>}</span>
+kube-controller-manager:<span class=si>${</span><span class=nv>KUBE_VERSION</span><span class=si>}</span>
+kube-apiserver:<span class=si>${</span><span class=nv>KUBE_VERSION</span><span class=si>}</span>
+pause:<span class=si>${</span><span class=nv>KUBE_PAUSE_VERSION</span><span class=si>}</span>
+etcd:<span class=si>${</span><span class=nv>ETCD_VERSION</span><span class=si>}</span>
+coredns:<span class=si>${</span><span class=nv>CORE_DNS_VERSION</span><span class=si>}</span><span class=o>)</span>
+
+
+<span class=k>for</span> imageName in <span class=si>${</span><span class=nv>images</span><span class=p>[@]</span><span class=si>}</span> <span class=p>;</span> <span class=k>do</span>
+  docker pull <span class=nv>$ALIYUN_URL</span>/<span class=nv>$imageName</span>
+  docker tag  <span class=nv>$ALIYUN_URL</span>/<span class=nv>$imageName</span> <span class=nv>$GCR_URL</span>/<span class=nv>$imageName</span>
+  docker rmi <span class=nv>$ALIYUN_URL</span>/<span class=nv>$imageName</span>
+<span class=k>done</span>
+<span class=o>[</span>root@master install<span class=o>]</span><span class=c1># chmod +x installK8sMasterImage.sh &amp;&amp; ./installK8sMasterImage.sh</span>
+
+root@master install<span class=o>]</span><span class=c1># kubeadm init --kubernetes-version=v1.15.0 --apiserver-advertise-address=192.168.33.10 --pod-network-cidr=10.244.0.0/16</span>
+<span class=o>[</span>init<span class=o>]</span> Using Kubernetes version: v1.15.0
+<span class=o>[</span>preflight<span class=o>]</span> Running pre-flight checks
+	<span class=o>[</span>WARNING Hostname<span class=o>]</span>: hostname <span class=s2>&#34;master&#34;</span> could not be reached
+	<span class=o>[</span>WARNING Hostname<span class=o>]</span>: hostname <span class=s2>&#34;master&#34;</span>: lookup master on 10.0.2.3:53: no such host
+<span class=o>[</span>preflight<span class=o>]</span> Pulling images required <span class=k>for</span> setting up a Kubernetes cluster
+<span class=o>[</span>preflight<span class=o>]</span> This might take a minute or two, depending on the speed of your internet connection
+<span class=o>[</span>preflight<span class=o>]</span> You can also perform this action in beforehand using <span class=s1>&#39;kubeadm config images pull&#39;</span>
+<span class=o>[</span>kubelet-start<span class=o>]</span> Writing kubelet environment file with flags to file <span class=s2>&#34;/var/lib/kubelet/kubeadm-flags.env&#34;</span>
+<span class=o>[</span>kubelet-start<span class=o>]</span> Writing kubelet configuration to file <span class=s2>&#34;/var/lib/kubelet/config.yaml&#34;</span>
+<span class=o>[</span>kubelet-start<span class=o>]</span> Activating the kubelet service
+<span class=o>[</span>certs<span class=o>]</span> Using certificateDir folder <span class=s2>&#34;/etc/kubernetes/pki&#34;</span>
+<span class=o>[</span>certs<span class=o>]</span> Generating <span class=s2>&#34;front-proxy-ca&#34;</span> certificate and key
+<span class=o>[</span>certs<span class=o>]</span> Generating <span class=s2>&#34;front-proxy-client&#34;</span> certificate and key
+<span class=o>[</span>certs<span class=o>]</span> Generating <span class=s2>&#34;ca&#34;</span> certificate and key
+<span class=o>[</span>certs<span class=o>]</span> Generating <span class=s2>&#34;apiserver&#34;</span> certificate and key
+<span class=o>[</span>certs<span class=o>]</span> apiserver serving cert is signed <span class=k>for</span> DNS names <span class=o>[</span>master kubernetes kubernetes.default kubernetes.default.svc kubernetes.default.svc.cluster.local<span class=o>]</span> and IPs <span class=o>[</span>10.96.0.1 192.168.33.10<span class=o>]</span>
+<span class=o>[</span>certs<span class=o>]</span> Generating <span class=s2>&#34;apiserver-kubelet-client&#34;</span> certificate and key
+<span class=o>[</span>certs<span class=o>]</span> Generating <span class=s2>&#34;etcd/ca&#34;</span> certificate and key
+<span class=o>[</span>certs<span class=o>]</span> Generating <span class=s2>&#34;etcd/server&#34;</span> certificate and key
+<span class=o>[</span>certs<span class=o>]</span> etcd/server serving cert is signed <span class=k>for</span> DNS names <span class=o>[</span>master localhost<span class=o>]</span> and IPs <span class=o>[</span>192.168.33.10 127.0.0.1 ::1<span class=o>]</span>
+<span class=o>[</span>certs<span class=o>]</span> Generating <span class=s2>&#34;etcd/healthcheck-client&#34;</span> certificate and key
+<span class=o>[</span>certs<span class=o>]</span> Generating <span class=s2>&#34;apiserver-etcd-client&#34;</span> certificate and key
+<span class=o>[</span>certs<span class=o>]</span> Generating <span class=s2>&#34;etcd/peer&#34;</span> certificate and key
+<span class=o>[</span>certs<span class=o>]</span> etcd/peer serving cert is signed <span class=k>for</span> DNS names <span class=o>[</span>master localhost<span class=o>]</span> and IPs <span class=o>[</span>192.168.33.10 127.0.0.1 ::1<span class=o>]</span>
+<span class=o>[</span>certs<span class=o>]</span> Generating <span class=s2>&#34;sa&#34;</span> key and public key
+<span class=o>[</span>kubeconfig<span class=o>]</span> Using kubeconfig folder <span class=s2>&#34;/etc/kubernetes&#34;</span>
+<span class=o>[</span>kubeconfig<span class=o>]</span> Writing <span class=s2>&#34;admin.conf&#34;</span> kubeconfig file
+<span class=o>[</span>kubeconfig<span class=o>]</span> Writing <span class=s2>&#34;kubelet.conf&#34;</span> kubeconfig file
+<span class=o>[</span>kubeconfig<span class=o>]</span> Writing <span class=s2>&#34;controller-manager.conf&#34;</span> kubeconfig file
+<span class=o>[</span>kubeconfig<span class=o>]</span> Writing <span class=s2>&#34;scheduler.conf&#34;</span> kubeconfig file
+<span class=o>[</span>control-plane<span class=o>]</span> Using manifest folder <span class=s2>&#34;/etc/kubernetes/manifests&#34;</span>
+<span class=o>[</span>control-plane<span class=o>]</span> Creating static Pod manifest <span class=k>for</span> <span class=s2>&#34;kube-apiserver&#34;</span>
+<span class=o>[</span>control-plane<span class=o>]</span> Creating static Pod manifest <span class=k>for</span> <span class=s2>&#34;kube-controller-manager&#34;</span>
+<span class=o>[</span>control-plane<span class=o>]</span> Creating static Pod manifest <span class=k>for</span> <span class=s2>&#34;kube-scheduler&#34;</span>
+<span class=o>[</span>etcd<span class=o>]</span> Creating static Pod manifest <span class=k>for</span> <span class=nb>local</span> etcd in <span class=s2>&#34;/etc/kubernetes/manifests&#34;</span>
+<span class=o>[</span>wait-control-plane<span class=o>]</span> Waiting <span class=k>for</span> the kubelet to boot up the control plane as static Pods from directory <span class=s2>&#34;/etc/kubernetes/manifests&#34;</span>. This can take up to 4m0s
+<span class=o>[</span>apiclient<span class=o>]</span> All control plane components are healthy after 26.502984 seconds
+<span class=o>[</span>upload-config<span class=o>]</span> Storing the configuration used in ConfigMap <span class=s2>&#34;kubeadm-config&#34;</span> in the <span class=s2>&#34;kube-system&#34;</span> Namespace
+<span class=o>[</span>kubelet<span class=o>]</span> Creating a ConfigMap <span class=s2>&#34;kubelet-config-1.15&#34;</span> in namespace kube-system with the configuration <span class=k>for</span> the kubelets in the cluster
+<span class=o>[</span>upload-certs<span class=o>]</span> Skipping phase. Please see --upload-certs
+<span class=o>[</span>mark-control-plane<span class=o>]</span> Marking the node master as control-plane by adding the label <span class=s2>&#34;node-role.kubernetes.io/master=&#39;&#39;&#34;</span>
+<span class=o>[</span>mark-control-plane<span class=o>]</span> Marking the node master as control-plane by adding the taints <span class=o>[</span>node-role.kubernetes.io/master:NoSchedule<span class=o>]</span>
+<span class=o>[</span>bootstrap-token<span class=o>]</span> Using token: z1uxfl.z8l2uo9v8x3dtdcu
+<span class=o>[</span>bootstrap-token<span class=o>]</span> Configuring bootstrap tokens, cluster-info ConfigMap, RBAC Roles
+<span class=o>[</span>bootstrap-token<span class=o>]</span> configured RBAC rules to allow Node Bootstrap tokens to post CSRs in order <span class=k>for</span> nodes to get long term certificate credentials
+<span class=o>[</span>bootstrap-token<span class=o>]</span> configured RBAC rules to allow the csrapprover controller automatically approve CSRs from a Node Bootstrap Token
+<span class=o>[</span>bootstrap-token<span class=o>]</span> configured RBAC rules to allow certificate rotation <span class=k>for</span> all node client certificates in the cluster
+<span class=o>[</span>bootstrap-token<span class=o>]</span> Creating the <span class=s2>&#34;cluster-info&#34;</span> ConfigMap in the <span class=s2>&#34;kube-public&#34;</span> namespace
+<span class=o>[</span>addons<span class=o>]</span> Applied essential addon: CoreDNS
+<span class=o>[</span>addons<span class=o>]</span> Applied essential addon: kube-proxy
+
+Your Kubernetes control-plane has initialized successfully!
+
+To start using your cluster, you need to run the following as a regular user:
+
+  mkdir -p <span class=nv>$HOME</span>/.kube
+  sudo cp -i /etc/kubernetes/admin.conf <span class=nv>$HOME</span>/.kube/config
+  sudo chown <span class=k>$(</span>id -u<span class=k>)</span>:<span class=k>$(</span>id -g<span class=k>)</span> <span class=nv>$HOME</span>/.kube/config
+
+You should now deploy a pod network to the cluster.
+Run <span class=s2>&#34;kubectl apply -f [podnetwork].yaml&#34;</span> with one of the options listed at:
+  https://kubernetes.io/docs/concepts/cluster-administration/addons/
+
+Then you can join any number of worker nodes by running the following on each as root:
+
+kubeadm join 192.168.33.10:6443 --token z1uxfl.z8l2uo9v8x3dtdcu <span class=se>\
+</span><span class=se></span>    --discovery-token-ca-cert-hash sha256:5c725b5b384221d25aed03a02a142fe2442d76f6362673b72f349abffb18b6f2
+<span class=o>[</span>root@master ~<span class=o>]</span>#
+<span class=o>[</span>root@master ~<span class=o>]</span><span class=c1># mkdir -p $HOME/.kube</span>
+<span class=o>[</span>root@master ~<span class=o>]</span><span class=c1># sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config</span>
+<span class=o>[</span>root@master ~<span class=o>]</span><span class=c1># sudo chown $(id -u):$(id -g) $HOME/.kube/config</span>
+<span class=o>[</span>root@master ~<span class=o>]</span><span class=c1># kubectl get pod -n kube-system -owide</span>
+NAME                             READY   STATUS    RESTARTS   AGE   IP          NODE     NOMINATED NODE   READINESS GATES
+coredns-5c98db65d4-9g7dj         0/1     Pending   <span class=m>0</span>          39s   &lt;none&gt;      &lt;none&gt;   &lt;none&gt;           &lt;none&gt;
+coredns-5c98db65d4-f6h7d         0/1     Pending   <span class=m>0</span>          39s   &lt;none&gt;      &lt;none&gt;   &lt;none&gt;           &lt;none&gt;
+etcd-master                      1/1     Running   <span class=m>0</span>          57s   10.0.2.15   master   &lt;none&gt;           &lt;none&gt;
+kube-apiserver-master            1/1     Running   <span class=m>0</span>          57s   10.0.2.15   master   &lt;none&gt;           &lt;none&gt;
+kube-controller-manager-master   1/1     Running   <span class=m>0</span>          57s   10.0.2.15   master   &lt;none&gt;           &lt;none&gt;
+kube-proxy-n9tql                 1/1     Running   <span class=m>0</span>          39s   10.0.2.15   master   &lt;none&gt;           &lt;none&gt;
+kube-scheduler-master            1/1     Running   <span class=m>0</span>          57s   10.0.2.15   master   &lt;none&gt;           &lt;none&gt;
+<span class=o>[</span>root@master ~<span class=o>]</span><span class=c1># wget https://raw.githubusercontent.com/coreos/flannel/62e44c867a2846fefb68bd5f178daf4da3095ccb/Documentation/kube-flannel.yml</span>
+--2019-06-30 06:47:53--  https://raw.githubusercontent.com/coreos/flannel/62e44c867a2846fefb68bd5f178daf4da3095ccb/Documentation/kube-flannel.yml
+Resolving raw.githubusercontent.com <span class=o>(</span>raw.githubusercontent.com<span class=o>)</span>... 151.101.228.133
+Connecting to raw.githubusercontent.com <span class=o>(</span>raw.githubusercontent.com<span class=o>)</span><span class=p>|</span>151.101.228.133<span class=p>|</span>:443... connected.
+HTTP request sent, awaiting response... <span class=m>200</span> OK
+Length: <span class=m>12306</span> <span class=o>(</span>12K<span class=o>)</span> <span class=o>[</span>text/plain<span class=o>]</span>
+Saving to: ‘kube-flannel.yml’
+
+100%<span class=o>[</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span>&gt;<span class=o>]</span> 12,306      51.3KB/s   in 0.2s
+
+2019-06-30 06:47:57 <span class=o>(</span>51.3 KB/s<span class=o>)</span> - ‘kube-flannel.yml’ saved <span class=o>[</span>12306/12306<span class=o>]</span>
+
+<span class=o>[</span>root@master install<span class=o>]</span><span class=c1># ll</span>
+total <span class=m>24</span>
+-rwxr-xr-x. <span class=m>1</span> root root   <span class=m>580</span> Jun <span class=m>30</span> 05:21 installK8sMasterImage.sh
+-rw-r--r--. <span class=m>1</span> root root <span class=m>12306</span> Jun <span class=m>30</span> 05:26 kube-flannel.yml
+-rwxr-xr-x. <span class=m>1</span> root root   <span class=m>294</span> Jun <span class=m>30</span> 04:20 preENV.sh
+<span class=o>[</span>root@master install<span class=o>]</span><span class=c1># kubectl apply -f kube-flannel.yml</span>
+podsecuritypolicy.extensions/psp.flannel.unprivileged created
+clusterrole.rbac.authorization.k8s.io/flannel created
+clusterrolebinding.rbac.authorization.k8s.io/flannel created
+serviceaccount/flannel created
+configmap/kube-flannel-cfg created
+daemonset.extensions/kube-flannel-ds-amd64 created
+daemonset.extensions/kube-flannel-ds-arm64 created
+daemonset.extensions/kube-flannel-ds-arm created
+daemonset.extensions/kube-flannel-ds-ppc64le created
+daemonset.extensions/kube-fla<span class=o>[</span>root@master ~<span class=o>]</span><span class=c1># kubectl get pod -n kube-system -owide</span>
+NAME                             READY   STATUS    RESTARTS   AGE     IP           NODE     NOMINATED NODE   READINESS GATES
+coredns-5c98db65d4-9g7dj         1/1     Running   <span class=m>0</span>          5m42s   10.244.0.3   master   &lt;none&gt;           &lt;none&gt;
+coredns-5c98db65d4-f6h7d         1/1     Running   <span class=m>0</span>          5m42s   10.244.0.2   master   &lt;none&gt;           &lt;none&gt;
+etcd-master                      1/1     Running   <span class=m>0</span>          6m      10.0.2.15    master   &lt;none&gt;           &lt;none&gt;
+kube-apiserver-master            1/1     Running   <span class=m>0</span>          6m      10.0.2.15    master   &lt;none&gt;           &lt;none&gt;
+kube-controller-manager-master   1/1     Running   <span class=m>0</span>          6m      10.0.2.15    master   &lt;none&gt;           &lt;none&gt;
+kube-flannel-ds-amd64-lbprc      1/1     Running   <span class=m>0</span>          84s     10.0.2.15    master   &lt;none&gt;           &lt;none&gt;
+kube-proxy-n9tql                 1/1     Running   <span class=m>0</span>          5m42s   10.0.2.15    master   &lt;none&gt;           &lt;none&gt;
+kube-scheduler-master            1/1     Running   <span class=m>0</span>          6m      10.0.2.15    master   &lt;none&gt;           &lt;none&gt;
+<span class=o>[</span>root@master install<span class=o>]</span><span class=c1># # 查看当前集群状态</span>
+<span class=o>[</span>root@master ~<span class=o>]</span><span class=c1># kubectl get node -A</span>
+NAME     STATUS   ROLES    AGE     VERSION
+master   Ready    master   6m29s   v1.15.0
+<span class=o>[</span>root@master ~<span class=o>]</span>#
+</code></pre></td></tr></table></div></div><h2 id=各-node-节点上处理>各 Node 节点上处理</h2><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span><span class=lnt>43
+</span><span class=lnt>44
+</span><span class=lnt>45
+</span><span class=lnt>46
+</span><span class=lnt>47
+</span><span class=lnt>48
+</span><span class=lnt>49
+</span><span class=lnt>50
+</span><span class=lnt>51
+</span><span class=lnt>52
+</span><span class=lnt>53
+</span><span class=lnt>54
+</span><span class=lnt>55
+</span><span class=lnt>56
+</span><span class=lnt>57
+</span><span class=lnt>58
+</span><span class=lnt>59
+</span><span class=lnt>60
+</span><span class=lnt>61
+</span><span class=lnt>62
+</span><span class=lnt>63
+</span><span class=lnt>64
+</span><span class=lnt>65
+</span><span class=lnt>66
+</span><span class=lnt>67
+</span><span class=lnt>68
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-shell data-lang=shell><span class=o>[</span>root@node2 install<span class=o>]</span><span class=c1># vim installK8sNodeImage.sh</span>
+<span class=o>[</span>root@node5 install<span class=o>]</span><span class=c1># cat installK8sNodeImage.sh</span>
+
+<span class=c1>#!/bin/bash</span>
+
+<span class=nb>set</span> -e
+
+<span class=nv>KUBE_VERSION</span><span class=o>=</span>v1.15.0
+<span class=nv>KUBE_PAUSE_VERSION</span><span class=o>=</span>3.1
+<span class=nv>CORE_DNS_VERSION</span><span class=o>=</span>1.3.1
+
+<span class=nv>GCR_URL</span><span class=o>=</span>k8s.gcr.io
+<span class=nv>ALIYUN_URL</span><span class=o>=</span>registry.cn-hangzhou.aliyuncs.com/google_containers
+
+<span class=nv>images</span><span class=o>=</span><span class=o>(</span>kube-proxy:<span class=si>${</span><span class=nv>KUBE_VERSION</span><span class=si>}</span>
+pause:<span class=si>${</span><span class=nv>KUBE_PAUSE_VERSION</span><span class=si>}</span>
+coredns:<span class=si>${</span><span class=nv>CORE_DNS_VERSION</span><span class=si>}</span><span class=o>)</span>
+
+
+<span class=k>for</span> imageName in <span class=si>${</span><span class=nv>images</span><span class=p>[@]</span><span class=si>}</span> <span class=p>;</span> <span class=k>do</span>
+  docker pull <span class=nv>$ALIYUN_URL</span>/<span class=nv>$imageName</span>
+  docker tag  <span class=nv>$ALIYUN_URL</span>/<span class=nv>$imageName</span> <span class=nv>$GCR_URL</span>/<span class=nv>$imageName</span>
+  docker rmi <span class=nv>$ALIYUN_URL</span>/<span class=nv>$imageName</span>
+<span class=k>done</span>
+<span class=o>[</span>root@node1 ~<span class=o>]</span><span class=c1># chmod +x installK8sNodeImage.sh  &amp;&amp; ./installK8sNodeImage.sh</span>
+v1.15.0: Pulling from google_containers/kube-proxy
+39fafc05754f: Pull <span class=nb>complete</span>
+db3f71d0eb90: Pull <span class=nb>complete</span>
+b593bfa65f6f: Pull <span class=nb>complete</span>
+Digest: sha256:7b94921f1c64876d3663698ade724fce79b417b32f0e1053976ca68a18fc0cba
+Status: Downloaded newer image <span class=k>for</span> registry.cn-hangzhou.aliyuncs.com/google_containers/kube-proxy:v1.15.0
+Untagged: registry.cn-hangzhou.aliyuncs.com/google_containers/kube-proxy:v1.15.0
+Untagged: registry.cn-hangzhou.aliyuncs.com/google_containers/kube-proxy@sha256:7b94921f1c64876d3663698ade724fce79b417b32f0e1053976ca68a18fc0cba
+3.1: Pulling from google_containers/pause
+cf9202429979: Pull <span class=nb>complete</span>
+Digest: sha256:759c3f0f6493093a9043cc813092290af69029699ade0e3dbe024e968fcb7cca
+Status: Downloaded newer image <span class=k>for</span> registry.cn-hangzhou.aliyuncs.com/google_containers/pause:3.1
+Untagged: registry.cn-hangzhou.aliyuncs.com/google_containers/pause:3.1
+Untagged: registry.cn-hangzhou.aliyuncs.com/google_containers/pause@sha256:759c3f0f6493093a9043cc813092290af69029699ade0e3dbe024e968fcb7cca
+1.3.1: Pulling from google_containers/coredns
+e0daa8927b68: Pull <span class=nb>complete</span>
+3928e47de029: Pull <span class=nb>complete</span>
+Digest: sha256:638adb0319813f2479ba3642bbe37136db8cf363b48fb3eb7dc8db634d8d5a5b
+Status: Downloaded newer image <span class=k>for</span> registry.cn-hangzhou.aliyuncs.com/google_containers/coredns:1.3.1
+Untagged: registry.cn-hangzhou.aliyuncs.com/google_containers/coredns:1.3.1
+Untagged: registry.cn-hangzhou.aliyuncs.com/google_containers/coredns@sha256:638adb0319813f2479ba3642bbe37136db8cf363b48fb3eb7dc8db634d8d5a5b
+<span class=o>[</span>root@node1 ~<span class=o>]</span>#
+<span class=o>[</span>root@node5 install<span class=o>]</span><span class=c1># # Node 加入集群</span>
+
+<span class=o>[</span>root@node1 install<span class=o>]</span><span class=c1># kubeadm join 192.168.33.10:6443 --token sofcoc.j1it9gvn4uxpduo5 \</span>
+&gt;     --discovery-token-ca-cert-hash sha256:3a9b79bd92f66a6284322ade27732932888c0f99884596d5f2c9a03d272e475b
+<span class=o>[</span>preflight<span class=o>]</span> Running pre-flight checks
+<span class=o>[</span>preflight<span class=o>]</span> Reading configuration from the cluster...
+<span class=o>[</span>preflight<span class=o>]</span> FYI: You can look at this config file with <span class=s1>&#39;kubectl -n kube-system get cm kubeadm-config -oyaml&#39;</span>
+<span class=o>[</span>kubelet-start<span class=o>]</span> Downloading configuration <span class=k>for</span> the kubelet from the <span class=s2>&#34;kubelet-config-1.15&#34;</span> ConfigMap in the kube-system namespace
+<span class=o>[</span>kubelet-start<span class=o>]</span> Writing kubelet configuration to file <span class=s2>&#34;/var/lib/kubelet/config.yaml&#34;</span>
+<span class=o>[</span>kubelet-start<span class=o>]</span> Writing kubelet environment file with flags to file <span class=s2>&#34;/var/lib/kubelet/kubeadm-flags.env&#34;</span>
+<span class=o>[</span>kubelet-start<span class=o>]</span> Activating the kubelet service
+<span class=o>[</span>kubelet-start<span class=o>]</span> Waiting <span class=k>for</span> the kubelet to perform the TLS Bootstrap...
+
+This node has joined the cluster:
+* Certificate signing request was sent to apiserver and a response was received.
+* The Kubelet was informed of the new secure connection details.
+
+Run <span class=s1>&#39;kubectl get nodes&#39;</span> on the control-plane to see this node join the cluster.
+
+<span class=o>[</span>root@node1 install<span class=o>]</span>#
+
+</code></pre></td></tr></table></div></div><h2 id=master-节点操作>master 节点操作</h2><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-shell data-lang=shell><span class=o>[</span>root@master ~<span class=o>]</span><span class=c1># #将master节点也作为工作节点进行pod部署</span>
+<span class=o>[</span>root@master ~<span class=o>]</span><span class=c1># kubectl taint nodes master node-role.kubernetes.io/master-</span>
+node/master untainted
+</code></pre></td></tr></table></div></div><h2 id=打label>打label</h2><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-shell data-lang=shell><span class=o>[</span>root@master temp<span class=o>]</span><span class=c1># kubectl label node master nodename=master</span>
+node/master labeled
+<span class=o>[</span>root@master temp<span class=o>]</span><span class=c1># kubectl label node node1 nodename=node1</span>
+node/node1 labeled
+<span class=o>[</span>root@master temp<span class=o>]</span><span class=c1># kubectl label node node2 nodename=node2</span>
+node/node2 labeled
+<span class=o>[</span>root@master temp<span class=o>]</span><span class=c1># kubectl label node node3 nodename=node3</span>
+node/node3 labeled
+<span class=o>[</span>root@master temp<span class=o>]</span><span class=c1># kubectl label node node4 nodename=node4</span>
+node/node4 labeled
+<span class=o>[</span>root@master temp<span class=o>]</span><span class=c1># kubectl label node node5 nodename=node5</span>
+node/node5 labeled
+</code></pre></td></tr></table></div></div><h2 id=测试>测试</h2><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-shell data-lang=shell>vim nginx-deployment.yaml
+
+</code></pre></td></tr></table></div></div><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span><span class=lnt>43
+</span><span class=lnt>44
+</span><span class=lnt>45
+</span><span class=lnt>46
+</span><span class=lnt>47
+</span><span class=lnt>48
+</span><span class=lnt>49
+</span><span class=lnt>50
+</span><span class=lnt>51
+</span><span class=lnt>52
+</span><span class=lnt>53
+</span><span class=lnt>54
+</span><span class=lnt>55
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-yaml data-lang=yaml><span class=k>apiVersion</span><span class=p>:</span><span class=w> </span>apps/v1<span class=w>
+</span><span class=w></span><span class=k>kind</span><span class=p>:</span><span class=w> </span>Deployment<span class=w>
+</span><span class=w></span><span class=k>metadata</span><span class=p>:</span><span class=w>
+</span><span class=w></span><span class=w>  </span><span class=k>name</span><span class=p>:</span><span class=w> </span>nginx-deployment<span class=w>
+</span><span class=w>  </span><span class=k>labels</span><span class=p>:</span><span class=w>
+</span><span class=w></span><span class=w>    </span><span class=k>app</span><span class=p>:</span><span class=w> </span>nginx<span class=w>
+</span><span class=w></span><span class=k>spec</span><span class=p>:</span><span class=w>
+</span><span class=w></span><span class=w>  </span><span class=k>replicas</span><span class=p>:</span><span class=w> </span><span class=m>1</span><span class=w>
+</span><span class=w>  </span><span class=k>selector</span><span class=p>:</span><span class=w>
+</span><span class=w></span><span class=w>    </span><span class=k>matchLabels</span><span class=p>:</span><span class=w>
+</span><span class=w></span><span class=w>      </span><span class=k>app</span><span class=p>:</span><span class=w> </span>nginx<span class=w>
+</span><span class=w>  </span><span class=k>template</span><span class=p>:</span><span class=w>
+</span><span class=w></span><span class=w>    </span><span class=k>metadata</span><span class=p>:</span><span class=w>
+</span><span class=w></span><span class=w>      </span><span class=k>labels</span><span class=p>:</span><span class=w>
+</span><span class=w></span><span class=w>        </span><span class=k>app</span><span class=p>:</span><span class=w> </span>nginx<span class=w>
+</span><span class=w>    </span><span class=k>spec</span><span class=p>:</span><span class=w>
+</span><span class=w></span><span class=w>      </span><span class=k>containers</span><span class=p>:</span><span class=w>
+</span><span class=w></span><span class=w>      </span>- <span class=k>name</span><span class=p>:</span><span class=w> </span>nginx<span class=w>
+</span><span class=w>        </span><span class=k>image</span><span class=p>:</span><span class=w> </span>nginx<span class=p>:</span><span class=m>1.7</span><span class=m>.9</span><span class=w>
+</span><span class=w>        </span><span class=k>imagePullPolicy</span><span class=p>:</span><span class=w> </span>IfNotPresent<span class=w>
+</span><span class=w>        </span><span class=k>ports</span><span class=p>:</span><span class=w>
+</span><span class=w></span><span class=w>        </span>- <span class=k>containerPort</span><span class=p>:</span><span class=w> </span><span class=m>80</span><span class=w>
+</span><span class=w>          </span><span class=k>name</span><span class=p>:</span><span class=w> </span>web<span class=w>
+</span><span class=w>          </span><span class=k>protocol</span><span class=p>:</span><span class=w> </span>TCP<span class=w>
+</span><span class=w>      </span><span class=k>nodeSelector</span><span class=p>:</span><span class=w>
+</span><span class=w></span><span class=w>        </span><span class=k>nodename</span><span class=p>:</span><span class=w> </span>master<span class=w>
+</span><span class=w></span>---<span class=w>
+</span><span class=w></span><span class=k>apiVersion</span><span class=p>:</span><span class=w> </span>v1<span class=w>
+</span><span class=w></span><span class=k>kind</span><span class=p>:</span><span class=w> </span>Service<span class=w>
+</span><span class=w></span><span class=k>metadata</span><span class=p>:</span><span class=w>
+</span><span class=w></span><span class=w>  </span><span class=k>name</span><span class=p>:</span><span class=w> </span>nginx-service<span class=w>
+</span><span class=w>  </span><span class=k>labels</span><span class=p>:</span><span class=w>
+</span><span class=w></span><span class=w>    </span><span class=k>app</span><span class=p>:</span><span class=w> </span>nginx<span class=w>
+</span><span class=w></span><span class=k>spec</span><span class=p>:</span><span class=w>
+</span><span class=w></span><span class=w>  </span><span class=k>ports</span><span class=p>:</span><span class=w>
+</span><span class=w></span><span class=w>  </span>- <span class=k>port</span><span class=p>:</span><span class=w> </span><span class=m>80</span><span class=w>
+</span><span class=w>    </span><span class=k>targetPort</span><span class=p>:</span><span class=w> </span><span class=m>8080</span><span class=w>
+</span><span class=w>    </span><span class=k>name</span><span class=p>:</span><span class=w> </span>web<span class=w>
+</span><span class=w>  </span><span class=k>selector</span><span class=p>:</span><span class=w>
+</span><span class=w></span><span class=w>    </span><span class=k>app-name</span><span class=p>:</span><span class=w> </span>nginx<span class=w>
+</span><span class=w></span>---<span class=w>
+</span><span class=w></span><span class=k>apiVersion</span><span class=p>:</span><span class=w> </span>extensions/v1beta1<span class=w>
+</span><span class=w></span><span class=k>kind</span><span class=p>:</span><span class=w> </span>Ingress<span class=w>
+</span><span class=w></span><span class=k>metadata</span><span class=p>:</span><span class=w>
+</span><span class=w></span><span class=w>  </span><span class=k>name</span><span class=p>:</span><span class=w> </span>nginx<span class=w>
+</span><span class=w>  </span><span class=k>namespace</span><span class=p>:</span><span class=w> </span>default<span class=w>
+</span><span class=w></span><span class=k>spec</span><span class=p>:</span><span class=w>
+</span><span class=w></span><span class=w>  </span><span class=k>rules</span><span class=p>:</span><span class=w>
+</span><span class=w></span><span class=w>  </span>- <span class=k>host</span><span class=p>:</span><span class=w> </span>c4.k8s.com<span class=w>
+</span><span class=w>    </span><span class=k>http</span><span class=p>:</span><span class=w>
+</span><span class=w></span><span class=w>      </span><span class=k>paths</span><span class=p>:</span><span class=w>
+</span><span class=w></span><span class=w>      </span>- <span class=k>path</span><span class=p>:</span><span class=w> </span>/nginx<span class=w>
+</span><span class=w>        </span><span class=k>backend</span><span class=p>:</span><span class=w>
+</span><span class=w></span><span class=w>          </span><span class=k>serviceName</span><span class=p>:</span><span class=w> </span>nginx-service<span class=w>
+</span><span class=w>          </span><span class=k>servicePort</span><span class=p>:</span><span class=w> </span><span class=m>8080</span><span class=w>
+</span></code></pre></td></tr></table></div></div><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-shell data-lang=shell><span class=o>[</span>root@master temp<span class=o>]</span><span class=c1># kubectl apply -f nginx-deployment.yaml</span>
+deployment.apps/nginx-deployment created
+service/nginx-service created
+ingress.extensions/nginx created
+<span class=o>[</span>root@master temp<span class=o>]</span><span class=c1># kubectl get service/nginx-service</span>
+NAME            TYPE        CLUSTER-IP    EXTERNAL-IP   PORT<span class=o>(</span>S<span class=o>)</span>   AGE
+nginx-service   ClusterIP   10.100.2.78   &lt;none&gt;        80/TCP    38s
+<span class=o>[</span>root@master temp<span class=o>]</span><span class=c1># kubectl get ing</span>
+NAME    HOSTS        ADDRESS   PORTS   AGE
+nginx   c4.k8s.com             <span class=m>80</span>      4m5s
+<span class=o>[</span>root@master temp<span class=o>]</span><span class=c1># wget c4.k8s.com</span>
+--2019-06-30 07:12:18--  http://c4.k8s.com/
+Resolving c4.k8s.com <span class=o>(</span>c4.k8s.com<span class=o>)</span>... 208.73.211.177, 208.73.210.202, 208.73.211.165, ...
+Connecting to c4.k8s.com <span class=o>(</span>c4.k8s.com<span class=o>)</span><span class=p>|</span>208.73.211.177<span class=p>|</span>:80... connected.
+HTTP request sent, awaiting response... <span class=m>302</span> Found : Moved Temporarily
+Location: http://1223.dragonparking.com/?site<span class=o>=</span>c4.k8s.com <span class=o>[</span>following<span class=o>]</span>
+--2019-06-30 07:12:19--  http://1223.dragonparking.com/?site<span class=o>=</span>c4.k8s.com
+Resolving 1223.dragonparking.com <span class=o>(</span>1223.dragonparking.com<span class=o>)</span>... 46.51.238.1
+Connecting to 1223.dragonparking.com <span class=o>(</span>1223.dragonparking.com<span class=o>)</span><span class=p>|</span>46.51.238.1<span class=p>|</span>:80... connected.
+HTTP request sent, awaiting response... <span class=m>302</span> Moved Temporarily
+Location: http://park.zunmi.cn/?acct<span class=o>=</span>1223<span class=p>&amp;</span><span class=nv>site</span><span class=o>=</span>c4.k8s.com <span class=o>[</span>following<span class=o>]</span>
+--2019-06-30 07:12:21--  http://park.zunmi.cn/?acct<span class=o>=</span>1223<span class=p>&amp;</span><span class=nv>site</span><span class=o>=</span>c4.k8s.com
+Resolving park.zunmi.cn <span class=o>(</span>park.zunmi.cn<span class=o>)</span>... 52.197.205.2
+Connecting to park.zunmi.cn <span class=o>(</span>park.zunmi.cn<span class=o>)</span><span class=p>|</span>52.197.205.2<span class=p>|</span>:80... connected.
+HTTP request sent, awaiting response... <span class=m>200</span> OK
+Length: <span class=m>1020</span> <span class=o>[</span>text/html<span class=o>]</span>
+Saving to: ‘index.html’
+
+100%<span class=o>[</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span><span class=o>=</span>&gt;<span class=o>]</span> 1,020       --.-K/s   in 0s
+
+2019-06-30 07:12:22 <span class=o>(</span>93.5 MB/s<span class=o>)</span> - ‘index.html’ saved <span class=o>[</span>1020/1020<span class=o>]</span>
+
+<span class=o>[</span>root@master temp<span class=o>]</span><span class=c1># ll</span>
+total <span class=m>8</span>
+-rw-r--r--. <span class=m>1</span> root root <span class=m>1020</span> May  <span class=m>6</span> 23:28 index.html
+-rw-r--r--. <span class=m>1</span> root root  <span class=m>908</span> Jun <span class=m>30</span> 07:07 nginx-deployment.yaml
+<span class=o>[</span>root@master temp<span class=o>]</span><span class=c1># kubectl delete -f nginx-deployment.yaml</span>
+deployment.apps <span class=s2>&#34;nginx-deployment&#34;</span> deleted
+service <span class=s2>&#34;nginx-service&#34;</span> deleted
+ingress.extensions <span class=s2>&#34;nginx&#34;</span> deleted
+
+</code></pre></td></tr></table></div></div><h2 id=reference>Reference</h2><ul><li><a href=https://guzhongren.github.io/ target=_blank rel="noopener noreffer">1.博客：https://guzhongren.github.io/</a></li><li><a href=https://sm.ms/ target=_blank rel="noopener noreffer">2.图床：https://sm.ms/</a></li><li><a href="https://yq.aliyun.com/articles/706912?spm=a2c4e.11155435.0.0.59853312vRSRSj" target=_blank rel="noopener noreffer">3.原文：https://yq.aliyun.com/articles/706912?spm=a2c4e.11155435.0.0.59853312vRSRSj</a></li></ul><h2 id=hereby-declared特此申明>Hereby declared（特此申明）</h2><p>本文仅代表个人观点，与<a href=https://www.thoughtworks.com/ target=_blank rel="noopener noreffer">ThoughtWorks</a> 公司无任何关系。</p><hr><p><img class=lazyload src=/svg/loading/small.min.svg data-src=https://ftp.bmp.ovh/imgs/2020/02/b7282c60d4d581ad.png data-srcset="https://ftp.bmp.ovh/imgs/2020/02/b7282c60d4d581ad.png, https://ftp.bmp.ovh/imgs/2020/02/b7282c60d4d581ad.png 1.5x, https://ftp.bmp.ovh/imgs/2020/02/b7282c60d4d581ad.png 2x" data-sizes=auto alt=谷哥说-微信公众号 title=谷哥说-微信公众号></p></div><div class=post-footer id=post-footer><div class=post-info><div class=post-info-line><div class=post-info-mod><span>本文于 2019-06-30 更新</span></div><div class=post-info-license><span>采用 Creative Commons Attribution 4.0 International license 协议发布</span></div></div><div class=post-info-line><div class=post-info-md><span><a class=link-to-markdown href=/2019/06/k8s-1.15.0-%E5%AE%89%E8%A3%85%E8%AE%B0%E5%BD%95.zh/index.md target=_blank>阅读原始文档</a></span></div><div class=post-info-share><span><a href=javascript:void(0); title="分享到 Twitter" data-sharer=twitter data-url=https://guzhongren.github.io/2019/06/k8s-1.15.0-%E5%AE%89%E8%A3%85%E8%AE%B0%E5%BD%95.zh/ data-title="K8s 1.15.0 安装记录" data-hashtags=kubernetes,install,cluster,nginx,service><i class="fab fa-twitter fa-fw"></i></a><a href=javascript:void(0); title="分享到 Facebook" data-sharer=facebook data-url=https://guzhongren.github.io/2019/06/k8s-1.15.0-%E5%AE%89%E8%A3%85%E8%AE%B0%E5%BD%95.zh/ data-hashtag=kubernetes><i class="fab fa-facebook-square fa-fw"></i></a><a href=javascript:void(0); title="分享到 WhatsApp" data-sharer=whatsapp data-url=https://guzhongren.github.io/2019/06/k8s-1.15.0-%E5%AE%89%E8%A3%85%E8%AE%B0%E5%BD%95.zh/ data-title="K8s 1.15.0 安装记录" data-web><i class="fab fa-whatsapp fa-fw"></i></a><a href=javascript:void(0); title="分享到 Line" data-sharer=line data-url=https://guzhongren.github.io/2019/06/k8s-1.15.0-%E5%AE%89%E8%A3%85%E8%AE%B0%E5%BD%95.zh/ data-title="K8s 1.15.0 安装记录"><i data-svg-src=/lib/simple-icons/icons/line.min.svg></i></a><a href=javascript:void(0); title="分享到 微博" data-sharer=weibo data-url=https://guzhongren.github.io/2019/06/k8s-1.15.0-%E5%AE%89%E8%A3%85%E8%AE%B0%E5%BD%95.zh/ data-title="K8s 1.15.0 安装记录" data-image="https://images.pexels.com/photos/3872067/pexels-photo-3872067.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"><i class="fab fa-weibo fa-fw"></i></a><a href=javascript:void(0); title="分享到 Myspace" data-sharer=myspace data-url=https://guzhongren.github.io/2019/06/k8s-1.15.0-%E5%AE%89%E8%A3%85%E8%AE%B0%E5%BD%95.zh/ data-title="K8s 1.15.0 安装记录" data-description><i data-svg-src=/lib/simple-icons/icons/myspace.min.svg></i></a><a href=javascript:void(0); title="分享到 Blogger" data-sharer=blogger data-url=https://guzhongren.github.io/2019/06/k8s-1.15.0-%E5%AE%89%E8%A3%85%E8%AE%B0%E5%BD%95.zh/ data-title="K8s 1.15.0 安装记录" data-description><i class="fab fa-blogger fa-fw"></i></a><a href=javascript:void(0); title="分享到 Evernote" data-sharer=evernote data-url=https://guzhongren.github.io/2019/06/k8s-1.15.0-%E5%AE%89%E8%A3%85%E8%AE%B0%E5%BD%95.zh/ data-title="K8s 1.15.0 安装记录"><i class="fab fa-evernote fa-fw"></i></a></span></div></div></div><div class=post-info-more><section class=post-tags><i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/kubernetes/>kubernetes</a>,&nbsp;<a href=/tags/install/>install</a>,&nbsp;<a href=/tags/cluster/>cluster</a>,&nbsp;<a href=/tags/nginx/>nginx</a>,&nbsp;<a href=/tags/service/>service</a></section><section><span><a href=javascript:void(0); onclick=window.history.back();>返回</a></span>&nbsp;|&nbsp;<span><a href=/>主页</a></span></section></div><div class=post-nav><a href=/2019/06/harbor-%E5%AE%89%E8%A3%85%E5%B0%8F%E8%AE%B0.zh/ class=prev rel=prev title="Harbor 安装小记"><i class="fas fa-angle-left fa-fw"></i>Harbor 安装小记</a>
+<a href=/2019/08/basic-markdown-preview.zh/ class=next rel=next title="Markdown 基本语法预览">Markdown 基本语法预览<i class="fas fa-angle-right fa-fw"></i></a></div></div><div id=comments><div id=valine class=comment></div><noscript>Please enable JavaScript to view the comments powered by <a href=https://valine.js.org/>Valine</a>.</noscript></div></article></div></main><footer class=footer><div class=footer-container><div class=footer-line>由 <a href=https://gohugo.io/ target=_blank rel="noopener noreffer" title="Hugo 0.64.0">Hugo</a> 强力驱动 | 主题 - <a href=https://github.com/dillonzq/LoveIt target=_blank rel="noopener noreffer" title="LoveIt 0.2.8"><i class="far fa-kiss-wink-heart fa-fw"></i>LoveIt</a></div><div class=footer-line><i class="far fa-copyright fa-fw"></i><span itemprop=copyrightYear>2020</span><span class=author itemprop=copyrightHolder>&nbsp;<a href=https://guzhongren.github.io/ target=_blank>谷中仁</a></span>&nbsp;|&nbsp;<span class=license><a rel="license external nofollow noopener noreffer" href=https://creativecommons.org/licenses/by-nc/4.0/ target=_blank>CC BY-NC 4.0</a></span></div></div></footer></div><div id=fixed-buttons><a href=# id=back-to-top class=fixed-button title=回到顶部><i class="fas fa-arrow-up fa-fw"></i></a><a href=# id=view-comments class=fixed-button title=查看评论><i class="fas fa-comment fa-fw"></i></a></div><link rel=stylesheet href=/lib/valine/valine.min.css><script type=text/javascript src=/lib/valine/Valine.min.js></script><script type=text/javascript src=/lib/smooth-scroll/smooth-scroll.min.js></script><script type=text/javascript src=/lib/autocomplete/autocomplete.min.js></script><script type=text/javascript src=/lib/algoliasearch/algoliasearch-lite.umd.min.js></script><script type=text/javascript src=/lib/lazysizes/lazysizes.min.js></script><script type=text/javascript src=/lib/clipboard/clipboard.min.js></script><script type=text/javascript src=/lib/sharer/sharer.min.js></script><script type=text/javascript>window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{"valine":{"appId":"QGzwQXOqs5JOhN4RGPOkR2mR-MdYXbMMI","appKey":"WBmoGyJtbqUswvfLh6L8iEBr","avatar":"mp","el":"#valine","emojiCDN":"https://cdn.jsdelivr.net/npm/emoji-datasource-google@5.0.1/img/google/64/","emojiMaps":{"100":"1f4af.png","alien":"1f47d.png","anger":"1f4a2.png","angry":"1f620.png","anguished":"1f627.png","astonished":"1f632.png","black_heart":"1f5a4.png","blue_heart":"1f499.png","blush":"1f60a.png","bomb":"1f4a3.png","boom":"1f4a5.png","broken_heart":"1f494.png","brown_heart":"1f90e.png","clown_face":"1f921.png","cold_face":"1f976.png","cold_sweat":"1f630.png","confounded":"1f616.png","confused":"1f615.png","cry":"1f622.png","crying_cat_face":"1f63f.png","cupid":"1f498.png","dash":"1f4a8.png","disappointed":"1f61e.png","disappointed_relieved":"1f625.png","dizzy":"1f4ab.png","dizzy_face":"1f635.png","drooling_face":"1f924.png","exploding_head":"1f92f.png","expressionless":"1f611.png","face_vomiting":"1f92e.png","face_with_cowboy_hat":"1f920.png","face_with_hand_over_mouth":"1f92d.png","face_with_head_bandage":"1f915.png","face_with_monocle":"1f9d0.png","face_with_raised_eyebrow":"1f928.png","face_with_rolling_eyes":"1f644.png","face_with_symbols_on_mouth":"1f92c.png","face_with_thermometer":"1f912.png","fearful":"1f628.png","flushed":"1f633.png","frowning":"1f626.png","ghost":"1f47b.png","gift_heart":"1f49d.png","green_heart":"1f49a.png","grimacing":"1f62c.png","grin":"1f601.png","grinning":"1f600.png","hankey":"1f4a9.png","hear_no_evil":"1f649.png","heart":"2764-fe0f.png","heart_decoration":"1f49f.png","heart_eyes":"1f60d.png","heart_eyes_cat":"1f63b.png","heartbeat":"1f493.png","heartpulse":"1f497.png","heavy_heart_exclamation_mark_ornament":"2763-fe0f.png","hole":"1f573-fe0f.png","hot_face":"1f975.png","hugging_face":"1f917.png","hushed":"1f62f.png","imp":"1f47f.png","innocent":"1f607.png","japanese_goblin":"1f47a.png","japanese_ogre":"1f479.png","joy":"1f602.png","joy_cat":"1f639.png","kiss":"1f48b.png","kissing":"1f617.png","kissing_cat":"1f63d.png","kissing_closed_eyes":"1f61a.png","kissing_heart":"1f618.png","kissing_smiling_eyes":"1f619.png","laughing":"1f606.png","left_speech_bubble":"1f5e8-fe0f.png","love_letter":"1f48c.png","lying_face":"1f925.png","mask":"1f637.png","money_mouth_face":"1f911.png","nauseated_face":"1f922.png","nerd_face":"1f913.png","neutral_face":"1f610.png","no_mouth":"1f636.png","open_mouth":"1f62e.png","orange_heart":"1f9e1.png","partying_face":"1f973.png","pensive":"1f614.png","persevere":"1f623.png","pleading_face":"1f97a.png","pouting_cat":"1f63e.png","purple_heart":"1f49c.png","rage":"1f621.png","relaxed":"263a-fe0f.png","relieved":"1f60c.png","revolving_hearts":"1f49e.png","right_anger_bubble":"1f5ef-fe0f.png","robot_face":"1f916.png","rolling_on_the_floor_laughing":"1f923.png","scream":"1f631.png","scream_cat":"1f640.png","see_no_evil":"1f648.png","shushing_face":"1f92b.png","skull":"1f480.png","skull_and_crossbones":"2620-fe0f.png","sleeping":"1f634.png","sleepy":"1f62a.png","slightly_frowning_face":"1f641.png","slightly_smiling_face":"1f642.png","smile":"1f604.png","smile_cat":"1f638.png","smiley":"1f603.png","smiley_cat":"1f63a.png","smiling_face_with_3_hearts":"1f970.png","smiling_imp":"1f608.png","smirk":"1f60f.png","smirk_cat":"1f63c.png","sneezing_face":"1f927.png","sob":"1f62d.png","space_invader":"1f47e.png","sparkling_heart":"1f496.png","speak_no_evil":"1f64a.png","speech_balloon":"1f4ac.png","star-struck":"1f929.png","stuck_out_tongue":"1f61b.png","stuck_out_tongue_closed_eyes":"1f61d.png","stuck_out_tongue_winking_eye":"1f61c.png","sunglasses":"1f60e.png","sweat":"1f613.png","sweat_drops":"1f4a6.png","sweat_smile":"1f605.png","thinking_face":"1f914.png","thought_balloon":"1f4ad.png","tired_face":"1f62b.png","triumph":"1f624.png","two_hearts":"1f495.png","unamused":"1f612.png","upside_down_face":"1f643.png","weary":"1f629.png","white_frowning_face":"2639-fe0f.png","white_heart":"1f90d.png","wink":"1f609.png","woozy_face":"1f974.png","worried":"1f61f.png","yawning_face":"1f971.png","yellow_heart":"1f49b.png","yum":"1f60b.png","zany_face":"1f92a.png","zipper_mouth_face":"1f910.png","zzz":"1f4a4.png"},"enableQQ":false,"highlight":true,"lang":"zh-cn","pageSize":10,"placeholder":"你的评论 ...","recordIP":true,"visitor":true}},"search":{"algoliaAppID":"PASDMWALPK","algoliaIndex":"index.zh-cn","algoliaSearchKey":"b42948e51daaa93df92381c8e2ac0f93","highlightTag":"em","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"algolia"}};</script><script type=text/javascript src=/js/theme.min.js></script></body></html>
