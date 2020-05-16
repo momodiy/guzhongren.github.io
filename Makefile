@@ -5,7 +5,7 @@ Year_month = $(shell date +"%Y/%m")
 
 
 new:
-	hugo new posts/$(Year_month)/$(post)
+	hugo new posts/$(Year_month)/$(post).zh-cn.md
 
 pre:
 	hugo server -v -D
