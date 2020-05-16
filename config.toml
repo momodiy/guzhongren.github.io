@@ -964,7 +964,7 @@ enableEmoji = true
     enable = false
     # Google Analytics
     [params.analytics.google]
-      id = ""
+      id = "UA-158950474-1"
       # whether to anonymize IP
       # 是否匿名化用户 IP
       anonymizeIP = true
@@ -982,66 +982,66 @@ enableEmoji = true
   # CSS 和 JS 文件的 CDN 设置
   [params.cdn]
     # normalize.css@8.0.1 https://github.com/necolas/normalize.css
-    normalizeCSS = ""
+    normalizeCSS = "https://cdn.bootcdn.net/ajax/libs/normalize/8.0.1/normalize.min.css"
     # fontawesome-free@5.13.0 https://fontawesome.com/
-    fontawesomeFreeCSS = ""
+    fontawesomeFreeCSS = "https://cdn.bootcdn.net/ajax/libs/font-awesome/5.13.0/css/all.min.css"
     # simple-icons@2.9.0 https://github.com/simple-icons/simple-icons
     # ("https://cdn.jsdelivr.net/npm/simple-icons@v2/icons/")
-    simpleIconsPrefix = ""
+    simpleIconsPrefix = "https://cdn.jsdelivr.net/npm/simple-icons@v2/icons/"
     # animate.css@3.7.2 https://github.com/daneden/animate.css
-    animateCSS = ""
+    animateCSS = "https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css"
     # smooth-scroll@16.1.3 https://github.com/cferdinandi/smooth-scroll
-    smoothScrollJS = ""
+    smoothScrollJS = "https://cdnjs.cloudflare.com/ajax/libs/smoothscroll/1.4.10/SmoothScroll.min.js"
     # autocomplete.js@0.37.1 https://github.com/algolia/autocomplete.js
-    autocompleteJS = ""
+    autocompleteJS = "https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.37.1/autocomplete.jquery.min.js"
     # lunr.js@2.3.8 https://lunrjs.com/
-    lunrJS = ""
+    lunrJS = "https://cdnjs.cloudflare.com/ajax/libs/lunr.js/2.3.8/lunr.min.js"
     # algoliasearch@4.2.0 https://github.com/algolia/algoliasearch-client-javascript
-    algoliasearchJS = ""
+    algoliasearchJS = "https://cdnjs.cloudflare.com/ajax/libs/algoliasearch/4.2.0/algoliasearch.min.js"
     # lazysizes@5.2.0 https://github.com/aFarkas/lazysizes
-    lazysizesJS = ""
+    lazysizesJS = "https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.2.0/lazysizes.min.js"
     # object-fit-images@3.2.4 https://github.com/fregante/object-fit-images
-    objectFitImagesJS = ""
+    objectFitImagesJS = "https://cdnjs.cloudflare.com/ajax/libs/object-fit-images/3.2.4/ofi.min.js"
     # twemoji@12.1.5 https://github.com/twitter/twemoji
-    twemojiJS = ""
+    twemojiJS = "https://cdnjs.cloudflare.com/ajax/libs/twemoji/12.0.4/2/twemoji.min.js"
     # lightgallery.js@1.1.3 https://github.com/sachinchoolur/lightgallery.js
     # lg-thumbnail.js@1.1.0 https://github.com/sachinchoolur/lg-thumbnail.js
     # lg-zoom.js@1.0.1 https://github.com/sachinchoolur/lg-zoom.js
     lightgalleryCSS = ""
-    lightgalleryJS = ""
-    lightgalleryThumbnailJS = ""
-    lightgalleryZoomJS = ""
+    lightgalleryJS = "https://cdnjs.cloudflare.com/ajax/libs/lightgallery/1.7.0/js/lightgallery.min.js"
+    lightgalleryThumbnailJS = "https://cdnjs.cloudflare.com/ajax/libs/lg-thumbnail/1.2.0/lg-thumbnail.min.js"
+    lightgalleryZoomJS = "https://cdnjs.cloudflare.com/ajax/libs/lg-zoom/1.2.0/lg-zoom.min.js"
     # clipboard.js@2.0.6 https://github.com/zenorocha/clipboard.js
-    clipboardJS = ""
+    clipboardJS = "https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js"
     # sharer.js@0.4.0 https://github.com/ellisonleao/sharer.js
-    sharerJS = ""
+    sharerJS = "https://cdnjs.cloudflare.com/ajax/libs/sharer.js/0.4.0/sharer.min.js"
     # typeit@7.0.4 https://github.com/alexmacarthur/typeit
-    typeitJS = ""
+    typeitJS = "https://cdnjs.cloudflare.com/ajax/libs/typeit/7.0.4/typeit.min.js"
     # katex@0.11.1 https://katex.org/
     katexCSS = ""
-    katexJS = ""
+    katexJS = "https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.js"
     katexAutoRenderJS = ""
     katexCopyTexCSS = ""
     katexCopyTexJS = ""
     katexMhchemJS = ""
     # mermaid@8.5.0 https://github.com/knsv/mermaid
-    mermaidJS = ""
+    mermaidJS = "https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.5.0/mermaid.min.js"
     # echarts@4.7.0 https://echarts.apache.org/
-    echartsJS = ""
+    echartsJS = "https://cdnjs.cloudflare.com/ajax/libs/echarts/4.7.0/echarts.min.js"
     echartsMacaronsJS = ""
     # mapbox-gl@1.10.0 https://docs.mapbox.com/mapbox-gl-js
     mapboxGLCSS = ""
     mapboxGLJS = ""
     # aplayer@1.10.1 https://github.com/MoePlayer/APlayer
-    aplayerCSS = ""
-    aplayerJS = ""
+    aplayerCSS = "https://cdn.jsdelivr.net/npm/aplayer@1.10.0/dist/APlayer.min.css"
+    aplayerJS = "https://cdn.jsdelivr.net/npm/aplayer@1.10.0/dist/APlayer.min.js"
     # meting@2.0.1 https://github.com/metowolf/MetingJS
     metingJS = ""
     # gitalk@1.6.2 https://github.com/gitalk/gitalk
     gitalkCSS = ""
     gitalkJS = ""
     # valine@1.4.14 https://valine.js.org/
-    valineJS = ""
+    valineJS = "https://cdnjs.cloudflare.com/ajax/libs/valine/1.4.14/Valine.min.js"
 
 # Markup related configuration in Hugo
 # Hugo 解析文档的配置
