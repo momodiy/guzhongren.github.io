@@ -103,4 +103,4 @@ export default async (url: string) => {
 * [4.了不起的 Deno 实战教程](https://mp.weixin.qq.com/s/J4A5EYL7Kk8cx_X7Kh36Iw)
 
 ----
-![微信公众号](https://s1.ax1x.com/2020/05/23/Yx1I5q.png)
+![微信公众号](/images/wechat/扫码_搜索联合传播样式-标准色版.png)
