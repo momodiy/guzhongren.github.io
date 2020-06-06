@@ -369,7 +369,7 @@ enableEmoji = true
         Pinterest = ""
         Reddit = ""
         Codepen = "guzhongren"
-        FreeCodeCamp = ""
+        FreeCodeCamp = "guzhongren"
         Bitbucket = ""
         Stackoverflow = ""
         Weibo = ""
@@ -399,7 +399,7 @@ enableEmoji = true
         Douban = ""
         Angellist = ""
         Slidershare = ""
-        Jsfiddle = ""
+        Jsfiddle = "guzhongren"
         Deviantart = ""
         Behance = ""
         Dribbble = ""
@@ -409,7 +409,7 @@ enableEmoji = true
         Researchgate = ""
         Mastodon = ""
         Thingiverse = ""
-        Devto = "bytewar"
+        Devto = "guzhongren"
         Gitea = ""
         XMPP = ""
         Matrix = ""
@@ -565,7 +565,7 @@ enableEmoji = true
         Pinterest = ""
         Reddit = ""
         Codepen = ""
-        FreeCodeCamp = ""
+        FreeCodeCamp = "guzhongren"
         Bitbucket = ""
         Stackoverflow = ""
         Weibo = ""
@@ -667,7 +667,7 @@ enableEmoji = true
     enable = true
     # Custom content (HTML format is supported)
     # 自定义内容 (支持 HTML 格式)
-    custom = ''
+    custom = '友情链接: <div style="display: flex;justify-content: center;align-items: center;"><a style="display: flex;justify-content: center;align-items: center;margin: 0rem 1rem;" href="https://yihaimen.github.io"><span style="display: flex;justify-content: center;align-items: center;"><img style="height: 24px;" src="https://yihaimen.github.io/images/avatar.png"><span>易海门的博客</span></span></a><a style="display: flex;justify-content: center;align-items: center; margin: 0rem 1rem;" href="https://bytewars.cc"><span style="display: flex;justify-content: center;align-items: center;"><img style="height: 24px;" src="https://bytewars.github.io/images/avatar.png"><span>ByteWars社区</span></span></a></div>'
     # whether to show Hugo and theme info
     # 是否显示 Hugo 和主题信息
     hugo = true
@@ -915,7 +915,7 @@ enableEmoji = true
       # Publisher info
       # 出版者信息
       [params.page.seo.publisher]
-        name = "xxxx"
+        name = "guzhongren"
         [params.page.seo.publisher.logo]
           url = "logo.png"
           width = 127
@@ -961,10 +961,10 @@ enableEmoji = true
   # Analytics config
   # 网站分析配置
   [params.analytics]
-    enable = false
+    enable = true
     # Google Analytics
     [params.analytics.google]
-      id = ""
+      id = "UA-158950474-1"
       # whether to anonymize IP
       # 是否匿名化用户 IP
       anonymizeIP = true
