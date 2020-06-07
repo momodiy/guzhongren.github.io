@@ -4,7 +4,7 @@ date: 2020-06-07T11:21:14+08:00
 draft: false
 author: "谷中仁"
 authorLink: "https://guzhongren.github.io"
-description: ""
+description: "Window对象的各种测试方法总结"
 license: "Creative Commons Attribution 4.0 International license"
 
 tags: ["TDD","window", "window.location", "spyOn", "jest", "Object.defineProperty", "mock"]
@@ -262,6 +262,8 @@ describe('multiple', () => {
 ## 总结
 
 > 总结就是整理自己，方便自己，如若能方便他人，那就是意外了。
+
+源代码：[https://github.com/AndorLab/test-window-object](https://github.com/AndorLab/test-window-object)
 
 ## Reference
 
