@@ -251,6 +251,8 @@ describe('multiple', () => {
 
 > 总结就是整理自己，方便自己，如若能方便他人，那就是意外了。
 
+源代码：[https://github.com/AndorLab/test-window-object](https://github.com/AndorLab/test-window-object)
+
 ## Reference
 
 * [1.博客:https://guzhongren.github.io/](https://guzhongren.github.io/)
