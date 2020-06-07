@@ -7,9 +7,9 @@ authorLink: "https://guzhongren.github.io"
 description: ""
 license: "Creative Commons Attribution 4.0 International license"
 
-tags: [""]
-categories: [""]
-featuredImage: "https://images.pexels.com/photos/2881785/pexels-photo-2881785.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
+tags: ["TDD","window", "window.location", "spyOn", "jest", "Object.defineProperty", "mock"]
+categories: ["TDD"]
+featuredImage: "https://images.unsplash.com/photo-1591510459618-ffd147f35f23?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2089&q=80"
 images: [""]
 ---
 ## 前言
@@ -261,12 +261,13 @@ describe('multiple', () => {
 
 ## 总结
 
+> 总结就是整理自己，方便自己，如若能方便他人，那就是意外了。
 
 ## Reference
 
 * [1.博客:https://guzhongren.github.io/](https://guzhongren.github.io/)
 * [2.图床:https://sm.ms/](https://sm.ms/)
-* [3.mock-window-location](https://remarkablemark.org/blog/2018/11/17/mock-window-location/
+* [3.mock-window-location](https://remarkablemark.org/blog/2018/11/17/mock-window-location/)
 * [4.jest-how-to-mock-window-location-href](https://wildwolf.name/jest-how-to-mock-window-location-href/)
 * [5.Global Object defineProperty](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty)
 * [6.test double](https://www.jyt0532.com/2018/01/24/jinyong-test-double/)
