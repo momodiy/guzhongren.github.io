@@ -106,4 +106,4 @@ ok      benchmark       1.297s
 [1.https://golang.google.cn/](https://golang.google.cn/)
 [2.Golang 依赖注入(Dependency Injection)](https://guzhongren.github.io/2019/09/golang-%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5dependency-injection/)
 ----
-![谷哥说-微信公众号](https://ftp.bmp.ovh/imgs/2020/02/b7282c60d4d581ad.png)
+![谷哥说-微信公众号](/images/wechat/扫码_搜索联合传播样式-标准色版.png)
