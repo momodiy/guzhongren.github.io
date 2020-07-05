@@ -61,4 +61,4 @@ always-auth=true
 [1.https://yarnpkg.com/](https://yarnpkg.com/)
 
 ----
-![谷哥说-微信公众号](https://ftp.bmp.ovh/imgs/2020/02/b7282c60d4d581ad.png)
+![谷哥说-微信公众号](/images/wechat/扫码_搜索联合传播样式-标准色版.png)

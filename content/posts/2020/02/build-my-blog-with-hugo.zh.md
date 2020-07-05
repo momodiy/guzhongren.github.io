@@ -82,7 +82,7 @@ comment: true
 
 
 ----
-![谷哥说-微信公众号](https://ftp.bmp.ovh/imgs/2020/02/b7282c60d4d581ad.png)
+![谷哥说-微信公众号](/images/wechat/扫码_搜索联合传播样式-标准色版.png)
 ```
 生成文章后，直接更新需要更新的字段，如标签（tags）和分类（categories）等，然后在中间直接写文章就可以。
 
@@ -242,4 +242,4 @@ pub:
 * 4.[https://github.com/features/actions](https://github.com/features/actions)
 * 5.[https://github.com/settings/tokens](https://github.com/settings/tokens)
 ----
-![谷哥说-微信公众号](https://ftp.bmp.ovh/imgs/2020/02/b7282c60d4d581ad.png)
+![谷哥说-微信公众号](/images/wechat/扫码_搜索联合传播样式-标准色版.png)

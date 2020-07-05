@@ -88,4 +88,4 @@ featuredImage: "https://pic4.zhimg.com/80/v2-f8af3dcb49b2e0bdbfd7060fb36bdd5f.jp
 本文仅代表个人观点，与[ThoughtWorks](https://www.thoughtworks.com/) 公司无任何关系。
 
 ----
-![谷哥说-微信公众号](https://ftp.bmp.ovh/imgs/2020/02/b7282c60d4d581ad.png)
+![谷哥说-微信公众号](/images/wechat/扫码_搜索联合传播样式-标准色版.png)
