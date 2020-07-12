@@ -243,6 +243,7 @@ git-crypt unlock /path/to/git-crypt.key
 * [Update git crypt key](https://github.com/AGWA/git-crypt/issues/47#issuecomment-492939759)
 * [List gpg user](https://github.com/AGWA/git-crypt/issues/189#issuecomment-549787656)
 * [Gnu 隐私卫士 (GnuPG) 袖珍 HOWTO (中文版)](https://www.gnupg.org/howtos/zh/index.html)
+* [transcrypt使用案例](https://www.lnmpy.com/blog/transcrypt-intro/)
 
 ## Hereby declared（特此申明）
 
