@@ -7,8 +7,8 @@ authorLink: "https://guzhongren.github.io"
 description: ""
 license: "Creative Commons Attribution 4.0 International license"
 
-tags: [""]
-categories: [""]
+tags: ["deno", "oak", "tdd", "git", "mvc", "fetch"]
+categories: ["deno"]
 featuredImage: "https://images.pexels.com/photos/2881785/pexels-photo-2881785.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
 images: [""]
 ---
