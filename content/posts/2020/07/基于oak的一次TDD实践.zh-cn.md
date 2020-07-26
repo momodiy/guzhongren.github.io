@@ -454,7 +454,11 @@ content-type: application/json; charset=utf-8
 
 ### 用户create接口(addUser)
 
-用户添加接口可以为系统添加用户，那么对应的`Todo`如下：
+添加用户涉及到`Controller`, `Service` 和 `Repository`, 所以我们按照三步来实现该接口。
+
+#### Controller
+
+Controller 层是对外提供服务的，用户添加接口可以为系统添加用户，那么对应的`Todo`如下：
 
 > * 输入用户名和密码，返回特定数据结构的用户信息
 > * 参数必须输入，否则抛异常
@@ -628,17 +632,21 @@ controller 这一层需要调用service的服;作为service，对于controller�
 ```
 
 在此解释第一个测试即`addUser should return added user when add user`;
-> #### given
+> ##### given
 * mock `UserService`,给UserService的 `addUser`方法打桩，并返回特定的用户结构;
 * 新建测试服务，并将 `UserController`注册给post接口 `/users`;
 
-> #### when
+> ##### when
 
 * 传入正确的form类型的参数，用`fetch`请求`http://127.0.0.1:9000/users`;
 
-> #### then
+> ##### then
 
 * 对获取到的结果进行判定，并中断测试应用，将打桩的方法恢复。
+
+### Service
+
+### Repository
 
 
 
