@@ -452,12 +452,195 @@ content-type: application/json; charset=utf-8
 
 至此，完成第一个接口，有 Oak 提供应用服务，经过了`Unit test`和 `RestClient`的测试。完成了开始的`Todo`。
 
-### 用户create接口
+### 用户create接口(addUser)
+
+用户添加接口可以为系统添加用户，那么对应的`Todo`如下：
+
+> * 输入用户名和密码，返回特定数据结构的用户信息
+> * 参数必须输入，否则抛异常
+> * 如果输入错误参数，则抛异常
+
+在此过程中，我们需要用到[`mock`](https://github.com/udibo/mock)来mock 第三方依赖。
+
+导入所需依赖，并新建`UserController.test.ts`， 测试如下：
 
 ```ts
+// tests/controllers/UserController.test.ts
+import {
+  stub,
+  Stub,
+  assertEquals,
+  v4,
+  assertThrowsAsync,
+  Application,
+  Router,
+} from "../../deps.ts";
+import UserController from "../../src/controllers/UserController.ts";
+import IResponse from "../../src/controllers/model/IResponse.ts";
+import UserService from "../../src/services/UserService.ts";
+import IUser, { User } from "../../src/entity/User.ts";
+import InvalidedParamsException from "../../src/exception/InvalidedParamsException.ts";
+import {TEST_PORT} from '../testFixtures.ts'
+
+const { test } = Deno;
 
 
+const userId = v4.generate();
+const registrationDate = (new Date()).toISOString();
+
+const mockedUser: User = {
+  id: userId,
+  username: "username",
+  registrationDate,
+  deleted: false,
+};
+
+test("#addUser should return added user when add user", async () => {
+  const userService = new UserService();
+  const queryAllStub: Stub<UserService> = stub(userService, "addUser");
+  const expectResponse = {
+    success: true,
+    data: mockedUser,
+  };
+  queryAllStub.returns = [mockedUser];
+  const userController = new UserController();
+  userController.userService = userService;
+
+  const app = new Application();
+  const router = new Router();
+  const abortController = new AbortController();
+  const { signal } = abortController;
+
+  router.post("/users", async (context) => {
+    return await userController.addUser(context);
+  });
+
+  app.use(router.routes());
+
+  app.listen({ port: TEST_PORT, signal });
+
+  const response = await fetch(`http://127.0.0.1:${TEST_PORT}/users`, {
+    method: "POST",
+    body: "name=name&password=123",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+    },
+  });
+
+  assertEquals(response.ok, true);
+  const responseJSON = await response.json();
+
+  assertEquals(responseJSON, expectResponse);
+  abortController.abort();
+
+  queryAllStub.restore();
+});
+
+test("#addUser should throw exception about no params given no params when add user", async () => {
+  const userService = new UserService();
+  const queryAllStub: Stub<UserService> = stub(userService, "addUser");
+  queryAllStub.returns = [mockedUser];
+  const userController = new UserController();
+  userController.userService = userService;
+
+  const app = new Application();
+  const router = new Router();
+  const abortController = new AbortController();
+  const { signal } = abortController;
+
+  router.post("/users", async (context) => {
+    await assertThrowsAsync(
+      async () => {
+        await userController.addUser(context);
+      },
+      InvalidedParamsException,
+      "should given params: name ...",
+    );
+    abortController.abort();
+    queryAllStub.restore();
+  });
+
+  app.use(router.routes());
+
+  app.listen({ port: TEST_PORT, signal });
+
+  const response = await fetch(`http://127.0.0.1:${TEST_PORT}/users`, {
+    method: "POST",
+    body: "",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+    },
+  });
+  await response.body!.cancel();
+});
+
+test("#addUser should throw exception about no correct params given wrong params when add user", async () => {
+  const userService = new UserService();
+  const queryAllStub: Stub<UserService> = stub(userService, "addUser");
+
+  queryAllStub.returns = [mockedUser];
+  const userController = new UserController();
+  userController.userService = userService;
+
+  const app = new Application();
+  const router = new Router();
+  const abortController = new AbortController();
+  const { signal } = abortController;
+
+  router.post("/users", async (context) => {
+    await assertThrowsAsync(
+      async () => {
+        await userController.addUser(context);
+      },
+      InvalidedParamsException,
+      "should given param name and password",
+    );
+    abortController.abort();
+    queryAllStub.restore();
+  });
+
+  app.use(router.routes());
+
+  app.listen({ port: TEST_PORT, signal });
+
+  const response = await fetch(`http://127.0.0.1:${TEST_PORT}/users`, {
+    method: "POST",
+    body: "wrong=params",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+    },
+  });
+  await response.body!.cancel();
 ```
+
+controller 这一层需要调用service的服;作为service，对于controller是一个第三方服务，因此需要将service的方法mock，并以参数的形式传入controller;下面这段代码就是mock的应用；
+
+```ts
+  const userService = new UserService();
+  const queryAllStub: Stub<UserService> = stub(userService, "addUser");
+  const expectResponse = {
+    success: true,
+    data: mockedUser,
+  };
+  queryAllStub.returns = [mockedUser];
+  const userController = new UserController();
+  userController.userService = userService;
+```
+
+在此解释第一个测试即`addUser should return added user when add user`;
+> #### given
+* mock `UserService`,给UserService的 `addUser`方法打桩，并返回特定的用户结构;
+* 新建测试服务，并将 `UserController`注册给post接口 `/users`;
+
+> #### when
+
+* 传入正确的form类型的参数，用`fetch`请求`http://127.0.0.1:9000/users`;
+
+> #### then
+
+* 对获取到的结果进行判定，并中断测试应用，将打桩的方法恢复。
+
+
 
 ## 乱中取整
 
@@ -472,6 +655,7 @@ content-type: application/json; charset=utf-8
 * [Docker: https://www.docker.com/](https://www.docker.com/)
 * [Typescript: https://www.typescriptlang.org/](https://www.typescriptlang.org/)
 * [Node: https://nodejs.org/](https://nodejs.org/)
+* [mock: https://github.com/udibo/mock](https://github.com/udibo/mock)
 
 ## Hereby declared（特此申明）
 
