@@ -207,7 +207,7 @@ Deno 没有像 Node 一样的诸如package.json来管理依赖，因为Deno的�
 
 我将系统中用到的依赖存放在根目录的`deps.ts`中，在最终提交的时候做一次`[完整性检查与锁定文件](https://nugine.github.io/deno-manual-cn/linking_to_external_code/integrity_checking.html)`, 来保证我所有的依赖在与其他协作者之间是相同的。
 
-首先导入用到的测试相关的依赖。**在后面开发中用到的相关依赖请自行添加到本文件中。**
+首先导入用到的测试相关的依赖。**在后面开发中用到的相关依赖请自行添加到本文件中。** 比较重要的我会列出来。
 
 ```ts
 export {
@@ -366,6 +366,23 @@ export const API_VERSION = env.API_VERSION || "/api/v1";
 ```
 
 配置文件中，记录了应用程序启动的默认host, 端口，及数据库相关的信息，最后记录了应用程序api的前缀。
+
+在开始之前，需要在`deps.ts`中引入所需要的库；
+
+```ts
+export {
+  Application,
+  Router,
+  Response,
+  Status,
+  Request,
+  RouteParams,
+  Context,
+  RouterContext,
+  helpers,
+  send,
+} from "https://deno.land/x/oak/mod.ts";
+```
 
 ##### 新建路由 `router.ts`, 引入`Heath.ts`并绑定路由
 
@@ -631,7 +648,7 @@ controller 这一层需要调用service的服;作为service，对于controller�
   userController.userService = userService;
 ```
 
-在此解释第一个测试即`addUser should return added user when add user`;
+在此解释两个测试，第一个测试即`#addUser should return added user when add user`;
 > ##### given
 * mock `UserService`,给UserService的 `addUser`方法打桩，并返回特定的用户结构;
 * 新建测试服务，并将 `UserController`注册给post接口 `/users`;
@@ -643,6 +660,21 @@ controller 这一层需要调用service的服;作为service，对于controller�
 > ##### then
 
 * 对获取到的结果进行判定，并中断测试应用，将打桩的方法恢复。
+
+在此解释两个测试，第二个测试即`#addUser should throw exception about no params given no params when add user`; `given`和`when`与第一个测试的`given`和`when`查不多，只是`body`参数为空;最重要的不同点是这次的`then`是在`when`里面，因为抛异常会在`handler`上抛，所以，需要将`then`的判定放在`handler` 上。这里用到了`Deno`的`assertThrowsAsync`来捕获异常并判定异常。
+
+> ##### given
+
+* mock `UserService`,给UserService的 `addUser`方法打桩，并返回特定的用户结构;
+* 新建测试服务，并将 `UserController`注册给post接口 `/users`;
+
+> ##### when
+
+* 给`body`传入空参数，用`fetch`请求`http://127.0.0.1:9000/users`;
+
+> ##### then
+
+* `then`部分处于`given`的路由处理handler中，对异常进行捕获并判定，接着中断测试应用，将打桩的方法恢复。
 
 ### Service
 
