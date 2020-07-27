@@ -291,18 +291,21 @@ test("health check", async () => {
 
 ```
 
-> #### given
-- 上面的代码中，首先声明了我们期望的数据结构，即`expectResponse`；
-- 然后创建一个应用程序和一个路由，
-- 再创建一个终止应用的控制器，且从中取到信号标识，
-- 接着， 向路由中添加一个`health`路由及其handler；
-- 然后将路由挂在到应用程序上；
-- 监听应用程序端口，且传入应用程序信号；
-> #### when
-- 给启动的应用发一个get请求，请求路径为`/health`;
-> #### then
-- 根据fetch到的结果进行判定，看收到的`response`是不是和期望的一致， 且在最后终止上面的应用程序。
-- 到此，如果运行测试肯定会发生错误，解决问题的也很简单，就是去实现`getHealthInfo` handler。
+#### given
+> - 上面的代码中，首先声明了我们期望的数据结构，即`expectResponse`；
+> - 然后创建一个应用程序和一个路由，
+> - 再创建一个终止应用的控制器，且从中取到信号标识，
+> - 接着， 向路由中添加一个`health`路由及其handler；
+> - 然后将路由挂在到应用程序上；
+> - 监听应用程序端口，且传入应用程序信号。
+
+#### when
+
+> - 给启动的应用发一个get请求，请求路径为`/health`;
+#### then
+
+> - 根据fetch到的结果进行判定，看收到的`response`是不是和期望的一致， 且在最后终止上面的应用程序。
+> - 到此，如果运行测试肯定会发生错误，解决问题的也很简单，就是去实现`getHealthInfo` handler。
 
 #### 实现 `getHealthInfo` handler
 
@@ -421,9 +424,9 @@ if (import.meta.main) {
 
 ##### 启动应用
 
-如果是VSCode， 可以使用`F5`功能键，快速启动应用，在低版本的 VS Code(1.47.2一下) 中可以启动调试。也可以以下命令启动；
+如果是`VSCode`， 可以使用`F5`功能键，快速启动应用，在低版本的 `VS Code(1.47.2以下)` 中可以启动调试。也可以以下命令启动；
 
-```
+```shell
 ❯ make dev
 deno run --allow-net --allow-env ./src/index.ts
 数据库链接成功！
@@ -455,23 +458,23 @@ content-type: application/json; charset=utf-8
 }
 ```
 
-至此，完成第一个接口，有 Oak 提供应用服务，经过了`Unit test`和 `RestClient`的测试。完成了开始的`Todo`。
+至此，完成第一个接口，有 `Oak` 提供应用服务，经过了`Unit test`和 `RestClient`的测试。完成了开始的`Todo`。
 
-### 用户create接口(addUser)
+### 添加用户接口(addUser)
 
-添加用户涉及到`Controller`, `Service` 和 `Repository`, 所以我们按照三步来实现该接口。
+添加用户涉及到`Controller`, `Service` 和 `Repository`, 所以我们分三步来实现该接口。
 
 #### Controller
 
-Controller 层是对外提供服务的，用户添加接口可以为系统添加用户，那么对应的`Todo`如下：
+`Controller` 是控制层，对外提供服务；添加用户接口可以为系统添加用户，那么对应的`Todo`如下：
 
 > * 输入用户名和密码，返回特定数据结构的用户信息
 > * 参数必须输入，否则抛异常
 > * 如果输入错误参数，则抛异常
 
-在此过程中，我们需要用到[`mock`](https://github.com/udibo/mock)来mock 第三方依赖。
+在此过程中，我们需要用到[`mock`](https://github.com/udibo/mock)来 `mock` 第三方依赖。
 
-导入所需依赖，并新建`UserController.test.ts`， 测试如下：
+导入所需依赖，并新建`UserController.test.ts`，在`Coding` 过程中需要实现`UserService`, 但不需要实现`addUser`方法； 测试如下：
 
 ```ts
 // tests/controllers/UserController.test.ts
@@ -637,38 +640,295 @@ controller 这一层需要调用service的服;作为service，对于controller�
 ```
 
 在此解释两个测试，第一个测试即`#addUser should return added user when add user`;
-> ##### given
-* mock `UserService`,给UserService的 `addUser`方法打桩，并返回特定的用户结构;
-* 新建测试服务，并将 `UserController`注册给post接口 `/users`;
 
-> ##### when
+##### given
 
-* 传入正确的form类型的参数，用`fetch`请求`http://127.0.0.1:9000/users`;
+> * mock `UserService`,给UserService的 `addUser`方法打桩，并返回特定的用户结构;
+> * 新建测试服务，并将 `UserController`注册给post接口 `/users`;
 
-> ##### then
+##### when
 
-* 对获取到的结果进行判定，并中断测试应用，将打桩的方法恢复。
+> * 传入正确的form类型的参数，用`fetch`请求`http://127.0.0.1:9000/users`;
+
+##### then
+
+> * 对获取到的结果进行判定，并中断测试应用，将打桩的方法恢复。
 
 在此解释两个测试，第二个测试即`#addUser should throw exception about no params given no params when add user`; `given`和`when`与第一个测试的`given`和`when`查不多，只是`body`参数为空;最重要的不同点是这次的`then`是在`when`里面，因为抛异常会在`handler`上抛，所以，需要将`then`的判定放在`handler` 上。这里用到了`Deno`的`assertThrowsAsync`来捕获异常并判定异常。
 
-> ##### given
+##### given
 
-* mock `UserService`,给UserService的 `addUser`方法打桩，并返回特定的用户结构;
-* 新建测试服务，并将 `UserController`注册给post接口 `/users`;
+> * `mock` `UserService`,给UserService的 `addUser`方法打桩，并返回特定的用户结构;
+> * 新建测试服务，并将 `UserController`注册给post接口 `/users`;
 
-> ##### when
+##### when
 
-* 给`body`传入空参数，用`fetch`请求`http://127.0.0.1:9000/users`;
+> * 给`body`传入空参数，用`fetch`请求`http://127.0.0.1:9000/users`;
 
-> ##### then
+##### then
 
-* `then`部分处于`given`的路由处理handler中，对异常进行捕获并判定，接着中断测试应用，将打桩的方法恢复。
+> * `then`部分处于`given`的路由处理`handler`中，对异常进行捕获并判定，接着中断测试应用，将打桩的方法恢复。
 
-### Service
+##### 运行测试
 
-### Repository
+```shell
+❯ make test
+deno test --allow-env --allow-net -L info
+Check file:///xxx/web-api-based-deno/.deno.test.ts
+running 5 tests
+test should work ... ok (5ms)
+test UserController #addUser should return added user when add user ... ok (21ms)
+test UserController #addUser should throw exception about no params given no params when add user ... ok (4ms)
+test UserController #addUser should throw exception about no correct params given wrong params when add user ... ok (3ms)
+test health check ... ok (4ms)
 
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out (37ms)
 
+```
+
+#### Service
+
+`Service`是服务层，通过组合其他服务和调用底层数据接口层提供服务；对于用户添加，对于添加用户的`Service`, 我们只需要将用户对象传递过来，然后由`Repository`来处理；所以，我们的`Todo`对应如下：
+
+> 当传入期望的用户信息，可返回特定数据结构的用户信息
+
+新建`UserService.test.ts`， 并导入相关依赖；
+
+```ts
+// tests/services/UserService.test.ts
+import {
+  stub,
+  Stub,
+  assertEquals,
+  v4,
+} from "../../deps.ts";
+import UserRepo from "../../src/repositories/userRepo.ts";
+import UserService from "../../src/services/UserService.ts";
+import IUser from "../../src/entity/User.ts";
+const { test } = Deno;
+
+test("UserService #addUser should return added user", async () => {
+  const parameter: IUser = {
+    username: "username",
+    password: "password",
+  };
+  const registrationDate = (new Date()).toISOString();
+  const id = v4.generate();
+  const mockedUser: IUser = {
+    ...parameter,
+    id,
+    registrationDate,
+    deleted: false,
+  };
+  const userRepo = new UserRepo();
+  const createUserStub: Stub<UserRepo> = stub(userRepo, "create");
+  createUserStub.returns = [mockedUser];
+
+  const userService = new UserService();
+  userService.userRepo = userRepo;
+
+  assertEquals(await userService.addUser(parameter), mockedUser);
+  createUserStub.restore();
+});
+```
+
+代码逻辑很简单，基本不需要解释。运行测试肯定会失败，为了让代码通过测试，编写`UserService.ts`, 在`UserService.ts`中调用`Repository`的`create`方法。所以，也需要简单实现`UserRepo`，只需要添加`create`方法即可。
+
+```ts
+// src/services/UserService.ts
+import UserRepo from "../repositories/userRepo.ts";
+import IUser from "../entity/User.ts";
+
+export default class UserService {
+  constructor() {
+    this.userRepo = new UserRepo();
+  }
+  userRepo = new UserRepo();
+  async addUser(user: IUser) {
+    return await this.userRepo.create(user);
+  }
+```
+
+##### 运行测试
+
+```shell
+❯ make test
+deno test --allow-env --allow-net -L info
+Check file:///Users/c4/Desktop/Personal/02.Project/web-api-based-deno/.deno.test.ts
+running 6 tests
+test should work ... ok (5ms)
+test UserController #addUser should return added user when add user ... ok (21ms)
+test UserController #addUser should throw exception about no params given no params when add user ... ok (4ms)
+test UserController #addUser should throw exception about no correct params given wrong params when add user ... ok (3ms)
+test health check ... ok (4ms)
+test UserService #addUser should return added user ... ok (1ms)
+
+test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out (38ms)
+
+```
+
+#### Repository
+
+`Repository`通常和数据库交互，将传入的数据持久化到数据库中；对于添加用户这个接口，我们的需求因该是将传入的信息以数据库要求的格式存储起来，并将结果返回给`Service`;因此，`Todo`大致如下：
+
+> * 将传入的用户存入数据亏并返回特定数据结构的信息
+> * 如果参数中缺少基本字段则抛异常
+
+测试如下：
+
+```ts
+// tests/repositories/UserRepo.test.ts
+import {
+  stub,
+  Stub,
+  Client,
+  assertEquals,
+  v4,
+  assert,
+  assertMatch,
+  assertThrowsAsync,
+} from "../../deps.ts";
+import UserRepo from "../../src/repositories/userRepo.ts";
+import client from "../../src/Utils/client.ts";
+import IUser from "../../src/entity/User.ts";
+import NotFoundException from "../../src/exception/NotFoundException.ts";
+import InvalidedParamsException from "../../src/exception/InvalidedParamsException.ts";
+const { test } = Deno;
+
+test("UserRepo #create should return mocked User given username&password when create", async () => {
+  const queryStub: Stub<Client> = stub(client, "query");
+  const mockedQueryResult = {
+    rowCount: 1,
+  };
+  queryStub.returns = [mockedQueryResult];
+  const parameter: IUser = {
+    username: "username",
+    password: "password",
+  };
+  const userRepo = new UserRepo();
+  userRepo.client = client;
+  const createdUserResult = await userRepo.create(parameter);
+
+  assertEquals(createdUserResult.username, parameter.username);
+  assertEquals(createdUserResult.password, parameter.password);
+  assert(v4.validate(createdUserResult.id!));
+  assertMatch(
+    createdUserResult.registrationDate!,
+    /[\d]{4}-[\d]{2}-[\d]{2}T[\d]{2}:[\d]{2}:[\d]{2}\.[\d]{1,3}Z/,
+  );
+
+  queryStub.restore();
+});
+
+test("UserRepo #create should throw exception given no value for field when create", async () => {
+  const parameter: IUser = {
+    username: "",
+    password: "",
+  };
+
+  const userRepo = new UserRepo();
+
+  assertThrowsAsync(async () => {
+    await userRepo.create(parameter)
+  }, InvalidedParamsException,
+  "should supply valid username and password!")
+});
+
+```
+
+因为`Repository`层要和数据库打交道，所以需要一个和数据库操作相应的处理工具库；在此我们期望通过使用`PostgreSql`自己的的`Client`来执行数据库操作。
+
+在上面第一个测试代码中， 我们`mock`了`Client`的`query`方法，并且返回了预定的数据。接着调用`UserRepo`的`create`方法，判断返回数据的数据字段值与期望值是否一致。
+
+运行测试依旧会失败，接下来以最简单的方式实现让测试通过。
+
+导入`PostgreSql`相关的依赖；
+
+```ts
+export { Client } from "https://deno.land/x/postgres/mod.ts";
+```
+
+及定义数据库连接信息
+
+```ts
+// src/config.ts
+export const DB_HOST = env.DB_HOST || "localhost";
+export const DB_USER = env.DB_USER || "postgres";
+export const DB_PASSWORD = env.DB_PASSWORD || "0";
+export const DB_DATABASE = env.DB_DATABASE || "postgres";
+export const DB_PORT = env.DB_PORT ? parseInt(env.DB_PORT) : 5432;
+
+```
+
+获取数据库连接的`Client`实例
+
+```ts
+// src/Utils/client.ts
+import { Client } from "../../deps.ts";
+import {
+  DB_HOST,
+  DB_DATABASE,
+  DB_PORT,
+  DB_USER,
+  DB_PASSWORD,
+} from "../config.ts";
+
+const client = new Client({
+  hostname: DB_HOST,
+  database: DB_DATABASE,
+  user: DB_USER,
+  password: DB_PASSWORD,
+  port: DB_PORT,
+});
+
+export default client;
+
+```
+
+数据库应该在应用启动时连接，所以在`index.ts`引入`client`并建立连接和管理连接。
+
+```ts
+if (import.meta.main) {
++  await client.connect();
++  console.info("数据库链接成功！");
+   const app = await createApplication();
+   await listenToServer(app);
++  await client.end();
+}
+
+```
+
+现在启动应用，发送请求即可；
+
+```
+// _resources/httpClient/addUser.http
+POST http://localhost:8000/api/v1/users HTTP/1.1
+Content-Type: application/x-www-form-urlencoded
+
+name=foo&password=123
+
+```
+
+请求结果
+
+```
+HTTP/1.1 201 Created
+content-length: 149
+x-response-time: 34ms
+content-type: application/json; charset=utf-8
+
+{
+  "success": true,
+  "data": {
+    "username": "foo",
+    "password": "123",
+    "id": "7aea0bb7-e0bc-4f1f-a516-3a43f4e30fb6",
+    "registrationDate": "2020-07-27T14:11:24.140Z"
+  }
+}
+```
+
+异常情况可以自己制造，在此就不演示了，至此完成用户添加的接口。
 
 ## 乱中取整
 
