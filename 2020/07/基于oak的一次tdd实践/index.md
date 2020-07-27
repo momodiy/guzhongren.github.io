@@ -3,7 +3,7 @@
 
 ## 简介
 
-Deno 是ry(Ryan Dahl)的新项目，近期发布了其 1.0.0 版，在开发圈子里掀起了不小的风浪，与之创建的 Node 运行时有异曲同工之妙，`真香定律`又一次出现了。
+`Deno` 是`ry(Ryan Dahl)`的新项目，近期发布了其 `1.0.0` 版，在开发圈子里掀起了不小的风浪，与之创建的 Node 运行时有异曲同工之妙，`真香定律`又一次出现了。
 
 在软件开发中，为了开发出可维护，高质量的程序，使用`TDD`开发可以有效提升项目质量和开发效率。
 
@@ -26,7 +26,7 @@ Deno 是ry(Ryan Dahl)的新项目，近期发布了其 1.0.0 版，在开发圈�
 
 > A middleware framework for Deno's net server 🦕
 
-`oak` 是借鉴 Node 框架`Koa`的设计思路开发的一个高性能的框架，其`洋葱模型`式的中间件等思路在开发中使用起来也是非常方便。
+`oak` 是借鉴 `Node` 框架`Koa`的设计思路开发的一个高性能的框架，其`洋葱模型`式的中间件等思路在开发中使用起来也是非常方便。
 
 ## 目标
 
@@ -216,7 +216,7 @@ export {
 
 ### 测试先行
 
-现在`tests`目录下新建一个测试命名为`index.test.ts`, 写基本测试，证明测试和程序是可以work的。
+现在`tests`目录下新建一个测试命名为`index.test.ts`, 写基本测试，证明测试和程序是可以`work`的。
 
 ```ts
 import { assert, equal } from "../deps.ts";
@@ -907,9 +907,29 @@ if (import.meta.main) {
 
 ```
 
-现在启动应用，发送请求即可；
+##### 重新启动测试
+
+```shell
+❯ make test
+deno test --allow-env --allow-net -L info
+Check file:///xxx/web-api-based-deno/.deno.test.ts
+running 8 tests
+test should work ... ok (2ms)
+test UserRepo #create should return mocked User given username&password when create ... ok (1ms)
+test UserRepo #create should throw exception given no value for field when create ... ok (1ms)
+test UserController #addUser should return added user when add user ... ok (14ms)
+test UserController #addUser should throw exception about no params given no params when add user ... ok (4ms)
+test UserController #addUser should throw exception about no correct params given wrong params when add user ... ok (2ms)
+test health check ... ok (3ms)
+test UserService #addUser should return added user ... ok (1ms)
+
+test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out (28ms)
+
+```
 
 ##### 请求体
+
+由`RestClient`验证请求； 现在启动应用，发送如下请求；
 
 ```
 // _resources/httpClient/addUser.http
