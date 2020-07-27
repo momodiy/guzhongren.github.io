@@ -9,7 +9,7 @@ license: "Creative Commons Attribution 4.0 International license"
 
 tags: ["deno", "oak", "tdd", "git", "mvc", "fetch"]
 categories: ["deno"]
-featuredImage: "https://images.pexels.com/photos/2881785/pexels-photo-2881785.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
+featuredImage: "https://i.loli.net/2020/07/27/Q3pqoCGe7PkKSOv.jpg"
 images: [""]
 ---
 
@@ -212,9 +212,9 @@ export default class NotFoundException extends Error {
 
 ### 依赖管理
 
-Deno 没有像 Node 一样的诸如package.json来管理依赖，因为Deno的依赖是去中心化的，也就是以远程文件作为库，这一点和`Golang`很像。
+Deno 没有像 Node 一样的诸如`package.json`来管理依赖，因为`Deno`的依赖是去中心化的，也就是以远程文件作为库，这一点和`Golang`很像。
 
-我将系统中用到的依赖存放在根目录的`deps.ts`中，在最终提交的时候做一次`[完整性检查与锁定文件](https://nugine.github.io/deno-manual-cn/linking_to_external_code/integrity_checking.html)`, 来保证我所有的依赖在与其他协作者之间是相同的。
+我将系统中用到的依赖存放在根目录的`deps.ts`中，在最终提交的时候做一次[`完整性检查与锁定文件`](https://nugine.github.io/deno-manual-cn/linking_to_external_code/integrity_checking.html), 来保证我所有的依赖在与其他协作者之间是相同的。
 
 首先导入用到的测试相关的依赖。**在后面开发中用到的相关依赖请自行添加到本文件中。** 比较重要的我会列出来。
 
@@ -256,7 +256,7 @@ test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out (6ms)
 
 ### 建立测试固件
 
-将测试中用到的通用的测试信息存放在测试固件（testFixtures）中，可以在测试中复用，且可以简化代码。
+将测试中用到的通用的测试信息存放在测试固件（`testFixtures`）中，可以在测试中复用，且可以简化代码。
 
 ```ts
 // tests/testFixtures.ts
@@ -265,7 +265,7 @@ export const TEST_PORT = 9000
 
 ### health 接口
 
-health 接口可以作为系统的健康检查的一个出口，在运维平台中非常实用。对于此接口，我们只需要返回一个状态`OK`即可。其他情况可忽略。那么对应的`Todo`应该如下：
+`health` 接口可以作为系统的健康检查的一个出口，在运维平台中非常实用。对于此接口，我们只需要返回一个状态`OK`即可。其他情况可忽略。那么对应的`Todo`应该如下：
 
 > 当访问到系统的时候，应该返回系统的状态，且为OK。
 
@@ -456,7 +456,7 @@ Application started, and listen to 127.0.0.1:8000
 
 ##### 调用接口测试结果
 
-这里使用VS Code 的[`Rest Client`](https://marketplace.visualstudio.com/items?itemName=humao.rest-client)插件进行辅助测试。
+这里使用`VS Code` 的[`Rest Client`](https://marketplace.visualstudio.com/items?itemName=humao.rest-client)插件进行辅助测试。
 
 ###### 请求体
 
@@ -481,7 +481,7 @@ content-type: application/json; charset=utf-8
 
 至此，完成第一个接口，有 `Oak` 提供应用服务，经过了`Unit test`和 `RestClient`的测试。完成了开始的`Todo`。
 
-### 添加用户接口(addUser)
+### 添加用户接口(`addUser`)
 
 添加用户涉及到`Controller`, `Service` 和 `Repository`, 所以我们分三步来实现该接口。
 
