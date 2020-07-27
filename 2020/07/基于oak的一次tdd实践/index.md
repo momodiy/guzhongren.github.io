@@ -58,7 +58,18 @@ v12.13.0
 deno 1.2.0
 v8 8.5.216
 typescript 3.9.2
+
+❯ docker --version
+Docker version 19.03.8, build afacb8b
+
 ```
+
+其他信息
+
+|类型|版本|备注|
+|:--|:--:|:--:|
+|[PostgreSql](https://hub.docker.com/_/postgres)|12||
+|[PGAdmin](https://hub.docker.com/r/dpage/pgadmin4)|latest||
 
 ### 项目结构
 
