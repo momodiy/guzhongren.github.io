@@ -973,8 +973,42 @@ content-type: application/json; charset=utf-8
 
 异常情况可以自己制造，在此就不演示了，至此完成用户添加的接口。
 
+## 打包
+
+按照上面的步骤，我们可以完成查询单个用户(`GET`:`/users/:id`), 查询所有用户(`GET`:`/users`)和删除(`DELETE`:`/users/:id`)等接口，快速且高效。当我们完成测试和接口后，使用`deno`的命令行工具，我们可以将整个工程打包为一个`.js`文件;
+
+```shell
+❯ make bundle
+mkdir dist
+deno bundle src/index.ts dist/platform.js
+Bundle file:///xxx/web-api-based-deno/src/index.ts
+Emit "dist/platform.js" (856.11 KB)
+
+```
+
+对于`NodeJs`开发的后端应用，可怕的`node_modules`依赖在打包时会是个问题，一般的`node`后端应用都是直接将环境变量更新一下，然后将其部署在生产环境；
+开发者写的工程文件并没有多大，而应用依赖的`node_modules`大多时候时工程文件的几十倍甚至几百倍。然后`Deno`很好的解决了这个问题。
+
+## 启动应用
+
+如有需要将打包好的`.js`拷贝到目标目录，只要有`Deno`环境，我们就可以直接启动应用；
+
+```shell
+❯ make start 
+APP_PORT=1234 deno run --allow-net --allow-env ./dist/platform.js 
+数据库链接成功！
+Application started, and listen to 127.0.0.1:1234
+```
+
 ## 乱中取整
 
+通过学习`Deno`,有了一些心得体会；
+
+* `Deno`工程可以使用`Javascript`和`Typescript`进行编程，大大降低了认知复杂度和学习难度；
+* 如果使用`Typescript`开发，那么会避免`动态一时爽，重构火葬场`的尴尬局面，所以推荐使用`Typescript`来写应用；
+
+
+最后感谢[海门](https://yihaimen.github.io/)的校对和指导；在他的帮助下，顺利完成了这片博客。
 
 ## Reference
 
