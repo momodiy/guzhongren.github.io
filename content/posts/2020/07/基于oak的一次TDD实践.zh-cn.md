@@ -13,6 +13,10 @@ featuredImage: "https://i.loli.net/2020/07/27/Q3pqoCGe7PkKSOv.jpg"
 images: [""]
 ---
 
+## 源码
+
+> [`Deno Restful API With PostgreSql & TDD`](https://github.com/guzhongren/deno-restful-api-with-postgresql-tdd)
+
 ## 简介
 
 `Deno` 是`ry(Ryan Dahl)`的新项目，近期发布了其 `1.0.0` 版，在开发圈子里掀起了不小的风浪，与之创建的 Node 运行时有异曲同工之妙，`真香定律`又一次出现了。
@@ -86,8 +90,8 @@ Docker version 19.03.8, build afacb8b
 ### 项目结构
 
 ```shell
-❯ tree -L 1 web-api-based-deno
-web-api-based-deno
+❯ tree -L 1 deno-restful-api-with-postgresql-tdd
+deno-restful-api-with-postgresql-tdd
 ├── .github         // github action
 ├── .vscode         // debug 及 vscode 配置文件
 ├── LICENSE         // 仓库许可
@@ -108,7 +112,7 @@ web-api-based-deno
 
 ## 实现过程
 
-> 先说明一哈，如果要用文字写完整个开发过程个人认为是没有必要的，所以就以最开始的`health`和`addUser`(post接口)为例， 其他接口请参考代码实现。
+> 先说明一下，如果要用文字写完整个开发过程个人认为是没有必要的，所以就以最开始的`health`和`addUser`(`post`接口)为例， 其他接口请参考[代码实现](https://github.com/guzhongren/deno-restful-api-with-postgresql-tdd)。
 
 ### 启动基础设施(数据库)并初始化数据表
 
@@ -121,7 +125,7 @@ Starting iaas_db_1 ... done
 Starting iaas_pgadmin_1 ... done
 ```
 
-#### 登录`pgadmin`, 在默认的数据库`postgres`中新建Query并执行如下操作，完成初始化数据库。
+#### 登录`pgadmin`, 在默认的数据库`postgres`中新建Query并执行如下操作，完成初始化数据库
 
 ```sql
 CREATE TABLE public."user"
@@ -247,7 +251,7 @@ test("should work", () => {
 ```shell
 ❯ make test
 deno test --allow-env --allow-net -L info
-Check file:///xxxx/web-api-based-deno/.deno.test.ts
+Check file:///xxxx/deno-restful-api-with-postgresql-tdd/.deno.test.ts
 running 1 tests
 test should work ... ok (6ms)
 
@@ -355,7 +359,7 @@ export const getHealthInfo = ({ response }: { response: Response }) => {
 ```shell
 ❯ make test
 deno test --allow-env --allow-net -L info
-Check file://xxx/web-api-based-deno/.deno.test.ts
+Check file://xxx/deno-restful-api-with-postgresql-tdd/.deno.test.ts
 running 2 tests
 test should work ... ok (6ms)
 test health check ... ok (3ms)
@@ -695,7 +699,7 @@ controller 这一层需要调用service的服;作为service，对于controller�
 ```shell
 ❯ make test
 deno test --allow-env --allow-net -L info
-Check file:///xxx/web-api-based-deno/.deno.test.ts
+Check file:///xxx/deno-restful-api-with-postgresql-tdd/.deno.test.ts
 running 5 tests
 test should work ... ok (5ms)
 test UserController #addUser should return added user when add user ... ok (21ms)
@@ -775,7 +779,7 @@ export default class UserService {
 ```shell
 ❯ make test
 deno test --allow-env --allow-net -L info
-Check file:///Users/c4/Desktop/Personal/02.Project/web-api-based-deno/.deno.test.ts
+Check file:///xxx/deno-restful-api-with-postgresql-tdd/.deno.test.ts
 running 6 tests
 test should work ... ok (5ms)
 test UserController #addUser should return added user when add user ... ok (21ms)
@@ -924,7 +928,7 @@ if (import.meta.main) {
 ```shell
 ❯ make test
 deno test --allow-env --allow-net -L info
-Check file:///xxx/web-api-based-deno/.deno.test.ts
+Check file:///xxx/deno-restful-api-with-postgresql-tdd/.deno.test.ts
 running 8 tests
 test should work ... ok (2ms)
 test UserRepo #create should return mocked User given username&password when create ... ok (1ms)
@@ -981,7 +985,7 @@ content-type: application/json; charset=utf-8
 ❯ make bundle
 mkdir dist
 deno bundle src/index.ts dist/platform.js
-Bundle file:///xxx/web-api-based-deno/src/index.ts
+Bundle file:///xxx/deno-restful-api-with-postgresql-tdd/src/index.ts
 Emit "dist/platform.js" (856.11 KB)
 
 ```
@@ -1012,7 +1016,7 @@ Application started, and listen to 127.0.0.1:1234
 
 ## Reference
 
-* [web-api-based-deno: https://github.com/guzhongren/web-api-based-deno](https://github.com/guzhongren/web-api-based-deno)
+* [源码: https://github.com/guzhongren/deno-restful-api-with-postgresql-tdd](https://github.com/guzhongren/deno-restful-api-with-postgresql-tdd)
 * [博客:https://guzhongren.github.io/](https://guzhongren.github.io/)
 * [图床:https://sm.ms/](https://sm.ms/)
 * [Denoland: https://deno.land/](https://deno.land/)
