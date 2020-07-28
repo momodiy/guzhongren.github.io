@@ -36,7 +36,7 @@ images: [""]
 > * 天生支持 TypeScript。
 > * 只有一个单一的可执行文件。
 > * 自带实用工具，例如依赖检查器（deno info）和 代码格式化工具（deno fmt）。
-> * 有一套经过审核（审计）的标准模块， 确保与 Deno 兼容： deno.land/std
+> * 有一套经过审核（审计）的标准模块， 确保与 Deno 兼容： deno.land/std。
 
 ### [oak](https://github.com/oakserver/oak)
 
@@ -125,7 +125,7 @@ Starting iaas_db_1 ... done
 Starting iaas_pgadmin_1 ... done
 ```
 
-#### 登录`pgadmin`, 在默认的数据库`postgres`中新建Query并执行如下操作，完成初始化数据库
+#### 登录`pgadmin`, 在默认的数据库`postgres`中新建`Query`并执行如下操作，完成初始化数据库
 
 ```sql
 CREATE TABLE public."user"
@@ -194,6 +194,8 @@ export default interface IUser {
 export class User implements IUser {}
 
 ```
+
+异常用来处理错误情况，在最终返回给用户结果的时候，我们不能将异常返回给用户，而是以一种更友好的方式返回，具体流程可以参考`src/middlewares/error.ts`这个中间件的处理方式。
 
 ```ts
 // src/exception/InvalidedParamsException.ts
@@ -317,6 +319,7 @@ test("health check", async () => {
 ```
 
 #### given
+
 > - 上面的代码中，首先声明了我们期望的数据结构，即`expectResponse`；
 > - 然后创建一个应用程序和一个路由，
 > - 再创建一个终止应用的控制器，且从中取到信号标识，
@@ -327,6 +330,7 @@ test("health check", async () => {
 #### when
 
 > - 给启动的应用发一个get请求，请求路径为`/health`;
+
 #### then
 
 > - 根据fetch到的结果进行判定，看收到的`response`是不是和期望的一致， 且在最后终止上面的应用程序。
@@ -650,7 +654,7 @@ test("#addUser should throw exception about no correct params given wrong params
   await response.body!.cancel();
 ```
 
-controller 这一层需要调用service的服;作为service，对于controller是一个第三方服务，因此需要将service的方法mock，并以参数的形式传入controller;下面这段代码就是mock的应用；
+`controller` 这一层需要调用`service`的服; 作为`service`，对于`controller`是一个第三方服务，因此需要将`service`的方法`mock`，并以参数的形式传入`Controller`;下面这段代码就是`mock`的应用；
 
 ```ts
   const userService = new UserService();
@@ -990,7 +994,7 @@ Emit "dist/platform.js" (856.11 KB)
 
 ```
 
-对于`NodeJs`开发的后端应用，可怕的`node_modules`依赖在打包时会是个问题，一般的`node`后端应用都是直接将环境变量更新一下，然后将其部署在生产环境；
+对于`NodeJs`开发的后端应用，可怕的`node_modules`依赖在打包时会是个问题，一般的`Node`后端应用都是直接将环境变量更新一下，然后将其部署在生产环境；
 开发者写的工程文件并没有多大，而应用依赖的`node_modules`大多时候时工程文件的几十倍甚至几百倍。然后`Deno`很好的解决了这个问题。
 
 ## 启动应用
@@ -1011,8 +1015,7 @@ Application started, and listen to 127.0.0.1:1234
 * `Deno`工程可以使用`Javascript`和`Typescript`进行编程，大大降低了认知复杂度和学习难度；
 * 如果使用`Typescript`开发，那么会避免`动态一时爽，重构火葬场`的尴尬局面，所以推荐使用`Typescript`来写应用；
 
-
-最后感谢[海门](https://yihaimen.github.io/)的校对和指导；在他的帮助下，顺利完成了这片博客。
+最后感谢[海门](https://yihaimen.github.io/)和[亦乐](https://github.com/hylerrix)的校对与指导；在他们的帮助下，我顺利完成了这篇博客。
 
 ## Reference
 
