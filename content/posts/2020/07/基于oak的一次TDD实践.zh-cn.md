@@ -9,7 +9,7 @@ license: "Creative Commons Attribution 4.0 International license"
 
 tags: ["deno", "oak", "tdd", "git", "mvc", "fetch"]
 categories: ["deno"]
-featuredImage: "https://i.loli.net/2020/07/27/Q3pqoCGe7PkKSOv.jpg"
+featuredImage: "https://wx2.sbimg.cn/2020/07/28/PpGwl.jpg"
 images: [""]
 ---
 
