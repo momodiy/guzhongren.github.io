@@ -3,7 +3,7 @@
 
 ## `Talking is cheap! Show me code!`
 
-> [`Deno Restful API With PostgreSql & TDD`](https://github.com/guzhongren/deno-restful-api-with-postgresql-tdd)
+> [源码地址：`Deno Restful API With PostgreSql & TDD`](https://github.com/guzhongren/deno-restful-api-with-postgresql-tdd)
 
 ## 简介
 
@@ -1000,8 +1000,10 @@ Application started, and listen to 127.0.0.1:1234
 
 通过学习`Deno`,有了一些心得体会；
 
-* `Deno`工程可以使用`Javascript`和`Typescript`进行编程，大大降低了认知复杂度和学习难度；
+* 兼容浏览器`API`,`Deno`工程可以使用`Javascript`和`Typescript`进行编程，大大降低了认知复杂度和学习难度；
 * 如果使用`Typescript`开发，那么会避免`动态一时爽，重构火葬场`的尴尬局面，所以推荐使用`Typescript`来写应用；
+* 去中心化仓库，以单文件的形式分发，在协作开发的时候，为了统一库版本，就需校验依赖的版本，`Deno`提供了生成`lock.json`的形式来保证不同协作者之间的版本依赖；
+* ...
 
 最后感谢[海门](https://yihaimen.github.io/)和[亦乐](https://github.com/hylerrix)的校对与指导；在他们的帮助下，我顺利完成了这篇博客。
 
