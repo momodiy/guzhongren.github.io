@@ -80,6 +80,15 @@ Java开发必备
 * 插件系统也不错，可与Trello等工具结合
 * 矢量图形编辑也非常不错
 
+## [jsonpp](https://github.com/jmhodges/jsonpp)
+
+json_pp 我主要是用来格式化 curl 命令行的结果，例如测试某个 restful 接口，返回的 json，在命令行就会自动给你格式化好输出，
+
+### 安装
+
+```shell
+brew install jsonpp
+```
 
 # 效率
 
@@ -111,6 +120,19 @@ Java开发必备
 * 可与其他人共享Todo
 * 最重要的是可以在每一个Todo里定义子Todo
 
+## Itsycal
+
+[Itsycal](https://www.mowglii.com/itsycal/itsycalbanner2@2x.png)
+
+Mac自带的顶部的日历其实有点不好用，如果你要看你的日程，那么你需要点开日历，而且他的时间格式其实也不是很友好（对于定制党）；Itsycal 很好的解决了这个问题。
+
+### 安装
+
+```shell
+brew cask install itsycal
+```
+
+
 # 沟通
 
 ## 微信
@@ -132,18 +154,32 @@ Java开发必备
 * 操作简单直观
 * 字幕，视频大小可随意调节
 
+# 工具
+
+## 清理工具
+
+[tencent-lemon](lemon.qq.com/)
+
+### 安装
+
+```shell
+brew cask install tencent-lemon
+```
+
+
 ## Reference
 
-* [1.博客：https://guzhongren.github.io/](https://guzhongren.github.io/)
-* [2.Todo: https://todo.microsoft.com/tasks/](https://todo.microsoft.com/tasks/)
-* [3.Visual Studio Cod: https://code.visualstudio.com/](https://code.visualstudio.com/)
-* [4.Vim: https://www.vim.org](https://www.vim.org/)
-* [5.Vimrc: https://github.com/guzhongren/.vim](https://github.com/guzhongren/.vim)
-* [6.Bitwarden:https://bitwarden.com/](https://bitwarden.com/)
-* [7.IDEA: https://www.jetbrains.com/idea/](https://www.jetbrains.com/idea/)
-* [8.微信:https://res.wx.qq.com/a/wx_fed/weixin_portal/res/static/img/3sPNXyP.gif](https://res.wx.qq.com/a/wx_fed/weixin_portal/res/static/img/3sPNXyP.gif)
-* [9.IINA:https://iina.io/](https://iina.io/)
-* [10.Adobe XD: https://www.adobe.com/cn/products/xd.html](https://www.adobe.com/cn/products/xd.html)
+* [博客：https://guzhongren.github.io/](https://guzhongren.github.io/)
+* [Todo: https://todo.microsoft.com/tasks/](https://todo.microsoft.com/tasks/)
+* [Visual Studio Cod: https://code.visualstudio.com/](https://code.visualstudio.com/)
+* [Vim: https://www.vim.org](https://www.vim.org/)
+* [Vimrc: https://github.com/guzhongren/.vim](https://github.com/guzhongren/.vim)
+* [Bitwarden:https://bitwarden.com/](https://bitwarden.com/)
+* [IDEA: https://www.jetbrains.com/idea/](https://www.jetbrains.com/idea/)
+* [微信:https://res.wx.qq.com/a/wx_fed/weixin_portal/res/static/img/3sPNXyP.gif](https://res.wx.qq.com/a/wx_fed/weixin_portal/res/static/img/3sPNXyP.gif)
+* [IINA:https://iina.io/](https://iina.io/)
+* [Adobe XD: https://www.adobe.com/cn/products/xd.html](https://www.adobe.com/cn/products/xd.html)
+* [Itsycal:https://www.mowglii.com/itsycal/](https://www.mowglii.com/itsycal/itsycalbanner2@2x.png)
 
 ## Hereby declared（特此申明）
 
