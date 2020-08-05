@@ -15,6 +15,8 @@ images: [""]
 
 ## 什么是ADR
 
+*ADR* 即*Architectural Decision Records*，架构决策记录。架构决策（AD）是一种软件设计决策方法，在解决功能或夸（非）功能需求方面有重要作用。一般情况，一个 ADR 只记录一个 AD。
+
 ## ADR 能干什么
 
 ## 什么情况下要使用ADR
@@ -28,6 +30,7 @@ images: [""]
 
 * [博客:https://guzhongren.github.io/](https://guzhongren.github.io/)
 * [图床:https://sm.ms/](https://sm.ms/)
+* [ADR: https://adr.github.io/](https://adr.github.io/)
 
 ## Hereby declared（特此申明）
 
