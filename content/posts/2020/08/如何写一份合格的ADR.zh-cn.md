@@ -23,6 +23,8 @@ images: [""]
 >
 > 架构决策记录（ADR）捕捉AD，如经常做写个人笔记或会议记录时; 在项目中创建和维护的ADR集合构成其决策日志。
 
+所有这些都属于架构知识管理（AKM）的主题。
+
 ## ADR 能干什么
 
 > 它可以记录某些决定背后的动机.
@@ -39,6 +41,13 @@ images: [""]
 ## 怎么写呢
 
 
+## 参考项目
+
+* [MADR](https://adr.github.io/madr/) - Markdown架构决策记录（MADR）。精益ADR可快速记录代码中的架构决策。
+* [adr-log: https://adr.github.io/adr-log/](https://adr.github.io/adr-log/) - 从MADR生成体系结构决策日志。
+* [嵌入式架构决策记录:https://adr.github.io/e-adr/](https://adr.github.io/e-adr/)显示如何通过ADR注释将分布式AD日志嵌入Java代码中。
+* [eadlsync:https://adr.github.io/eadlsync/](https://adr.github.io/eadlsync/) - 将嵌入式架构决策记录与架构决策存储库同步。
+* [SE Repo: https://github.com/adr/serepo](https://github.com/adr/serepo) - 软件工程资料库。用于版本化软件工程工件的存储库，可以是架构决策，模式等。
 
 ## 总结
 
