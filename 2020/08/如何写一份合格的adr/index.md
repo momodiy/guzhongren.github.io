@@ -99,15 +99,16 @@ ADR 是一个思考过程，也是一个记录过程； 将抽象的思考，以
 * [SE Repo: https://github.com/adr/serepo](https://github.com/adr/serepo) - 软件工程资料库。用于版本化软件工程工件的存储库，可以是架构决策，模式等。
 
 ![Photo by Sheldon Liu](https://images.unsplash.com/photo-1569091791842-7cfb64e04797?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=675&q=80)
+
 ## 总结
 
 ADR 在大型项目或者大公司的项目中经常会用到，不管是对现有业务的澄清总结，还是对不确定的业务的拉通都有积极作用。当然也是一个`甩锅利器`。
 
 建议：
 
-* 使用版本控制工具来管理 ADR, 比如[Confluence](https://www.atlassian.com/software/confluence),国内的话有[语雀](https://www.yuque.com/), [石墨](https://shimo.im/), 还有些代码管理平台也有`Wik`, 如阿里云的[云效](https://www.aliyun.com/product/yunxiao), 腾讯的[Coding](https://coding.net/)等； 当然如果是小项目也可以存在代码仓库中。
+* 使用版本控制工具来管理 ADR, 比如[Confluence](https://www.atlassian.com/software/confluence),国内的话有[语雀](https://www.yuque.com/), [石墨](https://shimo.im/), 还有些代码管理平台也有`Wiki`, 如阿里云的[云效](https://www.aliyun.com/product/yunxiao), 腾讯的[Coding](https://coding.net/)等； 当然如果是小项目也可以存在代码仓库中。
 
-万事皆可法；工作中的大部分事物都是有套路的; 愿你选对套路，归来仍是高效 dev。
+> 万事皆可法；工作中的大部分事物都是有套路的; 愿你选对套路，归来仍是高效 dev。
 
 ## Reference
 
