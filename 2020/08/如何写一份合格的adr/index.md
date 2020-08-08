@@ -1,10 +1,6 @@
 # 如何写一份合格的ADR
 
 
-## Where from
-
-最近在项目上要做技术变更，需要给处建议并和客户确认，在组内 TL 和 老 TWer 的帮助下，算是对 ADR 有了一个较为完全的认识，并知道了如何写一个 ADR，在此，做个记录，加深理解。
-
 ## 什么是 ADR
 
 > *ADR* 即*Architectural Decision Records*，架构决策记录。
