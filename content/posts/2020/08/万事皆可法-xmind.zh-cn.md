@@ -1,7 +1,7 @@
 ---
 title: "万事皆可法 Xmind"
 date: 2020-08-13T20:42:44+08:00
-draft: false
+draft: true
 author: "谷中仁"
 authorLink: "https://guzhongren.github.io"
 description: ""
