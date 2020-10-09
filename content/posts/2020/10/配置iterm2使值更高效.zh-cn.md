@@ -19,7 +19,7 @@ images: [""]
 
 ## 解决方案
 
-[Preferences](https://res.cloudinary.com/practicaldev/image/fetch/s--wW-uFN_---/c_limit%2Cf_auto%2Cfl_progressive%2Cq_auto%2Cw_880/https://wp.gabsii.com/wp-content/uploads/2019/11/Screenshot-2019-11-03-at-22.15.09-1024x583.png)
+![Preferences](https://res.cloudinary.com/practicaldev/image/fetch/s--wW-uFN_---/c_limit%2Cf_auto%2Cfl_progressive%2Cq_auto%2Cw_880/https://wp.gabsii.com/wp-content/uploads/2019/11/Screenshot-2019-11-03-at-22.15.09-1024x583.png)
 
 使用`CMD+,`快捷键打开`Preferences > Profile > Keys`， 点击`Presets...`选择` Natural Text Editing`
 从此，你的 itemr2 如你的IDE 一样高效。
