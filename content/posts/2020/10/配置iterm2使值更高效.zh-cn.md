@@ -1,5 +1,5 @@
 ---
-title: "配置iterm2使值更高效"
+title: "配置iTerm2使值更高效"
 date: 2020-10-09T22:40:08+08:00
 draft: false
 author: "谷中仁"
